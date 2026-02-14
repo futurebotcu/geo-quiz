@@ -71,3 +71,4 @@ analyze_*.py
 *analysis_report.json
 mode_separation.py
 README_CAPITAL_PHOTOS_ANALYSIS.md
+*_analysis.py
