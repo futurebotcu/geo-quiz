@@ -64,3 +64,10 @@ C:devgeo_quiz*/
 # Reports (generated)
 QA_REPORT.md
 FIX_REPORT.md
+
+# analysis leftovers
+_legacy/
+analyze_*.py
+*analysis_report.json
+mode_separation.py
+README_CAPITAL_PHOTOS_ANALYSIS.md
