@@ -1,0 +1,1757 @@
+[
+  {
+    "iso2": "ad",
+    "country": "Andorra",
+    "capital": "Andorra la Vella",
+    "filename": "AD_andorra-la-vella.jpg",
+    "path": "assets/capital_photos/AD_andorra-la-vella.jpg",
+    "width": 1024,
+    "height": 959
+  },
+  {
+    "iso2": "ae",
+    "country": "United Arab Emirates",
+    "capital": "Abu Dhabi",
+    "filename": "AE_abu-dhabi.jpg",
+    "path": "assets/capital_photos/AE_abu-dhabi.jpg",
+    "width": 4609,
+    "height": 3072
+  },
+  {
+    "iso2": "af",
+    "country": "Afghanistan",
+    "capital": "Kabul",
+    "filename": "AF_kabul.jpg",
+    "path": "assets/capital_photos/AF_kabul.jpg",
+    "width": 1024,
+    "height": 956
+  },
+  {
+    "iso2": "ag",
+    "country": "Antigua and Barbuda",
+    "capital": "Saint John's",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "al",
+    "country": "Albania",
+    "capital": "Tirana",
+    "filename": "AL_tirana.jpg",
+    "path": "assets/capital_photos/AL_tirana.jpg",
+    "width": 1024,
+    "height": 957
+  },
+  {
+    "iso2": "am",
+    "country": "Armenia",
+    "capital": "Yerevan",
+    "filename": "AM_yerevan.jpg",
+    "path": "assets/capital_photos/AM_yerevan.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "ao",
+    "country": "Angola",
+    "capital": "Luanda",
+    "filename": "AO_luanda.jpg",
+    "path": "assets/capital_photos/AO_luanda.jpg",
+    "width": 1024,
+    "height": 961
+  },
+  {
+    "iso2": "ar",
+    "country": "Argentina",
+    "capital": "Buenos Aires",
+    "filename": "AR_buenos-aires.jpg",
+    "path": "assets/capital_photos/AR_buenos-aires.jpg",
+    "width": 1024,
+    "height": 948
+  },
+  {
+    "iso2": "at",
+    "country": "Austria",
+    "capital": "Vienna",
+    "filename": "AT_vienna.jpg",
+    "path": "assets/capital_photos/AT_vienna.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "au",
+    "country": "Australia",
+    "capital": "Canberra",
+    "filename": "AU_canberra.jpg",
+    "path": "assets/capital_photos/AU_canberra.jpg",
+    "width": 1024,
+    "height": 952
+  },
+  {
+    "iso2": "az",
+    "country": "Azerbaijan",
+    "capital": "Baku",
+    "filename": "AZ_baku.jpg",
+    "path": "assets/capital_photos/AZ_baku.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ba",
+    "country": "Bosnia and Herzegovina",
+    "capital": "Sarajevo",
+    "filename": "BA_sarajevo.jpg",
+    "path": "assets/capital_photos/BA_sarajevo.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "bb",
+    "country": "Barbados",
+    "capital": "Bridgetown",
+    "filename": "BB_bridgetown.jpg",
+    "path": "assets/capital_photos/BB_bridgetown.jpg",
+    "width": 940,
+    "height": 626
+  },
+  {
+    "iso2": "bd",
+    "country": "Bangladesh",
+    "capital": "Dhaka",
+    "filename": "BD_dhaka.jpg",
+    "path": "assets/capital_photos/BD_dhaka.jpg",
+    "width": 1024,
+    "height": 952
+  },
+  {
+    "iso2": "be",
+    "country": "Belgium",
+    "capital": "Brussels",
+    "filename": "BE_brussels.jpg",
+    "path": "assets/capital_photos/BE_brussels.jpg",
+    "width": 940,
+    "height": 615
+  },
+  {
+    "iso2": "bf",
+    "country": "Burkina Faso",
+    "capital": "Ouagadougou",
+    "filename": "BF_ouagadougou.jpg",
+    "path": "assets/capital_photos/BF_ouagadougou.jpg",
+    "width": 1024,
+    "height": 924
+  },
+  {
+    "iso2": "bg",
+    "country": "Bulgaria",
+    "capital": "Sofia",
+    "filename": "BG_sofia.jpg",
+    "path": "assets/capital_photos/BG_sofia.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "bh",
+    "country": "Bahrain",
+    "capital": "Manama",
+    "filename": "BH_manama.jpg",
+    "path": "assets/capital_photos/BH_manama.jpg",
+    "width": 940,
+    "height": 576
+  },
+  {
+    "iso2": "bi",
+    "country": "Burundi",
+    "capital": "Gitega",
+    "filename": "BI_gitega.jpg",
+    "path": "assets/capital_photos/BI_gitega.jpg",
+    "width": 1024,
+    "height": 926
+  },
+  {
+    "iso2": "bj",
+    "country": "Benin",
+    "capital": "Porto-Novo",
+    "filename": "BJ_porto-novo.jpg",
+    "path": "assets/capital_photos/BJ_porto-novo.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "bn",
+    "country": "Brunei",
+    "capital": "Bandar Seri Begawan",
+    "filename": "BN_bandar-seri-begawan.jpg",
+    "path": "assets/capital_photos/BN_bandar-seri-begawan.jpg",
+    "width": 940,
+    "height": 529
+  },
+  {
+    "iso2": "bo",
+    "country": "Bolivia",
+    "capital": "Sucre",
+    "filename": "BO_sucre.jpg",
+    "path": "assets/capital_photos/BO_sucre.jpg",
+    "width": 916,
+    "height": 650
+  },
+  {
+    "iso2": "br",
+    "country": "Brazil",
+    "capital": "Brasília",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "bs",
+    "country": "Bahamas",
+    "capital": "Nassau",
+    "filename": "BS_nassau.jpg",
+    "path": "assets/capital_photos/BS_nassau.jpg",
+    "width": 5464,
+    "height": 3640
+  },
+  {
+    "iso2": "bt",
+    "country": "Bhutan",
+    "capital": "Thimphu",
+    "filename": "BT_thimphu.jpg",
+    "path": "assets/capital_photos/BT_thimphu.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "bw",
+    "country": "Botswana",
+    "capital": "Gaborone",
+    "filename": "BW_gaborone.jpg",
+    "path": "assets/capital_photos/BW_gaborone.jpg",
+    "width": 1024,
+    "height": 950
+  },
+  {
+    "iso2": "by",
+    "country": "Belarus",
+    "capital": "Minsk",
+    "filename": "BY_minsk.jpg",
+    "path": "assets/capital_photos/BY_minsk.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "bz",
+    "country": "Belize",
+    "capital": "Belmopan",
+    "filename": "BZ_belmopan.jpg",
+    "path": "assets/capital_photos/BZ_belmopan.jpg",
+    "width": 1024,
+    "height": 959
+  },
+  {
+    "iso2": "ca",
+    "country": "Canada",
+    "capital": "Ottawa",
+    "filename": "CA_ottawa.jpg",
+    "path": "assets/capital_photos/CA_ottawa.jpg",
+    "width": 940,
+    "height": 629
+  },
+  {
+    "iso2": "cd",
+    "country": "DR Congo",
+    "capital": "Kinshasa",
+    "filename": "CD_kinshasa.jpg",
+    "path": "assets/capital_photos/CD_kinshasa.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "cf",
+    "country": "Central African Republic",
+    "capital": "Bangui",
+    "filename": "CF_bangui.jpg",
+    "path": "assets/capital_photos/CF_bangui.jpg",
+    "width": 940,
+    "height": 528
+  },
+  {
+    "iso2": "cg",
+    "country": "Republic of the Congo",
+    "capital": "Brazzaville",
+    "filename": "CG_brazzaville.jpg",
+    "path": "assets/capital_photos/CG_brazzaville.jpg",
+    "width": 1024,
+    "height": 945
+  },
+  {
+    "iso2": "ch",
+    "country": "Switzerland",
+    "capital": "Bern",
+    "filename": "CH_bern.jpg",
+    "path": "assets/capital_photos/CH_bern.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ci",
+    "country": "Ivory Coast",
+    "capital": "Yamoussoukro",
+    "filename": "CI_yamoussoukro.jpg",
+    "path": "assets/capital_photos/CI_yamoussoukro.jpg",
+    "width": 940,
+    "height": 581
+  },
+  {
+    "iso2": "ck",
+    "country": "Cook Islands",
+    "capital": "Avarua",
+    "filename": "CK_avarua.jpg",
+    "path": "assets/capital_photos/CK_avarua.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "cl",
+    "country": "Chile",
+    "capital": "Santiago",
+    "filename": "CL_santiago.jpg",
+    "path": "assets/capital_photos/CL_santiago.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "cm",
+    "country": "Cameroon",
+    "capital": "Yaoundé",
+    "filename": "CM_yaounde.jpg",
+    "path": "assets/capital_photos/CM_yaounde.jpg",
+    "width": 8064,
+    "height": 6048
+  },
+  {
+    "iso2": "cn",
+    "country": "China",
+    "capital": "Beijing",
+    "filename": "CN_beijing.jpg",
+    "path": "assets/capital_photos/CN_beijing.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "co",
+    "country": "Colombia",
+    "capital": "Bogotá",
+    "filename": "CO_bogota.jpg",
+    "path": "assets/capital_photos/CO_bogota.jpg",
+    "width": 4134,
+    "height": 3312
+  },
+  {
+    "iso2": "cr",
+    "country": "Costa Rica",
+    "capital": "San José",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "cu",
+    "country": "Cuba",
+    "capital": "Havana",
+    "filename": "CU_havana.jpg",
+    "path": "assets/capital_photos/CU_havana.jpg",
+    "width": 940,
+    "height": 529
+  },
+  {
+    "iso2": "cv",
+    "country": "Cape Verde",
+    "capital": "Praia",
+    "filename": "CV_praia.jpg",
+    "path": "assets/capital_photos/CV_praia.jpg",
+    "width": 1024,
+    "height": 937
+  },
+  {
+    "iso2": "cy",
+    "country": "Cyprus",
+    "capital": "Nicosia",
+    "filename": "CY_nicosia.jpg",
+    "path": "assets/capital_photos/CY_nicosia.jpg",
+    "width": 940,
+    "height": 552
+  },
+  {
+    "iso2": "cz",
+    "country": "Czechia",
+    "capital": "Prague",
+    "filename": "CZ_prague.jpg",
+    "path": "assets/capital_photos/CZ_prague.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "de",
+    "country": "Germany",
+    "capital": "Berlin",
+    "filename": "DE_berlin.jpg",
+    "path": "assets/capital_photos/DE_berlin.jpg",
+    "width": 1024,
+    "height": 932
+  },
+  {
+    "iso2": "dj",
+    "country": "Djibouti",
+    "capital": "Djibouti",
+    "filename": "DJ_djibouti.jpg",
+    "path": "assets/capital_photos/DJ_djibouti.jpg",
+    "width": 1024,
+    "height": 941
+  },
+  {
+    "iso2": "dk",
+    "country": "Denmark",
+    "capital": "Copenhagen",
+    "filename": "DK_copenhagen.jpg",
+    "path": "assets/capital_photos/DK_copenhagen.jpg",
+    "width": 940,
+    "height": 625
+  },
+  {
+    "iso2": "dm",
+    "country": "Dominica",
+    "capital": "Roseau",
+    "filename": "DM_roseau.jpg",
+    "path": "assets/capital_photos/DM_roseau.jpg",
+    "width": 1024,
+    "height": 937
+  },
+  {
+    "iso2": "do",
+    "country": "Dominican Republic",
+    "capital": "Santo Domingo",
+    "filename": "DO_santo-domingo.jpg",
+    "path": "assets/capital_photos/DO_santo-domingo.jpg",
+    "width": 1024,
+    "height": 952
+  },
+  {
+    "iso2": "dz",
+    "country": "Algeria",
+    "capital": "Algiers",
+    "filename": "DZ_algiers.jpg",
+    "path": "assets/capital_photos/DZ_algiers.jpg",
+    "width": 963,
+    "height": 1024
+  },
+  {
+    "iso2": "ec",
+    "country": "Ecuador",
+    "capital": "Quito",
+    "filename": "EC_quito.jpg",
+    "path": "assets/capital_photos/EC_quito.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ee",
+    "country": "Estonia",
+    "capital": "Tallinn",
+    "filename": "EE_tallinn.jpg",
+    "path": "assets/capital_photos/EE_tallinn.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "eg",
+    "country": "Egypt",
+    "capital": "Cairo",
+    "filename": "EG_cairo.jpg",
+    "path": "assets/capital_photos/EG_cairo.jpg",
+    "width": 1024,
+    "height": 952
+  },
+  {
+    "iso2": "er",
+    "country": "Eritrea",
+    "capital": "Asmara",
+    "filename": "ER_asmara.jpg",
+    "path": "assets/capital_photos/ER_asmara.jpg",
+    "width": 1024,
+    "height": 917
+  },
+  {
+    "iso2": "es",
+    "country": "Spain",
+    "capital": "Madrid",
+    "filename": "ES_madrid.jpg",
+    "path": "assets/capital_photos/ES_madrid.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "et",
+    "country": "Ethiopia",
+    "capital": "Addis Ababa",
+    "filename": "ET_addis-ababa.jpg",
+    "path": "assets/capital_photos/ET_addis-ababa.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "fi",
+    "country": "Finland",
+    "capital": "Helsinki",
+    "filename": "FI_helsinki.jpg",
+    "path": "assets/capital_photos/FI_helsinki.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "fj",
+    "country": "Fiji",
+    "capital": "Suva",
+    "filename": "FJ_suva.jpg",
+    "path": "assets/capital_photos/FJ_suva.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "fm",
+    "country": "Micronesia",
+    "capital": "Palikir",
+    "filename": "FM_palikir.jpg",
+    "path": "assets/capital_photos/FM_palikir.jpg",
+    "width": 1024,
+    "height": 952
+  },
+  {
+    "iso2": "fr",
+    "country": "France",
+    "capital": "Paris",
+    "filename": "FR_paris.jpg",
+    "path": "assets/capital_photos/FR_paris.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ga",
+    "country": "Gabon",
+    "capital": "Libreville",
+    "filename": "GA_libreville.jpg",
+    "path": "assets/capital_photos/GA_libreville.jpg",
+    "width": 1024,
+    "height": 945
+  },
+  {
+    "iso2": "gb",
+    "country": "United Kingdom",
+    "capital": "London",
+    "filename": "GB_london.jpg",
+    "path": "assets/capital_photos/GB_london.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "gd",
+    "country": "Grenada",
+    "capital": "St. George's",
+    "filename": "GD_st-george-s.jpg",
+    "path": "assets/capital_photos/GD_st-george-s.jpg",
+    "width": 1024,
+    "height": 726
+  },
+  {
+    "iso2": "ge",
+    "country": "Georgia",
+    "capital": "Tbilisi",
+    "filename": "GE_tbilisi.jpg",
+    "path": "assets/capital_photos/GE_tbilisi.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "gh",
+    "country": "Ghana",
+    "capital": "Accra",
+    "filename": "GH_accra.jpg",
+    "path": "assets/capital_photos/GH_accra.jpg",
+    "width": 940,
+    "height": 525
+  },
+  {
+    "iso2": "gm",
+    "country": "Gambia",
+    "capital": "Banjul",
+    "filename": "GM_banjul.jpg",
+    "path": "assets/capital_photos/GM_banjul.jpg",
+    "width": 3992,
+    "height": 2242
+  },
+  {
+    "iso2": "gn",
+    "country": "Guinea",
+    "capital": "Conakry",
+    "filename": "GN_conakry.jpg",
+    "path": "assets/capital_photos/GN_conakry.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "gq",
+    "country": "Equatorial Guinea",
+    "capital": "Malabo",
+    "filename": "GQ_malabo.jpg",
+    "path": "assets/capital_photos/GQ_malabo.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "gr",
+    "country": "Greece",
+    "capital": "Athens",
+    "filename": "GR_athens.jpg",
+    "path": "assets/capital_photos/GR_athens.jpg",
+    "width": 940,
+    "height": 628
+  },
+  {
+    "iso2": "gt",
+    "country": "Guatemala",
+    "capital": "Guatemala City",
+    "filename": "GT_guatemala-city.jpg",
+    "path": "assets/capital_photos/GT_guatemala-city.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "gy",
+    "country": "Guyana",
+    "capital": "Georgetown",
+    "filename": "GY_georgetown.jpg",
+    "path": "assets/capital_photos/GY_georgetown.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "hn",
+    "country": "Honduras",
+    "capital": "Tegucigalpa",
+    "filename": "HN_tegucigalpa.jpg",
+    "path": "assets/capital_photos/HN_tegucigalpa.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "hr",
+    "country": "Croatia",
+    "capital": "Zagreb",
+    "filename": "HR_zagreb.jpg",
+    "path": "assets/capital_photos/HR_zagreb.jpg",
+    "width": 1024,
+    "height": 945
+  },
+  {
+    "iso2": "ht",
+    "country": "Haiti",
+    "capital": "Port-au-Prince",
+    "filename": "HT_port-au-prince.jpg",
+    "path": "assets/capital_photos/HT_port-au-prince.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "hu",
+    "country": "Hungary",
+    "capital": "Budapest",
+    "filename": "HU_budapest.jpg",
+    "path": "assets/capital_photos/HU_budapest.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "id",
+    "country": "Indonesia",
+    "capital": "Jakarta",
+    "filename": "ID_jakarta.jpg",
+    "path": "assets/capital_photos/ID_jakarta.jpg",
+    "width": 940,
+    "height": 626
+  },
+  {
+    "iso2": "ie",
+    "country": "Ireland",
+    "capital": "Dublin",
+    "filename": "IE_dublin.jpg",
+    "path": "assets/capital_photos/IE_dublin.jpg",
+    "width": 1024,
+    "height": 932
+  },
+  {
+    "iso2": "il",
+    "country": "Israel",
+    "capital": "Jerusalem",
+    "filename": "IL_jerusalem.jpg",
+    "path": "assets/capital_photos/IL_jerusalem.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "in",
+    "country": "India",
+    "capital": "New Delhi",
+    "filename": "IN_new-delhi.jpg",
+    "path": "assets/capital_photos/IN_new-delhi.jpg",
+    "width": 1024,
+    "height": 954
+  },
+  {
+    "iso2": "iq",
+    "country": "Iraq",
+    "capital": "Baghdad",
+    "filename": "IQ_baghdad.jpg",
+    "path": "assets/capital_photos/IQ_baghdad.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ir",
+    "country": "Iran",
+    "capital": "Tehran",
+    "filename": "IR_tehran.jpg",
+    "path": "assets/capital_photos/IR_tehran.jpg",
+    "width": 940,
+    "height": 588
+  },
+  {
+    "iso2": "is",
+    "country": "Iceland",
+    "capital": "Reykjavik",
+    "filename": "IS_reykjavik.jpg",
+    "path": "assets/capital_photos/IS_reykjavik.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "it",
+    "country": "Italy",
+    "capital": "Rome",
+    "filename": "IT_rome.jpg",
+    "path": "assets/capital_photos/IT_rome.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "jm",
+    "country": "Jamaica",
+    "capital": "Kingston",
+    "filename": "JM_kingston.jpg",
+    "path": "assets/capital_photos/JM_kingston.jpg",
+    "width": 1024,
+    "height": 930
+  },
+  {
+    "iso2": "jo",
+    "country": "Jordan",
+    "capital": "Amman",
+    "filename": "JO_amman.jpg",
+    "path": "assets/capital_photos/JO_amman.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "jp",
+    "country": "Japan",
+    "capital": "Tokyo",
+    "filename": "JP_tokyo.jpg",
+    "path": "assets/capital_photos/JP_tokyo.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "ke",
+    "country": "Kenya",
+    "capital": "Nairobi",
+    "filename": "KE_nairobi.jpg",
+    "path": "assets/capital_photos/KE_nairobi.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "kg",
+    "country": "Kyrgyzstan",
+    "capital": "Bishkek",
+    "filename": "KG_bishkek.jpg",
+    "path": "assets/capital_photos/KG_bishkek.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "kh",
+    "country": "Cambodia",
+    "capital": "Phnom Penh",
+    "filename": "KH_phnom-penh.jpg",
+    "path": "assets/capital_photos/KH_phnom-penh.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ki",
+    "country": "Kiribati",
+    "capital": "South Tarawa",
+    "filename": "KI_south-tarawa.jpg",
+    "path": "assets/capital_photos/KI_south-tarawa.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "km",
+    "country": "Comoros",
+    "capital": "Moroni",
+    "filename": "KM_moroni.jpg",
+    "path": "assets/capital_photos/KM_moroni.jpg",
+    "width": 1024,
+    "height": 937
+  },
+  {
+    "iso2": "kn",
+    "country": "Saint Kitts and Nevis",
+    "capital": "Basseterre",
+    "filename": "KN_basseterre.jpg",
+    "path": "assets/capital_photos/KN_basseterre.jpg",
+    "width": 1024,
+    "height": 961
+  },
+  {
+    "iso2": "kp",
+    "country": "North Korea",
+    "capital": "Pyongyang",
+    "filename": "KP_pyongyang.jpg",
+    "path": "assets/capital_photos/KP_pyongyang.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "kr",
+    "country": "South Korea",
+    "capital": "Seoul",
+    "filename": "KR_seoul.jpg",
+    "path": "assets/capital_photos/KR_seoul.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "kw",
+    "country": "Kuwait",
+    "capital": "Kuwait City",
+    "filename": "KW_kuwait-city.jpg",
+    "path": "assets/capital_photos/KW_kuwait-city.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "kz",
+    "country": "Kazakhstan",
+    "capital": "Astana",
+    "filename": "KZ_astana.jpg",
+    "path": "assets/capital_photos/KZ_astana.jpg",
+    "width": 650,
+    "height": 650
+  },
+  {
+    "iso2": "la",
+    "country": "Laos",
+    "capital": "Vientiane",
+    "filename": "LA_vientiane.jpg",
+    "path": "assets/capital_photos/LA_vientiane.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "lb",
+    "country": "Lebanon",
+    "capital": "Beirut",
+    "filename": "LB_beirut.jpg",
+    "path": "assets/capital_photos/LB_beirut.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "lc",
+    "country": "Saint Lucia",
+    "capital": "Castries",
+    "filename": "LC_castries.jpg",
+    "path": "assets/capital_photos/LC_castries.jpg",
+    "width": 940,
+    "height": 555
+  },
+  {
+    "iso2": "li",
+    "country": "Liechtenstein",
+    "capital": "Vaduz",
+    "filename": "LI_vaduz.jpg",
+    "path": "assets/capital_photos/LI_vaduz.jpg",
+    "width": 940,
+    "height": 641
+  },
+  {
+    "iso2": "lk",
+    "country": "Sri Lanka",
+    "capital": "Sri Jayawardenepura Kotte",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "lr",
+    "country": "Liberia",
+    "capital": "Monrovia",
+    "filename": "LR_monrovia.jpg",
+    "path": "assets/capital_photos/LR_monrovia.jpg",
+    "width": 1024,
+    "height": 939
+  },
+  {
+    "iso2": "ls",
+    "country": "Lesotho",
+    "capital": "Maseru",
+    "filename": "LS_maseru.jpg",
+    "path": "assets/capital_photos/LS_maseru.jpg",
+    "width": 1018,
+    "height": 945
+  },
+  {
+    "iso2": "lt",
+    "country": "Lithuania",
+    "capital": "Vilnius",
+    "filename": "LT_vilnius.jpg",
+    "path": "assets/capital_photos/LT_vilnius.jpg",
+    "width": 940,
+    "height": 623
+  },
+  {
+    "iso2": "lu",
+    "country": "Luxembourg",
+    "capital": "Luxembourg",
+    "filename": "LU_luxembourg.jpg",
+    "path": "assets/capital_photos/LU_luxembourg.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "lv",
+    "country": "Latvia",
+    "capital": "Riga",
+    "filename": "LV_riga.jpg",
+    "path": "assets/capital_photos/LV_riga.jpg",
+    "width": 940,
+    "height": 528
+  },
+  {
+    "iso2": "ly",
+    "country": "Libya",
+    "capital": "Tripoli",
+    "filename": "LY_tripoli.jpg",
+    "path": "assets/capital_photos/LY_tripoli.jpg",
+    "width": 1020,
+    "height": 943
+  },
+  {
+    "iso2": "ma",
+    "country": "Morocco",
+    "capital": "Rabat",
+    "filename": "MA_rabat.jpg",
+    "path": "assets/capital_photos/MA_rabat.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "mc",
+    "country": "Monaco",
+    "capital": "Monaco",
+    "filename": "MC_monaco.jpg",
+    "path": "assets/capital_photos/MC_monaco.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "md",
+    "country": "Moldova",
+    "capital": "Chișinău",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "me",
+    "country": "Montenegro",
+    "capital": "Podgorica",
+    "filename": "ME_podgorica.jpg",
+    "path": "assets/capital_photos/ME_podgorica.jpg",
+    "width": 1024,
+    "height": 924
+  },
+  {
+    "iso2": "mg",
+    "country": "Madagascar",
+    "capital": "Antananarivo",
+    "filename": "MG_antananarivo.jpg",
+    "path": "assets/capital_photos/MG_antananarivo.jpg",
+    "width": 940,
+    "height": 596
+  },
+  {
+    "iso2": "mh",
+    "country": "Marshall Islands",
+    "capital": "Majuro",
+    "filename": "MH_majuro.jpg",
+    "path": "assets/capital_photos/MH_majuro.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "mk",
+    "country": "North Macedonia",
+    "capital": "Skopje",
+    "filename": "MK_skopje.jpg",
+    "path": "assets/capital_photos/MK_skopje.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ml",
+    "country": "Mali",
+    "capital": "Bamako",
+    "filename": "ML_bamako.jpg",
+    "path": "assets/capital_photos/ML_bamako.jpg",
+    "width": 1024,
+    "height": 959
+  },
+  {
+    "iso2": "mm",
+    "country": "Myanmar",
+    "capital": "Naypyidaw",
+    "filename": "MM_naypyidaw.jpg",
+    "path": "assets/capital_photos/MM_naypyidaw.jpg",
+    "width": 1024,
+    "height": 950
+  },
+  {
+    "iso2": "mn",
+    "country": "Mongolia",
+    "capital": "Ulan Bator",
+    "filename": "MN_ulan-bator.jpg",
+    "path": "assets/capital_photos/MN_ulan-bator.jpg",
+    "width": 924,
+    "height": 650
+  },
+  {
+    "iso2": "mr",
+    "country": "Mauritania",
+    "capital": "Nouakchott",
+    "filename": "MR_nouakchott.jpg",
+    "path": "assets/capital_photos/MR_nouakchott.jpg",
+    "width": 1024,
+    "height": 941
+  },
+  {
+    "iso2": "mt",
+    "country": "Malta",
+    "capital": "Valletta",
+    "filename": "MT_valletta.jpg",
+    "path": "assets/capital_photos/MT_valletta.jpg",
+    "width": 1024,
+    "height": 909
+  },
+  {
+    "iso2": "mu",
+    "country": "Mauritius",
+    "capital": "Port Louis",
+    "filename": "MU_port-louis.jpg",
+    "path": "assets/capital_photos/MU_port-louis.jpg",
+    "width": 940,
+    "height": 529
+  },
+  {
+    "iso2": "mv",
+    "country": "Maldives",
+    "capital": "Malé",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "mw",
+    "country": "Malawi",
+    "capital": "Lilongwe",
+    "filename": "MW_lilongwe.jpg",
+    "path": "assets/capital_photos/MW_lilongwe.jpg",
+    "width": 1024,
+    "height": 948
+  },
+  {
+    "iso2": "mx",
+    "country": "Mexico",
+    "capital": "Mexico City",
+    "filename": "MX_mexico-city.jpg",
+    "path": "assets/capital_photos/MX_mexico-city.jpg",
+    "width": 1022,
+    "height": 943
+  },
+  {
+    "iso2": "my",
+    "country": "Malaysia",
+    "capital": "Kuala Lumpur",
+    "filename": "MY_kuala-lumpur.jpg",
+    "path": "assets/capital_photos/MY_kuala-lumpur.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "mz",
+    "country": "Mozambique",
+    "capital": "Maputo",
+    "filename": "MZ_maputo.jpg",
+    "path": "assets/capital_photos/MZ_maputo.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "na",
+    "country": "Namibia",
+    "capital": "Windhoek",
+    "filename": "NA_windhoek.jpg",
+    "path": "assets/capital_photos/NA_windhoek.jpg",
+    "width": 1024,
+    "height": 919
+  },
+  {
+    "iso2": "ne",
+    "country": "Niger",
+    "capital": "Niamey",
+    "filename": "NE_niamey.jpg",
+    "path": "assets/capital_photos/NE_niamey.jpg",
+    "width": 1024,
+    "height": 941
+  },
+  {
+    "iso2": "ng",
+    "country": "Nigeria",
+    "capital": "Abuja",
+    "filename": "NG_abuja.jpg",
+    "path": "assets/capital_photos/NG_abuja.jpg",
+    "width": 1024,
+    "height": 954
+  },
+  {
+    "iso2": "ni",
+    "country": "Nicaragua",
+    "capital": "Managua",
+    "filename": "NI_managua.jpg",
+    "path": "assets/capital_photos/NI_managua.jpg",
+    "width": 1024,
+    "height": 941
+  },
+  {
+    "iso2": "nl",
+    "country": "Netherlands",
+    "capital": "Amsterdam",
+    "filename": "NL_amsterdam.jpg",
+    "path": "assets/capital_photos/NL_amsterdam.jpg",
+    "width": 940,
+    "height": 628
+  },
+  {
+    "iso2": "no",
+    "country": "Norway",
+    "capital": "Oslo",
+    "filename": "NO_oslo.jpg",
+    "path": "assets/capital_photos/NO_oslo.jpg",
+    "width": 1024,
+    "height": 939
+  },
+  {
+    "iso2": "np",
+    "country": "Nepal",
+    "capital": "Kathmandu",
+    "filename": "NP_kathmandu.jpg",
+    "path": "assets/capital_photos/NP_kathmandu.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "nr",
+    "country": "Nauru",
+    "capital": "Yaren",
+    "filename": "NR_yaren.jpg",
+    "path": "assets/capital_photos/NR_yaren.jpg",
+    "width": 1024,
+    "height": 920
+  },
+  {
+    "iso2": "nz",
+    "country": "New Zealand",
+    "capital": "Wellington",
+    "filename": "NZ_wellington.jpg",
+    "path": "assets/capital_photos/NZ_wellington.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "om",
+    "country": "Oman",
+    "capital": "Muscat",
+    "filename": "OM_muscat.jpg",
+    "path": "assets/capital_photos/OM_muscat.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "pa",
+    "country": "Panama",
+    "capital": "Panama City",
+    "filename": "PA_panama-city.jpg",
+    "path": "assets/capital_photos/PA_panama-city.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "pe",
+    "country": "Peru",
+    "capital": "Lima",
+    "filename": "PE_lima.jpg",
+    "path": "assets/capital_photos/PE_lima.jpg",
+    "width": 1024,
+    "height": 933
+  },
+  {
+    "iso2": "pg",
+    "country": "Papua New Guinea",
+    "capital": "Port Moresby",
+    "filename": "PG_port-moresby.jpg",
+    "path": "assets/capital_photos/PG_port-moresby.jpg",
+    "width": 1024,
+    "height": 930
+  },
+  {
+    "iso2": "ph",
+    "country": "Philippines",
+    "capital": "Manila",
+    "filename": "PH_manila.jpg",
+    "path": "assets/capital_photos/PH_manila.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "pk",
+    "country": "Pakistan",
+    "capital": "Islamabad",
+    "filename": "PK_islamabad.jpg",
+    "path": "assets/capital_photos/PK_islamabad.jpg",
+    "width": 1024,
+    "height": 935
+  },
+  {
+    "iso2": "pl",
+    "country": "Poland",
+    "capital": "Warsaw",
+    "filename": "PL_warsaw.jpg",
+    "path": "assets/capital_photos/PL_warsaw.jpg",
+    "width": 940,
+    "height": 615
+  },
+  {
+    "iso2": "ps",
+    "country": "Palestine",
+    "capital": "Ramallah",
+    "filename": "PS_ramallah.jpg",
+    "path": "assets/capital_photos/PS_ramallah.jpg",
+    "width": 940,
+    "height": 649
+  },
+  {
+    "iso2": "pt",
+    "country": "Portugal",
+    "capital": "Lisbon",
+    "filename": "PT_lisbon.jpg",
+    "path": "assets/capital_photos/PT_lisbon.jpg",
+    "width": 1022,
+    "height": 948
+  },
+  {
+    "iso2": "pw",
+    "country": "Palau",
+    "capital": "Ngerulmud",
+    "filename": "PW_ngerulmud.jpg",
+    "path": "assets/capital_photos/PW_ngerulmud.jpg",
+    "width": 1024,
+    "height": 948
+  },
+  {
+    "iso2": "py",
+    "country": "Paraguay",
+    "capital": "Asunción",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "qa",
+    "country": "Qatar",
+    "capital": "Doha",
+    "filename": "QA_doha.jpg",
+    "path": "assets/capital_photos/QA_doha.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "ro",
+    "country": "Romania",
+    "capital": "Bucharest",
+    "filename": "RO_bucharest.jpg",
+    "path": "assets/capital_photos/RO_bucharest.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "rs",
+    "country": "Serbia",
+    "capital": "Belgrade",
+    "filename": "RS_belgrade.jpg",
+    "path": "assets/capital_photos/RS_belgrade.jpg",
+    "width": 1024,
+    "height": 959
+  },
+  {
+    "iso2": "ru",
+    "country": "Russia",
+    "capital": "Moscow",
+    "filename": "RU_moscow.jpg",
+    "path": "assets/capital_photos/RU_moscow.jpg",
+    "width": 1024,
+    "height": 950
+  },
+  {
+    "iso2": "rw",
+    "country": "Rwanda",
+    "capital": "Kigali",
+    "filename": "RW_kigali.jpg",
+    "path": "assets/capital_photos/RW_kigali.jpg",
+    "width": 1022,
+    "height": 926
+  },
+  {
+    "iso2": "sa",
+    "country": "Saudi Arabia",
+    "capital": "Riyadh",
+    "filename": "SA_riyadh.jpg",
+    "path": "assets/capital_photos/SA_riyadh.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "sb",
+    "country": "Solomon Islands",
+    "capital": "Honiara",
+    "filename": "SB_honiara.jpg",
+    "path": "assets/capital_photos/SB_honiara.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "sc",
+    "country": "Seychelles",
+    "capital": "Victoria",
+    "filename": "SC_victoria.jpg",
+    "path": "assets/capital_photos/SC_victoria.jpg",
+    "width": 940,
+    "height": 625
+  },
+  {
+    "iso2": "sd",
+    "country": "Sudan",
+    "capital": "Khartoum",
+    "filename": "SD_khartoum.jpg",
+    "path": "assets/capital_photos/SD_khartoum.jpg",
+    "width": 1024,
+    "height": 932
+  },
+  {
+    "iso2": "se",
+    "country": "Sweden",
+    "capital": "Stockholm",
+    "filename": "SE_stockholm.jpg",
+    "path": "assets/capital_photos/SE_stockholm.jpg",
+    "width": 1024,
+    "height": 939
+  },
+  {
+    "iso2": "sg",
+    "country": "Singapore",
+    "capital": "Singapore",
+    "filename": "SG_singapore.jpg",
+    "path": "assets/capital_photos/SG_singapore.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "si",
+    "country": "Slovenia",
+    "capital": "Ljubljana",
+    "filename": "SI_ljubljana.jpg",
+    "path": "assets/capital_photos/SI_ljubljana.jpg",
+    "width": 940,
+    "height": 492
+  },
+  {
+    "iso2": "sk",
+    "country": "Slovakia",
+    "capital": "Bratislava",
+    "filename": "SK_bratislava.jpg",
+    "path": "assets/capital_photos/SK_bratislava.jpg",
+    "width": 940,
+    "height": 449
+  },
+  {
+    "iso2": "sl",
+    "country": "Sierra Leone",
+    "capital": "Freetown",
+    "filename": "SL_freetown.jpg",
+    "path": "assets/capital_photos/SL_freetown.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "sm",
+    "country": "San Marino",
+    "capital": "City of San Marino",
+    "filename": "SM_city-of-san-marino.jpg",
+    "path": "assets/capital_photos/SM_city-of-san-marino.jpg",
+    "width": 5406,
+    "height": 3604
+  },
+  {
+    "iso2": "sn",
+    "country": "Senegal",
+    "capital": "Dakar",
+    "filename": "SN_dakar.jpg",
+    "path": "assets/capital_photos/SN_dakar.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "so",
+    "country": "Somalia",
+    "capital": "Mogadishu",
+    "filename": "SO_mogadishu.jpg",
+    "path": "assets/capital_photos/SO_mogadishu.jpg",
+    "width": 835,
+    "height": 650
+  },
+  {
+    "iso2": "sr",
+    "country": "Suriname",
+    "capital": "Paramaribo",
+    "filename": "SR_paramaribo.jpg",
+    "path": "assets/capital_photos/SR_paramaribo.jpg",
+    "width": 940,
+    "height": 600
+  },
+  {
+    "iso2": "ss",
+    "country": "South Sudan",
+    "capital": "Juba",
+    "filename": "SS_juba.jpg",
+    "path": "assets/capital_photos/SS_juba.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "st",
+    "country": "São Tomé and Príncipe",
+    "capital": "São Tomé",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "sv",
+    "country": "El Salvador",
+    "capital": "San Salvador",
+    "filename": "SV_san-salvador.jpg",
+    "path": "assets/capital_photos/SV_san-salvador.jpg",
+    "width": 940,
+    "height": 627
+  },
+  {
+    "iso2": "sy",
+    "country": "Syria",
+    "capital": "Damascus",
+    "filename": "SY_damascus.jpg",
+    "path": "assets/capital_photos/SY_damascus.jpg",
+    "width": 1024,
+    "height": 939
+  },
+  {
+    "iso2": "sz",
+    "country": "Eswatini",
+    "capital": "Mbabane",
+    "filename": "SZ_mbabane.jpg",
+    "path": "assets/capital_photos/SZ_mbabane.jpg",
+    "width": 1024,
+    "height": 935
+  },
+  {
+    "iso2": "td",
+    "country": "Chad",
+    "capital": "N'Djamena",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "tg",
+    "country": "Togo",
+    "capital": "Lomé",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "th",
+    "country": "Thailand",
+    "capital": "Bangkok",
+    "filename": "TH_bangkok.jpg",
+    "path": "assets/capital_photos/TH_bangkok.jpg",
+    "width": 6000,
+    "height": 2847
+  },
+  {
+    "iso2": "tj",
+    "country": "Tajikistan",
+    "capital": "Dushanbe",
+    "filename": "TJ_dushanbe.jpg",
+    "path": "assets/capital_photos/TJ_dushanbe.jpg",
+    "width": 1024,
+    "height": 945
+  },
+  {
+    "iso2": "tl",
+    "country": "Timor-Leste",
+    "capital": "Dili",
+    "filename": "TL_dili.jpg",
+    "path": "assets/capital_photos/TL_dili.jpg",
+    "width": 3376,
+    "height": 4501
+  },
+  {
+    "iso2": "tm",
+    "country": "Turkmenistan",
+    "capital": "Ashgabat",
+    "filename": "TM_ashgabat.jpg",
+    "path": "assets/capital_photos/TM_ashgabat.jpg",
+    "width": 2771,
+    "height": 1847
+  },
+  {
+    "iso2": "tn",
+    "country": "Tunisia",
+    "capital": "Tunis",
+    "filename": "TN_tunis.jpg",
+    "path": "assets/capital_photos/TN_tunis.jpg",
+    "width": 1024,
+    "height": 946
+  },
+  {
+    "iso2": "to",
+    "country": "Tonga",
+    "capital": "Nuku'alofa",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "tr",
+    "country": "Turkey",
+    "capital": "Ankara",
+    "filename": "TR_ankara.jpg",
+    "path": "assets/capital_photos/TR_ankara.jpg",
+    "width": 4559,
+    "height": 6838
+  },
+  {
+    "iso2": "tt",
+    "country": "Trinidad and Tobago",
+    "capital": "Port of Spain",
+    "filename": "TT_port-of-spain.jpg",
+    "path": "assets/capital_photos/TT_port-of-spain.jpg",
+    "width": 3335,
+    "height": 4552
+  },
+  {
+    "iso2": "tv",
+    "country": "Tuvalu",
+    "capital": "Funafuti",
+    "filename": "TV_funafuti.jpg",
+    "path": "assets/capital_photos/TV_funafuti.jpg",
+    "width": 1024,
+    "height": 904
+  },
+  {
+    "iso2": "tz",
+    "country": "Tanzania",
+    "capital": "Dodoma",
+    "filename": "TZ_dodoma.jpg",
+    "path": "assets/capital_photos/TZ_dodoma.jpg",
+    "width": 1024,
+    "height": 946
+  },
+  {
+    "iso2": "ua",
+    "country": "Ukraine",
+    "capital": "Kyiv",
+    "filename": "UA_kyiv.jpg",
+    "path": "assets/capital_photos/UA_kyiv.jpg",
+    "width": 3024,
+    "height": 4032
+  },
+  {
+    "iso2": "ug",
+    "country": "Uganda",
+    "capital": "Kampala",
+    "filename": "UG_kampala.jpg",
+    "path": "assets/capital_photos/UG_kampala.jpg",
+    "width": 1024,
+    "height": 954
+  },
+  {
+    "iso2": "us",
+    "country": "United States",
+    "capital": "Washington, D.C.",
+    "filename": "",
+    "path": "",
+    "width": 0,
+    "height": 0
+  },
+  {
+    "iso2": "uy",
+    "country": "Uruguay",
+    "capital": "Montevideo",
+    "filename": "UY_montevideo.jpg",
+    "path": "assets/capital_photos/UY_montevideo.jpg",
+    "width": 1024,
+    "height": 932
+  },
+  {
+    "iso2": "uz",
+    "country": "Uzbekistan",
+    "capital": "Tashkent",
+    "filename": "UZ_tashkent.jpg",
+    "path": "assets/capital_photos/UZ_tashkent.jpg",
+    "width": 3217,
+    "height": 4189
+  },
+  {
+    "iso2": "va",
+    "country": "Vatican City",
+    "capital": "Vatican City",
+    "filename": "VA_vatican-city.jpg",
+    "path": "assets/capital_photos/VA_vatican-city.jpg",
+    "width": 3939,
+    "height": 5909
+  },
+  {
+    "iso2": "vc",
+    "country": "Saint Vincent and the Grenadines",
+    "capital": "Kingstown",
+    "filename": "VC_kingstown.jpg",
+    "path": "assets/capital_photos/VC_kingstown.jpg",
+    "width": 940,
+    "height": 623
+  },
+  {
+    "iso2": "ve",
+    "country": "Venezuela",
+    "capital": "Caracas",
+    "filename": "VE_caracas.jpg",
+    "path": "assets/capital_photos/VE_caracas.jpg",
+    "width": 1024,
+    "height": 937
+  },
+  {
+    "iso2": "vn",
+    "country": "Vietnam",
+    "capital": "Hanoi",
+    "filename": "VN_hanoi.jpg",
+    "path": "assets/capital_photos/VN_hanoi.jpg",
+    "width": 4256,
+    "height": 2832
+  },
+  {
+    "iso2": "vu",
+    "country": "Vanuatu",
+    "capital": "Port Vila",
+    "filename": "VU_port-vila.jpg",
+    "path": "assets/capital_photos/VU_port-vila.jpg",
+    "width": 5472,
+    "height": 3648
+  },
+  {
+    "iso2": "ws",
+    "country": "Samoa",
+    "capital": "Apia",
+    "filename": "WS_apia.jpg",
+    "path": "assets/capital_photos/WS_apia.jpg",
+    "width": 867,
+    "height": 650
+  },
+  {
+    "iso2": "ye",
+    "country": "Yemen",
+    "capital": "Sana'a",
+    "filename": "YE_sana-a.jpg",
+    "path": "assets/capital_photos/YE_sana-a.jpg",
+    "width": 1024,
+    "height": 922
+  },
+  {
+    "iso2": "za",
+    "country": "South Africa",
+    "capital": "Pretoria",
+    "filename": "ZA_pretoria.jpg",
+    "path": "assets/capital_photos/ZA_pretoria.jpg",
+    "width": 1024,
+    "height": 943
+  },
+  {
+    "iso2": "zm",
+    "country": "Zambia",
+    "capital": "Lusaka",
+    "filename": "ZM_lusaka.jpg",
+    "path": "assets/capital_photos/ZM_lusaka.jpg",
+    "width": 1024,
+    "height": 948
+  },
+  {
+    "iso2": "zw",
+    "country": "Zimbabwe",
+    "capital": "Harare",
+    "filename": "ZW_harare.jpg",
+    "path": "assets/capital_photos/ZW_harare.jpg",
+    "width": 1024,
+    "height": 954
+  }
+]

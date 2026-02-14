@@ -1,0 +1,408 @@
+{
+  "@@locale": "en",
+  "appName": "World Geo Quiz",
+  "@appName": {
+    "description": "Brand app name for the app bar and tab title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language option"
+  },
+  "languageTurkish": "Turkish",
+  "@languageTurkish": {
+    "description": "Turkish language option"
+  },
+  "languageSystemDefault": "System Default",
+  "@languageSystemDefault": {
+    "description": "System default language option"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button"
+  },
+  "menuTitle": "Select Mode",
+  "@menuTitle": {
+    "description": "Main menu title"
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics menu item"
+  },
+  "debugCount": "Debug Count",
+  "@debugCount": {
+    "description": "Debug count button tooltip"
+  },
+  "modeSelect": "Select Mode",
+  "@modeSelect": {
+    "description": "Mode selection header"
+  },
+  "modeDescription": "Five different game modes: Food→Country, Photo→Capital, Flag→Country, City→Country, and Mixed.",
+  "@modeDescription": {
+    "description": "Mode selection description"
+  },
+  "modeFoodCountry": "Food → Country",
+  "@modeFoodCountry": {
+    "description": "Food to Country mode name"
+  },
+  "modeFoodCountryDesc": "Identify which country the food in the photo belongs to.",
+  "@modeFoodCountryDesc": {
+    "description": "Food to Country mode description"
+  },
+  "modeCapitalPhoto": "Photo → Capital",
+  "@modeCapitalPhoto": {
+    "description": "Photo to Capital mode name"
+  },
+  "modeCapitalPhotoDesc": "Identify the capital from the city photo.",
+  "@modeCapitalPhotoDesc": {
+    "description": "Photo to Capital mode description"
+  },
+  "modeFlagCountry": "Flag → Country",
+  "@modeFlagCountry": {
+    "description": "Flag to Country mode name"
+  },
+  "modeFlagCountryDesc": "Identify the country from the flag.",
+  "@modeFlagCountryDesc": {
+    "description": "Flag to Country mode description"
+  },
+  "modeCapitalCountry": "City → Country",
+  "@modeCapitalCountry": {
+    "description": "Capital to Country mode name"
+  },
+  "modeCapitalCountryDesc": "Select the country that the given city belongs to.",
+  "@modeCapitalCountryDesc": {
+    "description": "Capital to Country mode description"
+  },
+  "modeMixed": "Mixed",
+  "@modeMixed": {
+    "description": "Mixed mode name"
+  },
+  "modeMixedDesc": "All in one! Questions come in a mix.",
+  "@modeMixedDesc": {
+    "description": "Mixed mode description"
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Start button"
+  },
+  "missingData": "Missing data",
+  "@missingData": {
+    "description": "Missing data warning"
+  },
+  "hintText": "Hint: You can select difficulty before starting. Continent filter in settings!",
+  "@hintText": {
+    "description": "Hint text on main menu"
+  },
+  "difficulty": "Difficulty",
+  "@difficulty": {
+    "description": "Difficulty label"
+  },
+  "difficultyEasy": "Easy",
+  "@difficultyEasy": {
+    "description": "Easy difficulty level"
+  },
+  "difficultyMedium": "Medium",
+  "@difficultyMedium": {
+    "description": "Medium difficulty level"
+  },
+  "difficultyHard": "Hard",
+  "@difficultyHard": {
+    "description": "Hard difficulty level"
+  },
+  "questionCount": "Question Count",
+  "@questionCount": {
+    "description": "Question count label"
+  },
+  "timer": "Timer",
+  "@timer": {
+    "description": "Timer label"
+  },
+  "timerEnabled": "Timer enabled",
+  "@timerEnabled": {
+    "description": "Timer enabled label"
+  },
+  "countdownPerQuestion": "Countdown per question",
+  "@countdownPerQuestion": {
+    "description": "Countdown per question description"
+  },
+  "continentFilter": "Continent Filter",
+  "@continentFilter": {
+    "description": "Continent filter label"
+  },
+  "continentAll": "All",
+  "@continentAll": {
+    "description": "All continents option"
+  },
+  "continentEurope": "Europe",
+  "@continentEurope": {
+    "description": "Europe continent"
+  },
+  "continentAsia": "Asia",
+  "@continentAsia": {
+    "description": "Asia continent"
+  },
+  "continentAfrica": "Africa",
+  "@continentAfrica": {
+    "description": "Africa continent"
+  },
+  "continentNorthAmerica": "North America",
+  "@continentNorthAmerica": {
+    "description": "North America continent"
+  },
+  "continentSouthAmerica": "South America",
+  "@continentSouthAmerica": {
+    "description": "South America continent"
+  },
+  "continentOceania": "Oceania",
+  "@continentOceania": {
+    "description": "Oceania continent"
+  },
+  "quizSettings": "Quiz Settings",
+  "@quizSettings": {
+    "description": "Quiz settings section title"
+  },
+  "timerPerQuestionDesc": "30 seconds per question",
+  "@timerPerQuestionDesc": {
+    "description": "Timer per question description"
+  },
+  "questionsLabel": "Questions: {count}",
+  "@questionsLabel": {
+    "description": "Questions count label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "difficultyLevel": "Difficulty Level",
+  "@difficultyLevel": {
+    "description": "Difficulty level label"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section title"
+  },
+  "appDescription": "Test your geography knowledge!",
+  "@appDescription": {
+    "description": "App description"
+  },
+  "capitalMode": "Capital Mode",
+  "@capitalMode": {
+    "description": "Capital mode label"
+  },
+  "capitalModeDesc": "183 capital photos available",
+  "@capitalModeDesc": {
+    "description": "Capital mode description"
+  },
+  "flagMode": "Flag Mode",
+  "@flagMode": {
+    "description": "Flag mode label"
+  },
+  "flagModeDesc": "195 country flags (PNG + Emoji)",
+  "@flagModeDesc": {
+    "description": "Flag mode description"
+  },
+  "difficultyLevels": "Difficulty Levels",
+  "@difficultyLevels": {
+    "description": "Difficulty levels section title"
+  },
+  "difficultyEasyDesc": "1 option from same continent, 2 from others",
+  "@difficultyEasyDesc": {
+    "description": "Easy difficulty description"
+  },
+  "difficultyMediumDesc": "1 option from same continent, 2 from others",
+  "@difficultyMediumDesc": {
+    "description": "Medium difficulty description"
+  },
+  "difficultyHardDesc": "2 options from same continent, 1 from others",
+  "@difficultyHardDesc": {
+    "description": "Hard difficulty description"
+  },
+  "questionFoodCountry": "Which country does this food belong to?",
+  "@questionFoodCountry": {
+    "description": "Food to country question text"
+  },
+  "questionCapitalPhoto": "Which capital is in the photo?",
+  "@questionCapitalPhoto": {
+    "description": "Photo to capital question text"
+  },
+  "questionFlagCountry": "Which country does this flag belong to?",
+  "@questionFlagCountry": {
+    "description": "Flag to country question text"
+  },
+  "questionCapitalCountry": "Which country is {capital} the capital of?",
+  "@questionCapitalCountry": {
+    "description": "Capital to country question text",
+    "placeholders": {
+      "capital": {
+        "type": "String",
+        "example": "London"
+      }
+    }
+  },
+  "resultTitle": "Quiz Result",
+  "@resultTitle": {
+    "description": "Result screen title"
+  },
+  "scoreLabel": "{score} / {total} correct",
+  "@scoreLabel": {
+    "description": "Score label",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "durationLabel": "Time: {duration}",
+  "@durationLabel": {
+    "description": "Duration label",
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "modeLabel": "Mode: {mode}",
+  "@modeLabel": {
+    "description": "Mode label",
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "gradeExcellent": "Excellent!",
+  "@gradeExcellent": {
+    "description": "Grade: Excellent (90-100%)"
+  },
+  "gradeGreat": "Great!",
+  "@gradeGreat": {
+    "description": "Grade: Great (75-89%)"
+  },
+  "gradeGood": "Good",
+  "@gradeGood": {
+    "description": "Grade: Good (60-74%)"
+  },
+  "gradeFair": "Fair",
+  "@gradeFair": {
+    "description": "Grade: Fair (50-59%)"
+  },
+  "gradeNeedsWork": "Needs Work",
+  "@gradeNeedsWork": {
+    "description": "Grade: Needs Work (<50%)"
+  },
+  "reviewAnswers": "Review Answers",
+  "@reviewAnswers": {
+    "description": "Review answers button"
+  },
+  "backToMenu": "Back to Menu",
+  "@backToMenu": {
+    "description": "Back to menu button"
+  },
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Try again button"
+  },
+  "correctAnswer": "Correct Answer",
+  "@correctAnswer": {
+    "description": "Correct answer label"
+  },
+  "yourAnswer": "Your Answer",
+  "@yourAnswer": {
+    "description": "Your answer label"
+  },
+  "statsTitle": "Statistics",
+  "@statsTitle": {
+    "description": "Statistics screen title"
+  },
+  "overallStats": "Overall Statistics",
+  "@overallStats": {
+    "description": "Overall statistics section"
+  },
+  "totalGames": "Total Games",
+  "@totalGames": {
+    "description": "Total games played"
+  },
+  "bestScoreShort": "Best Score",
+  "@bestScoreShort": {
+    "description": "Best score label"
+  },
+  "recentResults": "Recent Results",
+  "@recentResults": {
+    "description": "Recent results section"
+  },
+  "bestScoreLabel": "Best: {score}",
+  "@bestScoreLabel": {
+    "description": "Best score with value",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "averageScoreLabel": "Average: {score}",
+  "@averageScoreLabel": {
+    "description": "Average score with value",
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "noGamesPlayed": "No games played yet",
+  "@noGamesPlayed": {
+    "description": "No games played message"
+  },
+  "questionLabel": "Question {current}/{total}",
+  "@questionLabel": {
+    "description": "Question counter",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreCounter": "Score: {score}",
+  "@scoreCounter": {
+    "description": "Score counter during quiz",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "explore": "Explore →",
+  "@explore": {
+    "description": "Explore button on carousel"
+  },
+  "quizLoading": "Loading Quiz...",
+  "@quizLoading": {
+    "description": "Quiz loading screen title"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error screen title"
+  }
+}

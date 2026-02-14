@@ -1,0 +1,977 @@
+[
+  {
+    "iso2": "af",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "al",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "dz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ad",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ao",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ag",
+    "flag_asset": "assets/flags/ag.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "ar",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "am",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "au",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "at",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "az",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bs",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bh",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bd",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bb",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "by",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "be",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bj",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bo",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ba",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "br",
+    "flag_asset": "assets/flags/br.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "bn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bf",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "bi",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kh",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ca",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cv",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cf",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "td",
+    "flag_asset": "assets/flags/td.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "cl",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "co",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "km",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ck",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cr",
+    "flag_asset": "assets/flags/cr.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "hr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cu",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cy",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cd",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "dk",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "dj",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "dm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "do",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ec",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "eg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sv",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gq",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "er",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ee",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "et",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "fj",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "fi",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "fr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ga",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ge",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "de",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gh",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gd",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gy",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ht",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "hn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "hu",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "is",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "in",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "id",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ir",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "iq",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ie",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "il",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "it",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ci",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "jm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "jp",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "jo",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ke",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ki",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "la",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lv",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lb",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ls",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ly",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "li",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lu",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "my",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mv",
+    "flag_asset": "assets/flags/mv.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "ml",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mh",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mu",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mx",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "fm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "md",
+    "flag_asset": "assets/flags/md.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "mc",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "me",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ma",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "na",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "nr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "np",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "nl",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "nz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ni",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ne",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ng",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kp",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "mk",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "no",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "om",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pk",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ps",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pa",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "py",
+    "flag_asset": "assets/flags/py.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "pe",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ph",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pl",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "pt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "qa",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "cg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ro",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ru",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "rw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lc",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "vc",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ws",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sa",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "rs",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sc",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sl",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sg",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sk",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "si",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sb",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "so",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "za",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "kr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ss",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "es",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "lk",
+    "flag_asset": "assets/flags/lk.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "sd",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sr",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "se",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ch",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "sy",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "st",
+    "flag_asset": "assets/flags/st.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "tj",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "th",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tl",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tg",
+    "flag_asset": "assets/flags/tg.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "to",
+    "flag_asset": "assets/flags/to.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "tt",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tr",
+    "flag_asset": "assets/flags/tr.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "tm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "tv",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ug",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ua",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ae",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "gb",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "us",
+    "flag_asset": "assets/flags/us.png",
+    "fallback": "png"
+  },
+  {
+    "iso2": "uy",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "uz",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "vu",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "va",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ve",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "vn",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "ye",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "zm",
+    "flag_asset": "",
+    "fallback": "emoji"
+  },
+  {
+    "iso2": "zw",
+    "flag_asset": "",
+    "fallback": "emoji"
+  }
+]

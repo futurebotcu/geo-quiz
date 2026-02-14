@@ -1,0 +1,212 @@
+[
+    {
+        "iso2":  "ar",
+        "country":  "Arjantin",
+        "dish":  "Asado grilled beef",
+        "path":  "assets/food_photos/ar_asado-grilled-beef.jpg"
+    },
+    {
+        "iso2":  "br",
+        "country":  "Brezilya",
+        "dish":  "Brigadeiro",
+        "path":  "assets/food_photos/br_brigadeiro.jpg"
+    },
+    {
+        "iso2":  "br",
+        "country":  "Brezilya",
+        "dish":  "Feijoada",
+        "path":  "assets/food_photos/br_feijoada.jpg"
+    },
+    {
+        "iso2":  "br",
+        "country":  "Brezilya",
+        "dish":  "Picanha grilled beef",
+        "path":  "assets/food_photos/br_picanha-grilled-beef.jpg"
+    },
+    {
+        "iso2":  "cn",
+        "country":  "Çin",
+        "dish":  "Dim sum",
+        "path":  "assets/food_photos/cn_dim-sum.jpg"
+    },
+    {
+        "iso2":  "cn",
+        "country":  "Çin",
+        "dish":  "Kung pao chicken",
+        "path":  "assets/food_photos/cn_kung-pao-chicken.jpg"
+    },
+    {
+        "iso2":  "cn",
+        "country":  "Çin",
+        "dish":  "Peking duck",
+        "path":  "assets/food_photos/cn_peking-duck.jpg"
+    },
+    {
+        "iso2":  "es",
+        "country":  "İspanya",
+        "dish":  "Churros",
+        "path":  "assets/food_photos/es_churros.jpg"
+    },
+    {
+        "iso2":  "es",
+        "country":  "İspanya",
+        "dish":  "Paella",
+        "path":  "assets/food_photos/es_paella.jpg"
+    },
+    {
+        "iso2":  "fr",
+        "country":  "Fransa",
+        "dish":  "Croissant",
+        "path":  "assets/food_photos/fr_croissant.jpg"
+    },
+    {
+        "iso2":  "fr",
+        "country":  "Fransa",
+        "dish":  "Escargot",
+        "path":  "assets/food_photos/fr_escargot.jpg"
+    },
+    {
+        "iso2":  "fr",
+        "country":  "Fransa",
+        "dish":  "Ratatouille",
+        "path":  "assets/food_photos/fr_ratatouille.jpg"
+    },
+    {
+        "iso2":  "gr",
+        "country":  "Yunanistan",
+        "dish":  "Moussaka",
+        "path":  "assets/food_photos/gr_moussaka.jpg"
+    },
+    {
+        "iso2":  "gr",
+        "country":  "Yunanistan",
+        "dish":  "Souvlaki",
+        "path":  "assets/food_photos/gr_souvlaki.jpg"
+    },
+    {
+        "iso2":  "jp",
+        "country":  "Japonya",
+        "dish":  "Ramen",
+        "path":  "assets/food_photos/jp_ramen.jpg"
+    },
+    {
+        "iso2":  "jp",
+        "country":  "Japonya",
+        "dish":  "Sushi",
+        "path":  "assets/food_photos/jp_sushi.jpg"
+    },
+    {
+        "iso2":  "jp",
+        "country":  "Japonya",
+        "dish":  "Tempura",
+        "path":  "assets/food_photos/jp_tempura.jpg"
+    },
+    {
+        "iso2":  "kr",
+        "country":  "Güney Kore",
+        "dish":  "Bibimbap",
+        "path":  "assets/food_photos/kr_bibimbap.jpg"
+    },
+    {
+        "iso2":  "kr",
+        "country":  "Güney Kore",
+        "dish":  "Kimchi",
+        "path":  "assets/food_photos/kr_kimchi.jpg"
+    },
+    {
+        "iso2":  "kr",
+        "country":  "Güney Kore",
+        "dish":  "Korean bbq",
+        "path":  "assets/food_photos/kr_korean-bbq.jpg"
+    },
+    {
+        "iso2":  "mx",
+        "country":  "Meksika",
+        "dish":  "Enchiladas",
+        "path":  "assets/food_photos/mx_enchiladas.jpg"
+    },
+    {
+        "iso2":  "mx",
+        "country":  "Meksika",
+        "dish":  "Guacamole",
+        "path":  "assets/food_photos/mx_guacamole.jpg"
+    },
+    {
+        "iso2":  "mx",
+        "country":  "Meksika",
+        "dish":  "Tacos al pastor",
+        "path":  "assets/food_photos/mx_tacos-al-pastor.jpg"
+    },
+    {
+        "iso2":  "th",
+        "country":  "Tayland",
+        "dish":  "Green curry",
+        "path":  "assets/food_photos/th_green-curry.jpg"
+    },
+    {
+        "iso2":  "th",
+        "country":  "Tayland",
+        "dish":  "Pad thai",
+        "path":  "assets/food_photos/th_pad-thai.jpg"
+    },
+    {
+        "iso2":  "th",
+        "country":  "Tayland",
+        "dish":  "Tom yum soup",
+        "path":  "assets/food_photos/th_tom-yum-soup.jpg"
+    },
+    {
+        "iso2":  "tr",
+        "country":  "Türkiye",
+        "dish":  "Baklava",
+        "path":  "assets/food_photos/tr_baklava.jpg"
+    },
+    {
+        "iso2":  "tr",
+        "country":  "Türkiye",
+        "dish":  "Cag kebap",
+        "path":  "assets/food_photos/tr_cag-kebap.jpg"
+    },
+    {
+        "iso2":  "tr",
+        "country":  "Türkiye",
+        "dish":  "Doner kebap",
+        "path":  "assets/food_photos/tr_doner-kebap.jpg"
+    },
+    {
+        "iso2":  "us",
+        "country":  "Amerika Birleşik Devletleri",
+        "dish":  "Apple pie",
+        "path":  "assets/food_photos/us_apple-pie.jpg"
+    },
+    {
+        "iso2":  "us",
+        "country":  "Amerika Birleşik Devletleri",
+        "dish":  "Bbq ribs",
+        "path":  "assets/food_photos/us_bbq-ribs.jpg"
+    },
+    {
+        "iso2":  "us",
+        "country":  "Amerika Birleşik Devletleri",
+        "dish":  "Hamburger",
+        "path":  "assets/food_photos/us_hamburger.jpg"
+    },
+    {
+        "iso2":  "vn",
+        "country":  "Vietnam",
+        "dish":  "Banh mi",
+        "path":  "assets/food_photos/vn_banh-mi.jpg"
+    },
+    {
+        "iso2":  "vn",
+        "country":  "Vietnam",
+        "dish":  "Pho",
+        "path":  "assets/food_photos/vn_pho.jpg"
+    },
+    {
+        "iso2":  "vn",
+        "country":  "Vietnam",
+        "dish":  "Spring rolls",
+        "path":  "assets/food_photos/vn_spring-rolls.jpg"
+    }
+]

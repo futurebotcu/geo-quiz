@@ -1,0 +1,84 @@
+name: geo_quiz
+description: "A geography quiz Flutter application."
+publish_to: 'none'
+
+version: 1.0.0+2
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
+  url_launcher: ^6.3.2
+  google_fonts: ^6.2.1
+  intl: ^0.20.2
+
+  # Web + mobile uyumlu state ve storage
+  provider: ^6.0.5
+  shared_preferences: ^2.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    # Localization
+    - assets/l10n/
+    # Başkentler
+    - data/assets_manifest.json
+    - data/flags_manifest.json
+    - assets/capital_photos/
+    - assets/flags/
+    - assets/placeholders/
+    - assets/capitals.json
+    - data/countries.json
+
+    # Yemekler
+    - data/foods_manifest.json
+    - assets/food_photos/
+    - assets/placeholders/
+
+    # UI Assets
+    - assets/ui_backgrounds/
+    - assets/ui_banners/
+    # Brand assets for icons and splash
+    - assets/brand/
+
+# Icon configuration
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/brand/app_icon_foreground.png
+  image_path_android: assets/brand/app_icon_foreground.png
+  image_path_ios: assets/brand/app_icon_foreground.png
+  adaptive_icon_foreground: assets/brand/app_icon_foreground.png
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_monochrome: assets/brand/app_icon_mono.png
+  min_sdk_android: 21
+
+# Splash screen configuration
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#000000"
+  image: assets/brand/splash_logo.png
+  image_dark: assets/brand/splash_logo.png
+  android_12:
+    image: assets/brand/splash_logo.png
+    icon_background_color: "#FFFFFF"
+    icon_background_color_dark: "#000000"
+  android: true
+  ios: true
+  web: false
