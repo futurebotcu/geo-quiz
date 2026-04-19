@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -7,6 +8,7 @@ import '../services/settings_provider.dart';
 import 'result_screen.dart';
 import '../widgets/top_lang_toggle.dart';
 import '../l10n/app_localizations.dart';
+import '../utils/mode_labels.dart';
 import '../generated/asset_version.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -27,8 +29,8 @@ class _QuizScreenState extends State<QuizScreen> {
   bool _isLoading = true;
   bool _hasAnswered = false;
   Timer? _timer;
+  Timer? _postAnswerTimer;
   DateTime? _quizStartTime;
-  DateTime? _questionStartTime;
 
   @override
   void initState() {
@@ -39,6 +41,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    _postAnswerTimer?.cancel();
     super.dispose();
   }
 
@@ -50,13 +53,11 @@ class _QuizScreenState extends State<QuizScreen> {
       final questions = await _engine.generateQuestions(widget.settings);
 
       if (questions.isEmpty) {
-        print(
-            '[QUIZ] No questions generated for ${widget.settings.mode.wireName}');
+        if (kDebugMode) debugPrint('[QUIZ] No questions generated for ${widget.settings.mode.wireName}');
         setState(() => _isLoading = false);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Bu mod için yeterli veri bulunamadı')),
+            SnackBar(content: Text(S.of(context).errorInsufficientData)),
           );
           Navigator.pop(context);
         }
@@ -67,7 +68,6 @@ class _QuizScreenState extends State<QuizScreen> {
         _questions = questions;
         _isLoading = false;
         _quizStartTime = DateTime.now();
-        _questionStartTime = DateTime.now();
       });
 
       // Precache food and capital photo images for better performance
@@ -89,11 +89,11 @@ class _QuizScreenState extends State<QuizScreen> {
         _startTimer();
       }
     } catch (e) {
-      print('[QUIZ] Error initializing quiz: $e');
+      if (kDebugMode) debugPrint('[QUIZ] Error initializing quiz: $e');
       setState(() => _isLoading = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Quiz yüklenirken hata: $e')),
+          SnackBar(content: Text(S.of(context).errorLoadingQuiz(e.toString()))),
         );
       }
     }
@@ -144,7 +144,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
     _answers.add(answer);
 
-    Timer(const Duration(seconds: 2), () {
+    _postAnswerTimer?.cancel();
+    _postAnswerTimer = Timer(const Duration(seconds: 2), () {
+      if (!mounted) return;
       if (_currentQuestionIndex < _questions.length - 1) {
         _nextQuestion();
       } else {
@@ -159,7 +161,6 @@ class _QuizScreenState extends State<QuizScreen> {
       _currentQuestionIndex++;
       _selectedOption = null;
       _hasAnswered = false;
-      _questionStartTime = DateTime.now();
     });
 
     if (widget.settings.timerEnabled) {
@@ -170,6 +171,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Future<void> _finishQuiz() async {
     _timer?.cancel();
+    _postAnswerTimer?.cancel();
+
+    if (!mounted) return;
 
     final totalTime = DateTime.now().difference(_quizStartTime!);
     final score = _answers.where((a) => a.isCorrect).length;
@@ -183,22 +187,20 @@ class _QuizScreenState extends State<QuizScreen> {
       completedAt: DateTime.now(),
     );
 
-    // Save result to provider
     final settingsProvider =
         Provider.of<SettingsProvider>(context, listen: false);
     await settingsProvider.saveQuizResult(result);
 
-    if (context.mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            result: result,
-            questions: _questions,
-          ),
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultScreen(
+          result: result,
+          questions: _questions,
         ),
-      );
-    }
+      ),
+    );
   }
 
   @override
@@ -213,8 +215,8 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text(S.of(context).error)),
-        body: const Center(
-          child: Text('Sorular yüklenemedi. Lütfen tekrar deneyin.'),
+        body: Center(
+          child: Text(S.of(context).errorQuestionsFailed),
         ),
       );
     }
@@ -228,11 +230,11 @@ class _QuizScreenState extends State<QuizScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.settings.mode.displayName,
+              localizedModeName(S.of(context), widget.settings.mode),
               style: const TextStyle(fontSize: 18),
             ),
             Text(
-              widget.settings.mode.subtitle,
+              localizedModeSubtitle(S.of(context), widget.settings.mode),
               style:
                   const TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
             ),
@@ -244,61 +246,64 @@ class _QuizScreenState extends State<QuizScreen> {
           child: LinearProgressIndicator(value: progress),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const TopLangToggle(),
-              const SizedBox(height: 16),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        S.of(context).questionLabel(
-                            _currentQuestionIndex + 1, _questions.length),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Text(
-                        S.of(context).scoreCounter(
-                            _answers.where((a) => a.isCorrect).length),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ],
+      body: SafeArea(
+        top: false,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const TopLangToggle(),
+                const SizedBox(height: 16),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          S.of(context).questionLabel(
+                              _currentQuestionIndex + 1, _questions.length),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          S.of(context).scoreCounter(
+                              _answers.where((a) => a.isCorrect).length),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      Text(
-                        _getLocalizedQuestionText(question),
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16),
-                      _buildQuestionImage(question),
-                    ],
+                const SizedBox(height: 16),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          _getLocalizedQuestionText(question),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        _buildQuestionImage(question),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              ...question.options.asMap().entries.map((entry) {
-                final index = entry.key;
-                final option = entry.value;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: _buildOptionButton(index, option, question),
-                );
-              }),
-            ],
+                const SizedBox(height: 16),
+                ...question.options.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final option = entry.value;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: _buildOptionButton(index, option, question),
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       ),
@@ -320,7 +325,9 @@ class _QuizScreenState extends State<QuizScreen> {
         final capital = question.metadata['capital'] as String? ?? '';
         return s.questionCapitalCountry(capital);
       case QuizMode.mixed:
-        return question.questionText; // Fallback for mixed mode
+        // In practice, each generated question carries a concrete mode
+        // (food/capital/flag/capitalCountry), so this branch is a safety net.
+        return s.questionFoodCountry;
     }
   }
 
@@ -375,6 +382,10 @@ class _QuizScreenState extends State<QuizScreen> {
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.high,
                 errorBuilder: (context, error, stackTrace) {
+                  if (kDebugMode) {
+                    debugPrint(
+                        'CAPITAL_IMG_FAIL path=${question.imagePath} mode=${question.mode} error=$error');
+                  }
                   // Flag görseli yüklenemezse emojiye düşelim
                   if (question.emoji != null) {
                     return Container(
@@ -478,7 +489,7 @@ class _FlagBox extends StatelessWidget {
           color: Theme.of(context)
               .colorScheme
               .surfaceContainerHighest
-              .withOpacity(.35),
+              .withValues(alpha: 0.35),
           child: assetPath != null && assetPath!.isNotEmpty
               ? Image.asset(
                   assetPath!,

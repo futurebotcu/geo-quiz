@@ -51,13 +51,10 @@ class DataHealth {
       case 'flagCountry':
         return true; // emoji fallback var
       case 'mixed':
-        // En az 2 mod enabled olmalı
-        int enabledCount = 0;
-        if (hasFoods) enabledCount++;
-        if (hasCapitalPhotos) enabledCount++;
-        // cityToCountry ve flagCountry her zaman enabled
-        enabledCount += 2;
-        return enabledCount >= 2;
+        // Mixed gerçek çeşitlilik için en az 1 foto-bazlı mod gerektirir.
+        // Flag (emoji fallback) + capitalCountry (metin) tek formatta kalır,
+        // bu "mixed" deneyimi sayılmaz.
+        return hasFoods || hasCapitalPhotos;
       default:
         return false;
     }

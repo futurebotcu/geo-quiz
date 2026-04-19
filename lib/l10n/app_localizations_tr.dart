@@ -9,7 +9,7 @@ class STr extends S {
   STr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appName => 'Dünya Geo Quiz';
+  String get appName => 'Geo Quiz: Bayraklar, Başkentler & Yemekler';
 
   @override
   String get settings => 'Ayarlar';
@@ -28,12 +28,6 @@ class STr extends S {
 
   @override
   String get save => 'Kaydet';
-
-  @override
-  String get cancel => 'Vazgeç';
-
-  @override
-  String get ok => 'Tamam';
 
   @override
   String get menuTitle => 'Mod Seç';
@@ -263,16 +257,6 @@ class STr extends S {
   String get recentResults => 'Son Sonuçlar';
 
   @override
-  String bestScoreLabel(int score) {
-    return 'En İyi: $score';
-  }
-
-  @override
-  String averageScoreLabel(String score) {
-    return 'Ortalama: $score';
-  }
-
-  @override
   String get noGamesPlayed => 'Henüz oyun oynanmadı';
 
   @override
@@ -293,4 +277,22 @@ class STr extends S {
 
   @override
   String get error => 'Hata';
+
+  @override
+  String get errorInsufficientData => 'Bu mod için yeterli veri bulunamadı';
+
+  @override
+  String errorLoadingQuiz(String error) {
+    return 'Quiz yüklenirken hata: $error';
+  }
+
+  @override
+  String get errorQuestionsFailed =>
+      'Sorular yüklenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get unanswered => 'Cevaplanmadı';
+
+  @override
+  String get average => 'Ortalama';
 }

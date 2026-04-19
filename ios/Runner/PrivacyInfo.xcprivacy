@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Required Reason APIs used by this app -->
+  <key>NSPrivacyAccessedAPITypes</key>
+  <array>
+    <!-- UserDefaults (NSUserDefaults) — used by shared_preferences plugin
+         Reason CA92.1: Access info from same app, per Apple's allowed reasons -->
+    <dict>
+      <key>NSPrivacyAccessedAPIType</key>
+      <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+      <key>NSPrivacyAccessedAPITypeReasons</key>
+      <array>
+        <string>CA92.1</string>
+      </array>
+    </dict>
+  </array>
+
+  <!-- Data types collected — this app collects NO user data -->
+  <key>NSPrivacyCollectedDataTypes</key>
+  <array/>
+
+  <!-- Tracking — this app does NOT track users -->
+  <key>NSPrivacyTracking</key>
+  <false/>
+
+  <!-- Tracking domains — none (no analytics, no ads) -->
+  <key>NSPrivacyTrackingDomains</key>
+  <array/>
+</dict>
+</plist>

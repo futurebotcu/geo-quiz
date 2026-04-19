@@ -9,7 +9,7 @@ class SEn extends S {
   SEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'World Geo Quiz';
+  String get appName => 'Geo Quiz: Flags, Capitals & Foods';
 
   @override
   String get settings => 'Settings';
@@ -28,12 +28,6 @@ class SEn extends S {
 
   @override
   String get save => 'Save';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get ok => 'OK';
 
   @override
   String get menuTitle => 'Select Mode';
@@ -267,16 +261,6 @@ class SEn extends S {
   String get recentResults => 'Recent Results';
 
   @override
-  String bestScoreLabel(int score) {
-    return 'Best: $score';
-  }
-
-  @override
-  String averageScoreLabel(String score) {
-    return 'Average: $score';
-  }
-
-  @override
   String get noGamesPlayed => 'No games played yet';
 
   @override
@@ -297,4 +281,22 @@ class SEn extends S {
 
   @override
   String get error => 'Error';
+
+  @override
+  String get errorInsufficientData => 'Not enough data for this mode';
+
+  @override
+  String errorLoadingQuiz(String error) {
+    return 'Error loading quiz: $error';
+  }
+
+  @override
+  String get errorQuestionsFailed =>
+      'Could not load questions. Please try again.';
+
+  @override
+  String get unanswered => 'Not answered';
+
+  @override
+  String get average => 'Average';
 }

@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appName": "World Geo Quiz",
+  "appName": "Geo Quiz: Flags, Capitals & Foods",
   "@appName": {
     "description": "Brand app name for the app bar and tab title"
   },
@@ -27,14 +27,6 @@
   "save": "Save",
   "@save": {
     "description": "Save button"
-  },
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "Cancel button"
-  },
-  "ok": "OK",
-  "@ok": {
-    "description": "OK button"
   },
   "menuTitle": "Select Mode",
   "@menuTitle": {
@@ -350,24 +342,6 @@
   "@recentResults": {
     "description": "Recent results section"
   },
-  "bestScoreLabel": "Best: {score}",
-  "@bestScoreLabel": {
-    "description": "Best score with value",
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
-  "averageScoreLabel": "Average: {score}",
-  "@averageScoreLabel": {
-    "description": "Average score with value",
-    "placeholders": {
-      "score": {
-        "type": "String"
-      }
-    }
-  },
   "noGamesPlayed": "No games played yet",
   "@noGamesPlayed": {
     "description": "No games played message"
@@ -404,5 +378,30 @@
   "error": "Error",
   "@error": {
     "description": "Error screen title"
+  },
+  "errorInsufficientData": "Not enough data for this mode",
+  "@errorInsufficientData": {
+    "description": "Snackbar when quiz engine cannot generate questions"
+  },
+  "errorLoadingQuiz": "Error loading quiz: {error}",
+  "@errorLoadingQuiz": {
+    "description": "Snackbar when quiz initialization fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorQuestionsFailed": "Could not load questions. Please try again.",
+  "@errorQuestionsFailed": {
+    "description": "Fallback text when question list is empty on quiz screen"
+  },
+  "unanswered": "Not answered",
+  "@unanswered": {
+    "description": "Label shown for questions the user did not answer in time"
+  },
+  "average": "Average",
+  "@average": {
+    "description": "Average score label in stats mode card"
   }
 }

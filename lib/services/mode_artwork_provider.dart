@@ -1,7 +1,6 @@
 // lib/services/mode_artwork_provider.dart
 import 'dart:math';
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import '../core/models.dart';
 import '../utils/emoji.dart' as emoji_utils;
@@ -14,6 +13,11 @@ class ModeArtwork {
 
 class ModeArtworkProvider {
   static final _rng = Random();
+
+  // Per-mode cache: first pick stays stable for the rest of the process so
+  // mode cards do not re-randomize on every rebuild and precache actually
+  // matches what renders.
+  static final Map<QuizMode, Future<ModeArtwork>> _cache = {};
 
   static const _dirs = {
     QuizMode.foodCountry: 'assets/food_photos/',
@@ -30,30 +34,29 @@ class ModeArtworkProvider {
     'assets/ui_backgrounds/',
   ];
 
-  /// AssetManifest.json'dan prefix ile başlayan tüm asset'leri çeker
+  /// Asset manifest'ten prefix ile başlayan tüm asset'leri çeker
   static Future<List<String>> _listAssets(String prefix) async {
     try {
-      final manifestContent = await rootBundle.loadString('AssetManifest.json');
-      final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-
-      final List<String> assets = [];
-      for (final key in manifestMap.keys) {
-        if (key.startsWith(prefix) &&
+      final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+      return manifest.listAssets().where((key) {
+        return key.startsWith(prefix) &&
             (key.endsWith('.jpg') ||
                 key.endsWith('.png') ||
-                key.endsWith('.jpeg'))) {
-          assets.add(key);
-        }
-      }
-      return assets;
+                key.endsWith('.jpeg'));
+      }).toList();
     } catch (e) {
       debugPrint('[ModeArtworkProvider] Error reading AssetManifest: $e');
       return [];
     }
   }
 
-  /// Mod için rastgele bir görsel/emoji seçer
-  static Future<ModeArtwork> pick(QuizMode mode) async {
+  /// Mod için rastgele bir görsel/emoji seçer. İlk çağrı random seçer,
+  /// sonraki çağrılar aynı Future'ı döndürür (memoization).
+  static Future<ModeArtwork> pick(QuizMode mode) {
+    return _cache.putIfAbsent(mode, () => _pickImpl(mode));
+  }
+
+  static Future<ModeArtwork> _pickImpl(QuizMode mode) async {
     // Bayrak modu: emoji kullan
     if (mode == QuizMode.flagCountry) {
       // Rastgele bir ülke ISO2 kodu seç (veya TR default)

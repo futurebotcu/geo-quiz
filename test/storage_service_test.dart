@@ -148,8 +148,11 @@ void main() {
         final stats = await storageService.loadUserStats();
 
         expect(stats.totalGamesPlayed, equals(1));
-        expect(stats.getBestScore(QuizMode.capitalPhoto), equals(8));
+        // bestScores now stores best PERCENTAGE (0-100), not absolute score.
+        // score=8/10 → 80%
+        expect(stats.getBestScore(QuizMode.capitalPhoto), equals(80));
         expect(stats.getAverageScore(QuizMode.capitalPhoto), equals(80.0));
+        expect(stats.getGamesPlayed(QuizMode.capitalPhoto), equals(1));
       });
     });
 

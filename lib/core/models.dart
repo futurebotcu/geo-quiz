@@ -103,19 +103,26 @@ class QuizSettings {
     this.continentFilter,
   });
 
+  // Sentinel used to distinguish "not provided" from "explicitly null"
+  // for nullable fields (continentFilter: null means "no filter").
+  static const Object _kUnset = Object();
+
   QuizSettings copyWith({
     QuizMode? mode,
     bool? timerEnabled,
     int? questionCount,
     DifficultyLevel? difficulty,
-    String? continentFilter,
+    Object? continentFilter = _kUnset,
   }) {
+    final String? resolvedContinent = identical(continentFilter, _kUnset)
+        ? this.continentFilter
+        : continentFilter as String?;
     return QuizSettings(
       mode: mode ?? this.mode,
       timerEnabled: timerEnabled ?? this.timerEnabled,
       questionCount: questionCount ?? this.questionCount,
       difficulty: difficulty ?? this.difficulty,
-      continentFilter: continentFilter ?? this.continentFilter,
+      continentFilter: resolvedContinent,
     );
   }
 
@@ -224,16 +231,24 @@ class QuizResult {
 }
 
 // =============== İSTATİSTİK ===============
+/// Kullanıcı istatistikleri.
+///
+/// `bestScores` ve `averageScores` artık **yüzde** cinsindendir (0-100):
+/// - `bestScores[mode]` — o modda alınmış en yüksek yüzde (int, 0-100).
+/// - `averageScores[mode]` — o modun tüm zamanlar ortalaması (double, 0-100).
+/// - `gamesPerMode[mode]` — o modda oynanmış oyun sayısı (true lifetime count).
 class UserStats {
   final int totalGamesPlayed;
-  final Map<QuizMode, int> bestScores;
-  final Map<QuizMode, double> averageScores;
+  final Map<QuizMode, int> bestScores; // yüzde 0-100
+  final Map<QuizMode, double> averageScores; // yüzde 0-100
+  final Map<QuizMode, int> gamesPerMode;
   final List<QuizResult> recentResults;
 
   const UserStats({
     this.totalGamesPlayed = 0,
     this.bestScores = const {},
     this.averageScores = const {},
+    this.gamesPerMode = const {},
     this.recentResults = const [],
   });
 
@@ -241,64 +256,96 @@ class UserStats {
     int? totalGamesPlayed,
     Map<QuizMode, int>? bestScores,
     Map<QuizMode, double>? averageScores,
+    Map<QuizMode, int>? gamesPerMode,
     List<QuizResult>? recentResults,
   }) {
     return UserStats(
       totalGamesPlayed: totalGamesPlayed ?? this.totalGamesPlayed,
       bestScores: bestScores ?? this.bestScores,
       averageScores: averageScores ?? this.averageScores,
+      gamesPerMode: gamesPerMode ?? this.gamesPerMode,
       recentResults: recentResults ?? this.recentResults,
     );
   }
 
   int getBestScore(QuizMode mode) => bestScores[mode] ?? 0;
   double getAverageScore(QuizMode mode) => averageScores[mode] ?? 0.0;
+  int getGamesPlayed(QuizMode mode) => gamesPerMode[mode] ?? 0;
 
   Map<String, dynamic> toJson() => {
         'totalGamesPlayed': totalGamesPlayed,
         'bestScores': bestScores.map((k, v) => MapEntry(k.wireName, v)),
         'averageScores': averageScores.map((k, v) => MapEntry(k.wireName, v)),
+        'gamesPerMode': gamesPerMode.map((k, v) => MapEntry(k.wireName, v)),
         'recentResults': recentResults.map((r) => r.toJson()).toList(),
       };
 
   factory UserStats.fromJson(Map<String, dynamic> json) {
+    final recentResults = (json['recentResults'] as List? ?? [])
+        .whereType<Map<String, dynamic>>()
+        .map(QuizResult.fromJson)
+        .toList();
+
+    // Yeni şema: gamesPerMode varsa, alanları olduğu gibi yükle.
+    if (json['gamesPerMode'] is Map) {
+      final bestScores = <QuizMode, int>{};
+      final averageScores = <QuizMode, double>{};
+      final gamesPerMode = <QuizMode, int>{};
+
+      if (json['bestScores'] is Map) {
+        (json['bestScores'] as Map).forEach((key, value) {
+          bestScores[QuizModeWire.fromWire(key as String?)] =
+              (value ?? 0) as int;
+        });
+      }
+      if (json['averageScores'] is Map) {
+        (json['averageScores'] as Map).forEach((key, value) {
+          averageScores[QuizModeWire.fromWire(key as String?)] =
+              (value ?? 0).toDouble();
+        });
+      }
+      (json['gamesPerMode'] as Map).forEach((key, value) {
+        gamesPerMode[QuizModeWire.fromWire(key as String?)] =
+            (value ?? 0) as int;
+      });
+
+      return UserStats(
+        totalGamesPlayed: json['totalGamesPlayed'] ?? 0,
+        bestScores: bestScores,
+        averageScores: averageScores,
+        gamesPerMode: gamesPerMode,
+        recentResults: recentResults,
+      );
+    }
+
+    // Eski şema migration: bestScores/averageScores mutlak skor anlamındaydı
+    // veya çok eski `bestScoreCapital` düzeyindeydi. recentResults üzerinden
+    // yeniden hesaplayarak yüzde semantiğine dönüştür.
     final bestScores = <QuizMode, int>{};
     final averageScores = <QuizMode, double>{};
+    final gamesPerMode = <QuizMode, int>{};
 
-    // Eski alan adları (geriye dönük)
-    if (json.containsKey('bestScoreCapital')) {
-      bestScores[QuizMode.capitalPhoto] = json['bestScoreCapital'] ?? 0;
-      averageScores[QuizMode.capitalPhoto] =
-          (json['averageScoreCapital']?.toDouble() ?? 0.0);
+    for (final r in recentResults) {
+      final pct = r.percentage.round();
+      final curBest = bestScores[r.mode] ?? 0;
+      if (pct > curBest) bestScores[r.mode] = pct;
+      gamesPerMode[r.mode] = (gamesPerMode[r.mode] ?? 0) + 1;
     }
-    if (json.containsKey('bestScoreFlag')) {
-      bestScores[QuizMode.flagCountry] = json['bestScoreFlag'] ?? 0;
-      averageScores[QuizMode.flagCountry] =
-          (json['averageScoreFlag']?.toDouble() ?? 0.0);
-    }
-
-    // Yeni format
-    if (json['bestScores'] is Map) {
-      (json['bestScores'] as Map).forEach((key, value) {
-        final m = QuizModeWire.fromWire(key as String?);
-        bestScores[m] = (value ?? 0) as int;
-      });
-    }
-    if (json['averageScores'] is Map) {
-      (json['averageScores'] as Map).forEach((key, value) {
-        final m = QuizModeWire.fromWire(key as String?);
-        averageScores[m] = (value ?? 0).toDouble();
-      });
+    for (final mode in gamesPerMode.keys) {
+      final modeResults = recentResults.where((r) => r.mode == mode);
+      if (modeResults.isNotEmpty) {
+        averageScores[mode] =
+            modeResults.map((r) => r.percentage).reduce((a, b) => a + b) /
+                modeResults.length;
+      }
     }
 
     return UserStats(
       totalGamesPlayed: json['totalGamesPlayed'] ?? 0,
       bestScores: bestScores,
       averageScores: averageScores,
-      recentResults: (json['recentResults'] as List? ?? [])
-          .whereType<Map<String, dynamic>>()
-          .map(QuizResult.fromJson)
-          .toList(),
+      gamesPerMode: gamesPerMode,
+      recentResults: recentResults,
     );
   }
 }

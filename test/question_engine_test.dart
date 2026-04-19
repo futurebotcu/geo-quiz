@@ -143,6 +143,107 @@ void main() {
         usedCountries.add(question.iso2);
       }
     });
+
+    test('should generate foodCountry mode questions', () async {
+      await questionEngine.initialize();
+
+      final questions = await questionEngine.generateQuestions(
+        const QuizSettings(mode: QuizMode.foodCountry, questionCount: 3),
+      );
+      expect(questions, isNotEmpty);
+      for (final q in questions) {
+        expect(q.mode, equals(QuizMode.foodCountry));
+        expect(q.options.length, equals(4));
+        expect(q.options.contains(q.correctAnswer), isTrue);
+        expect(q.imagePath, isNotNull);
+        // Food mode metadata should carry dish name.
+        expect(q.metadata['dishName'], isNotNull);
+      }
+    });
+
+    test('should generate capitalCountry mode questions', () async {
+      await questionEngine.initialize();
+
+      final questions = await questionEngine.generateQuestions(
+        const QuizSettings(mode: QuizMode.capitalCountry, questionCount: 3),
+      );
+      expect(questions, isNotEmpty);
+      for (final q in questions) {
+        expect(q.mode, equals(QuizMode.capitalCountry));
+        expect(q.options.length, equals(4));
+        expect(q.options.contains(q.correctAnswer), isTrue);
+        // Text-only mode — no image.
+        expect(q.imagePath, isNull);
+        // Capital carried via metadata.
+        expect(q.metadata['capital'], isNotNull);
+        expect((q.metadata['capital'] as String).isNotEmpty, isTrue);
+      }
+    });
+
+    test('mixed mode produces concrete (non-mixed) question modes', () async {
+      await questionEngine.initialize();
+
+      final questions = await questionEngine.generateQuestions(
+        const QuizSettings(mode: QuizMode.mixed, questionCount: 8),
+      );
+      expect(questions, isNotEmpty);
+      final modes = questions.map((q) => q.mode).toSet();
+      // Each question carries a concrete mode (not "mixed").
+      expect(modes.contains(QuizMode.mixed), isFalse);
+      // At least 2 distinct concrete modes in a mixed quiz of 8.
+      expect(modes.length, greaterThanOrEqualTo(2));
+    });
+
+    test('continentFilter restricts questions to Europe', () async {
+      await questionEngine.initialize();
+
+      final questions = await questionEngine.generateQuestions(
+        const QuizSettings(
+          mode: QuizMode.capitalPhoto,
+          questionCount: 5,
+          continentFilter: 'Europe',
+        ),
+      );
+      expect(questions, isNotEmpty);
+      for (final q in questions) {
+        expect(q.continent, equals('Europe'));
+      }
+    });
+
+    test('continentFilter supports North America split', () async {
+      await questionEngine.initialize();
+
+      final questions = await questionEngine.generateQuestions(
+        const QuizSettings(
+          mode: QuizMode.capitalCountry,
+          questionCount: 5,
+          continentFilter: 'North America',
+        ),
+      );
+      expect(questions, isNotEmpty);
+      for (final q in questions) {
+        expect(q.continent, equals('North America'));
+      }
+    });
+
+    test('all three difficulty levels produce 4 options each', () async {
+      await questionEngine.initialize();
+      for (final d in DifficultyLevel.values) {
+        final qs = await questionEngine.generateQuestions(
+          QuizSettings(
+            mode: QuizMode.capitalPhoto,
+            questionCount: 3,
+            difficulty: d,
+          ),
+        );
+        expect(qs, isNotEmpty, reason: 'Difficulty $d produced no questions');
+        for (final q in qs) {
+          expect(q.options.length, equals(4));
+          expect(q.options.toSet().length, equals(4)); // unique
+          expect(q.options.contains(q.correctAnswer), isTrue);
+        }
+      }
+    });
   });
 
   group('QuizResult Tests', () {

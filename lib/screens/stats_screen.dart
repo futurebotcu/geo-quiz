@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/models.dart';
 import '../services/settings_provider.dart';
+import '../utils/mode_labels.dart';
 import '../l10n/app_localizations.dart';
 
 class StatsScreen extends StatelessWidget {
@@ -46,7 +47,9 @@ class StatsScreen extends StatelessWidget {
                           Expanded(
                             child: _buildStatItem(
                               s.bestScoreShort,
-                              '${stats.bestScores.values.fold(0, (sum, score) => sum > score ? sum : score)}',
+                              stats.bestScores.values.isEmpty
+                                  ? '—'
+                                  : '${stats.bestScores.values.reduce((a, b) => a > b ? a : b)}%',
                               Icons.star,
                               Colors.amber,
                             ),
@@ -59,6 +62,7 @@ class StatsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               ...QuizMode.values
+                  .where((m) => m != QuizMode.capitalFromImage)
                   .map((mode) => _buildModeCard(context, mode, stats)),
               const SizedBox(height: 16),
               _buildRecentResultsCard(context, settingsProvider),
@@ -114,7 +118,7 @@ class StatsScreen extends StatelessWidget {
                   Icon(icon, color: color),
                   const SizedBox(width: 8),
                   Text(
-                    mode.displayName,
+                    localizedModeName(s, mode),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
@@ -125,7 +129,9 @@ class StatsScreen extends StatelessWidget {
                   Expanded(
                     child: _buildStatItem(
                       s.bestScoreShort,
-                      '$bestScore',
+                      bestScore == 0 && stats.getGamesPlayed(mode) == 0
+                          ? '—'
+                          : '$bestScore%',
                       Icons.star,
                       color,
                     ),
@@ -133,7 +139,7 @@ class StatsScreen extends StatelessWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildStatItem(
-                      'Average',
+                      s.average,
                       '${averageScore.toStringAsFixed(1)}%',
                       Icons.trending_up,
                       color,
@@ -196,6 +202,7 @@ class StatsScreen extends StatelessWidget {
                         break;
                     }
 
+                    final modeName = localizedModeName(s, result.mode);
                     return ListTile(
                       leading: CircleAvatar(
                         backgroundColor: modeColor,
@@ -207,9 +214,9 @@ class StatsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      title: Text(result.mode.displayName),
+                      title: Text(modeName),
                       subtitle: Text(
-                        '${result.mode.displayName} â€¢ ${_formatDate(result.completedAt)}',
+                        '$modeName • ${_formatDate(result.completedAt)}',
                       ),
                       trailing: Text(
                         '${result.percentage.toStringAsFixed(1)}%',
@@ -231,7 +238,7 @@ class StatsScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

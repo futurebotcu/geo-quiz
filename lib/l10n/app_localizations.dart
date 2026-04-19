@@ -100,7 +100,7 @@ abstract class S {
   /// Brand app name for the app bar and tab title
   ///
   /// In en, this message translates to:
-  /// **'World Geo Quiz'**
+  /// **'Geo Quiz: Flags, Capitals & Foods'**
   String get appName;
 
   /// Settings screen title
@@ -138,18 +138,6 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
-
-  /// Cancel button
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// OK button
-  ///
-  /// In en, this message translates to:
-  /// **'OK'**
-  String get ok;
 
   /// Main menu title
   ///
@@ -577,18 +565,6 @@ abstract class S {
   /// **'Recent Results'**
   String get recentResults;
 
-  /// Best score with value
-  ///
-  /// In en, this message translates to:
-  /// **'Best: {score}'**
-  String bestScoreLabel(int score);
-
-  /// Average score with value
-  ///
-  /// In en, this message translates to:
-  /// **'Average: {score}'**
-  String averageScoreLabel(String score);
-
   /// No games played message
   ///
   /// In en, this message translates to:
@@ -624,6 +600,36 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
+
+  /// Snackbar when quiz engine cannot generate questions
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough data for this mode'**
+  String get errorInsufficientData;
+
+  /// Snackbar when quiz initialization fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading quiz: {error}'**
+  String errorLoadingQuiz(String error);
+
+  /// Fallback text when question list is empty on quiz screen
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load questions. Please try again.'**
+  String get errorQuestionsFailed;
+
+  /// Label shown for questions the user did not answer in time
+  ///
+  /// In en, this message translates to:
+  /// **'Not answered'**
+  String get unanswered;
+
+  /// Average score label in stats mode card
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get average;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

@@ -43,13 +43,11 @@ flutter:
     - assets/capital_photos/
     - assets/flags/
     - assets/placeholders/
-    - assets/capitals.json
     - data/countries.json
 
     # Yemekler
     - data/foods_manifest.json
     - assets/food_photos/
-    - assets/placeholders/
 
     # UI Assets
     - assets/ui_backgrounds/

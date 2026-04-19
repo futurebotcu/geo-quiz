@@ -1,45 +1,14 @@
-import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'models.dart';
 import '../utils/image_picker.dart';
 import '../utils/emoji.dart' as emoji_utils;
-
-// Emoji mojibake düzeltmesi
-String _fixMojibakeEmoji(String? s) {
-  if (s == null || s.isEmpty) return '';
-  // Mojibake karakterleri içeriyorsa latin1->utf8 trick'i uygula
-  final bad = RegExp(r'[ÃÂÄÅðÝŸþ¸]'); // tipik bozuk bayt izleri
-  if (bad.hasMatch(s)) {
-    try {
-      return utf8.decode(latin1.encode(s));
-    } catch (_) {}
-  }
-  return s;
-}
 
 // Kıta filtresi yardımcısı
 bool _continentOk(String? filter, String? itemContinent) {
   if (filter == null || filter.isEmpty) return true; // Tümü
   if (itemContinent == null) return false;
   return itemContinent.toLowerCase() == filter.toLowerCase();
-}
-
-// String-based güvenli distractor seçici (class dışında global)
-List<String> _pickStringDistractors({
-  required String correct,
-  required Iterable<String> pool,
-  required Random random,
-  int count = 3,
-}) {
-  final set = <String>{};
-  for (final v in pool) {
-    final t = v.trim();
-    if (t.isEmpty) continue;
-    if (t.toLowerCase() == correct.toLowerCase()) continue;
-    set.add(t);
-  }
-  final list = set.toList()..shuffle(random);
-  return list.take(count).toList();
 }
 
 // Zorluk → şık üretim stratejisi
@@ -118,7 +87,6 @@ class _QuestionData {
 
 class QuestionEngine {
   final Random _random = Random();
-  static const int _maxDistractorsPerContinent = 1;
 
   String _normAsset(String? p) {
     if (p == null || p.isEmpty) return '';
@@ -144,214 +112,16 @@ class QuestionEngine {
     _initializeContinentMapping();
   }
 
+  /// countries.json tek kaynak: her CountryItem.continent değerine göre
+  /// iso2 listesi inşa edilir. Bu map hem `_getContinent` hem de
+  /// `getCountriesInContinent` için kullanılır.
   void _initializeContinentMapping() {
-    _continentMapping = {
-      'Europe': [
-        'ad',
-        'al',
-        'at',
-        'ba',
-        'be',
-        'bg',
-        'by',
-        'ch',
-        'cy',
-        'cz',
-        'de',
-        'dk',
-        'ee',
-        'es',
-        'fi',
-        'fr',
-        'gb',
-        'ge',
-        'gr',
-        'hr',
-        'hu',
-        'ie',
-        'is',
-        'it',
-        'li',
-        'lt',
-        'lu',
-        'lv',
-        'mc',
-        'md',
-        'me',
-        'mk',
-        'mt',
-        'nl',
-        'no',
-        'pl',
-        'pt',
-        'ro',
-        'rs',
-        'se',
-        'si',
-        'sk',
-        'sm',
-        'ua',
-        'va'
-      ],
-      'Asia': [
-        'ae',
-        'af',
-        'am',
-        'az',
-        'bd',
-        'bh',
-        'bn',
-        'bt',
-        'cn',
-        'id',
-        'il',
-        'in',
-        'iq',
-        'ir',
-        'jo',
-        'jp',
-        'kg',
-        'kh',
-        'kp',
-        'kr',
-        'kw',
-        'kz',
-        'la',
-        'lb',
-        'lk',
-        'mm',
-        'mn',
-        'mv',
-        'my',
-        'np',
-        'om',
-        'ph',
-        'pk',
-        'qa',
-        'sa',
-        'sg',
-        'sy',
-        'th',
-        'tj',
-        'tl',
-        'tm',
-        'tr',
-        'tw',
-        'uz',
-        'vn',
-        'ye'
-      ],
-      'Africa': [
-        'ao',
-        'bf',
-        'bi',
-        'bj',
-        'bw',
-        'cd',
-        'cf',
-        'cg',
-        'ci',
-        'cm',
-        'cv',
-        'dj',
-        'dz',
-        'eg',
-        'er',
-        'et',
-        'ga',
-        'gh',
-        'gm',
-        'gn',
-        'gq',
-        'gw',
-        'ke',
-        'km',
-        'lr',
-        'ls',
-        'ly',
-        'ma',
-        'mg',
-        'ml',
-        'mr',
-        'mu',
-        'mw',
-        'mz',
-        'na',
-        'ne',
-        'ng',
-        'rw',
-        'sc',
-        'sd',
-        'sl',
-        'sn',
-        'so',
-        'ss',
-        'st',
-        'sz',
-        'td',
-        'tg',
-        'tn',
-        'tz',
-        'ug',
-        'za',
-        'zm',
-        'zw'
-      ],
-      'North America': [
-        'ag',
-        'bb',
-        'bz',
-        'ca',
-        'cr',
-        'cu',
-        'dm',
-        'do',
-        'gd',
-        'gt',
-        'hn',
-        'ht',
-        'jm',
-        'kn',
-        'lc',
-        'mx',
-        'ni',
-        'pa',
-        'sv',
-        'tt',
-        'us',
-        'vc'
-      ],
-      'South America': [
-        'ar',
-        'bo',
-        'br',
-        'cl',
-        'co',
-        'ec',
-        'gy',
-        'pe',
-        'py',
-        'sr',
-        'uy',
-        've'
-      ],
-      'Oceania': [
-        'au',
-        'fj',
-        'fm',
-        'ki',
-        'mh',
-        'nr',
-        'nz',
-        'pg',
-        'pw',
-        'sb',
-        'to',
-        'tv',
-        'vu',
-        'ws'
-      ]
-    };
+    final map = <String, List<String>>{};
+    for (final c in _countryItems ?? const <CountryItem>[]) {
+      final cont = c.continent.isEmpty ? 'Unknown' : c.continent;
+      (map[cont] ??= <String>[]).add(c.iso2.toLowerCase());
+    }
+    _continentMapping = map;
   }
 
   String _getContinent(String iso2) {
@@ -363,15 +133,10 @@ class QuestionEngine {
     return 'Unknown';
   }
 
-  List<String> _getCountriesFromContinent(String continent) {
-    return _continentMapping[continent] ?? [];
-  }
-
   Future<List<QuizQuestion>> generateQuestions(
     QuizSettings settings,
   ) async {
-    print(
-        '[QG] mode=${settings.mode.wireName} count=${settings.questionCount} diff=${settings.difficulty}');
+    if (kDebugMode) debugPrint('[QG] mode=${settings.mode.wireName} count=${settings.questionCount} diff=${settings.difficulty}');
 
     if (_capitalItems == null ||
         _flagItems == null ||
@@ -398,10 +163,9 @@ class QuestionEngine {
         final continent = _getContinent(iso2);
         return _continentOk(continentFilter, continent);
       }).toList();
-      print(
-          '[QG] ${settings.mode.wireName} continent-filtered=$continentFilter pool=${availableItems.length}');
+      if (kDebugMode) debugPrint('[QG] ${settings.mode.wireName} continent-filtered=$continentFilter pool=${availableItems.length}');
     } else {
-      print('[QG] ${settings.mode.wireName} pool=${availableItems.length}');
+      if (kDebugMode) debugPrint('[QG] ${settings.mode.wireName} pool=${availableItems.length}');
     }
 
     availableItems.shuffle(_random);
@@ -419,8 +183,7 @@ class QuestionEngine {
           item, settings.mode, settings.difficulty);
       if (question != null) {
         questions.add(question);
-        print(
-            '[QG] Q${questions.length}: correct="${question.correctAnswer}" options=${question.options} image=${question.imagePath} iso=${question.iso2}');
+        if (kDebugMode) debugPrint('[QG] Q${questions.length}: correct="${question.correctAnswer}" options=${question.options} image=${question.imagePath} iso=${question.iso2}');
       }
     }
 
@@ -494,7 +257,7 @@ class QuestionEngine {
     }
 
     questions.shuffle(_random);
-    print('[QG] mixed generated=${questions.length}');
+    if (kDebugMode) debugPrint('[QG] mixed generated=${questions.length}');
     return questions;
   }
 
@@ -566,7 +329,7 @@ class QuestionEngine {
         final flagItem = item as FlagItem;
         final countryName = _getCountryName(flagItem.iso2);
         if (countryName == 'Unknown' || countryName.isEmpty) {
-          print('[QG] flagCountry: No country name found for ${flagItem.iso2}');
+          if (kDebugMode) debugPrint('[QG] flagCountry: No country name found for ${flagItem.iso2}');
           return null;
         }
         final pathFromManifest = flagItem.hasPngFlag ? flagItem.flagAsset : '';
@@ -577,14 +340,14 @@ class QuestionEngine {
           correctAnswer: countryName,
           imagePath: normalizedPath,
           emoji: flagItem.useEmoji
-              ? _fixMojibakeEmoji(emoji_utils.flagEmoji(flagItem.iso2))
+              ? emoji_utils.flagEmoji(flagItem.iso2)
               : null,
         );
 
       case QuizMode.capitalCountry:
         final countryItem = item as CountryItem;
         if (countryItem.capital.isEmpty || countryItem.name.isEmpty) {
-          print('[QG] capitalCountry: Invalid data for ${countryItem.iso2}');
+          if (kDebugMode) debugPrint('[QG] capitalCountry: Invalid data for ${countryItem.iso2}');
           return null;
         }
         return _QuestionData(

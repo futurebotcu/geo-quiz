@@ -51,30 +51,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 16),
-                      RadioListTile<Locale?>(
-                        title: Text(s.languageEnglish),
-                        value: const Locale('en'),
+                      RadioGroup<Locale?>(
                         groupValue: _selectedLocale,
-                        onChanged: (v) {
-                          setState(() => _selectedLocale = v);
-                        },
-                      ),
-                      RadioListTile<Locale?>(
-                        title: Text(s.languageTurkish),
-                        value: const Locale('tr'),
-                        groupValue: _selectedLocale,
-                        onChanged: (v) {
-                          setState(() => _selectedLocale = v);
-                        },
-                      ),
-                      RadioListTile<Locale?>(
-                        title: Text(s.languageSystemDefault),
-                        subtitle: Text(_getSystemLocaleDesc()),
-                        value: null,
-                        groupValue: _selectedLocale,
-                        onChanged: (v) {
-                          setState(() => _selectedLocale = v);
-                        },
+                        onChanged: (v) => setState(() => _selectedLocale = v),
+                        child: Column(
+                          children: [
+                            RadioListTile<Locale?>(
+                              title: Text(s.languageEnglish),
+                              value: const Locale('en'),
+                            ),
+                            RadioListTile<Locale?>(
+                              title: Text(s.languageTurkish),
+                              value: const Locale('tr'),
+                            ),
+                            RadioListTile<Locale?>(
+                              title: Text(s.languageSystemDefault),
+                              subtitle: Text(_getSystemLocaleDesc()),
+                              value: null,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 8),
                       SizedBox(

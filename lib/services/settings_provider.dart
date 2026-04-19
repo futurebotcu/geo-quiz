@@ -65,6 +65,35 @@ class SettingsProvider extends ChangeNotifier {
     await updateSettings(newSettings);
   }
 
+  // Sentinel allows callers to omit nullable params without clobbering them.
+  static const Object _kUnset = Object();
+
+  /// Atomically update multiple quiz configuration fields with a single
+  /// disk write and a single notifyListeners. Omitted params remain unchanged.
+  /// Pass `continentFilter: null` to explicitly clear the filter.
+  Future<void> updateQuizConfig({
+    QuizMode? mode,
+    DifficultyLevel? difficulty,
+    int? questionCount,
+    bool? timerEnabled,
+    Object? continentFilter = _kUnset,
+  }) async {
+    final newSettings = _settings.copyWith(
+      mode: mode,
+      difficulty: difficulty,
+      questionCount: questionCount,
+      timerEnabled: timerEnabled,
+      continentFilter: continentFilter,
+    );
+    _settings = newSettings;
+    notifyListeners();
+    try {
+      await _storage.saveSettings(newSettings);
+    } catch (e) {
+      debugPrint('Error saving settings (atomic): $e');
+    }
+  }
+
   Future<void> saveQuizResult(QuizResult result) async {
     try {
       await _storage.saveQuizResult(result);
@@ -124,14 +153,29 @@ class SettingsProvider extends ChangeNotifier {
 
   // Helper methods for common statistics
   int get totalGamesPlayed => _userStats.totalGamesPlayed;
-  int get bestScoreOverall =>
-      _userStats.bestScores.values.fold(0, (sum, score) => sum + score);
-  double get overallAverageScore => totalGamesPlayed == 0
-      ? 0.0
-      : _userStats.averageScores.values.fold(0.0, (sum, score) => sum + score) /
-          (_userStats.averageScores.isNotEmpty
-              ? _userStats.averageScores.length
-              : 1);
+
+  /// En yüksek mod-yüzdesi (0-100). Modlar arası TOPLAM değil, MAX.
+  int get bestScoreOverall {
+    final values = _userStats.bestScores.values;
+    if (values.isEmpty) return 0;
+    return values.reduce((a, b) => a > b ? a : b);
+  }
+
+  /// Tüm modların oyun-ağırlıklı lifetime ortalama yüzdesi (0-100).
+  double get overallAverageScore {
+    final gamesPerMode = _userStats.gamesPerMode;
+    final averageScores = _userStats.averageScores;
+    if (gamesPerMode.isEmpty) return 0.0;
+    double totalPct = 0.0;
+    int totalCount = 0;
+    for (final entry in gamesPerMode.entries) {
+      final count = entry.value;
+      final avg = averageScores[entry.key] ?? 0.0;
+      totalPct += avg * count;
+      totalCount += count;
+    }
+    return totalCount == 0 ? 0.0 : totalPct / totalCount;
+  }
 
   // Get performance for current mode
   int getBestScoreForMode(QuizMode mode) {
@@ -142,10 +186,10 @@ class SettingsProvider extends ChangeNotifier {
     return _userStats.getAverageScore(mode);
   }
 
-  // Check if this is a new best score
+  // Check if this is a new best score (percentage semantics)
   bool isNewBestScore(QuizResult result) {
     final currentBest = getBestScoreForMode(result.mode);
-    return result.score > currentBest;
+    return result.percentage.round() > currentBest;
   }
 
   // Get performance trend (simplified)

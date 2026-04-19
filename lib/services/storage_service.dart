@@ -7,6 +7,9 @@ class StorageService {
   static const String _settingsKey = 'quiz_settings';
   static const String _userStatsKey = 'user_stats';
   static const String _recentResultsKey = 'recent_results';
+  // Same key LocaleController uses directly (app_locale_code).
+  // Kept in sync so exportData/importData can roundtrip the user's locale.
+  static const String _localeKey = 'app_locale_code';
 
   static StorageService? _instance;
   static StorageService get instance => _instance ??= StorageService._();
@@ -109,33 +112,36 @@ class StorageService {
     final currentStats = await loadUserStats();
     final recentResults = await loadRecentResults();
 
-    // Calculate new statistics
     final totalGames = currentStats.totalGamesPlayed + 1;
 
-    // Calculate statistics for all modes
-    final Map<QuizMode, int> bestScores = Map.from(currentStats.bestScores);
-    final Map<QuizMode, double> averageScores =
-        Map.from(currentStats.averageScores);
+    final bestScores = Map<QuizMode, int>.from(currentStats.bestScores);
+    final averageScores =
+        Map<QuizMode, double>.from(currentStats.averageScores);
+    final gamesPerMode =
+        Map<QuizMode, int>.from(currentStats.gamesPerMode);
 
-    // Update best score for this mode
+    final pct = result.percentage; // 0.0 - 100.0
+    final pctRounded = pct.round();
+
+    // Best score: en yüksek yüzde (0-100 int)
     final currentBest = bestScores[result.mode] ?? 0;
-    if (result.score > currentBest) {
-      bestScores[result.mode] = result.score;
+    if (pctRounded > currentBest) {
+      bestScores[result.mode] = pctRounded;
     }
 
-    // Update average for this mode
-    final modeResults = recentResults.where((r) => r.mode == result.mode);
-    if (modeResults.isNotEmpty) {
-      final average =
-          modeResults.map((r) => r.percentage).reduce((a, b) => a + b) /
-              modeResults.length;
-      averageScores[result.mode] = average;
-    }
+    // Lifetime average: incremental formula ((oldAvg * oldCount) + pct) / newCount
+    final oldCount = gamesPerMode[result.mode] ?? 0;
+    final oldAvg = averageScores[result.mode] ?? 0.0;
+    final newCount = oldCount + 1;
+    final newAvg = ((oldAvg * oldCount) + pct) / newCount;
+    averageScores[result.mode] = newAvg;
+    gamesPerMode[result.mode] = newCount;
 
     final updatedStats = UserStats(
       totalGamesPlayed: totalGames,
       bestScores: bestScores,
       averageScores: averageScores,
+      gamesPerMode: gamesPerMode,
       recentResults: recentResults,
     );
 
@@ -158,24 +164,66 @@ class StorageService {
       'settings': _prefs!.getString(_settingsKey),
       'userStats': _prefs!.getString(_userStatsKey),
       'recentResults': _prefs!.getString(_recentResultsKey),
+      'appLocale': _prefs!.getString(_localeKey),
       'exportDate': DateTime.now().toIso8601String(),
     };
   }
 
-  // Import data from backup
+  /// Import data from backup. Each payload is validated by round-tripping
+  /// through the corresponding model; invalid payloads throw
+  /// [FormatException] before touching storage so the failure is atomic.
   Future<void> importData(Map<String, dynamic> data) async {
     await initialize();
 
-    if (data['settings'] != null) {
-      await _prefs!.setString(_settingsKey, data['settings']);
+    final settings = data['settings'];
+    if (settings is String) {
+      try {
+        final parsed = jsonDecode(settings) as Map<String, dynamic>;
+        QuizSettings.fromJson(parsed); // validate
+      } catch (e) {
+        throw FormatException('Invalid settings payload: $e');
+      }
+      await _prefs!.setString(_settingsKey, settings);
     }
 
-    if (data['userStats'] != null) {
-      await _prefs!.setString(_userStatsKey, data['userStats']);
+    final userStats = data['userStats'];
+    if (userStats is String) {
+      try {
+        final parsed = jsonDecode(userStats) as Map<String, dynamic>;
+        UserStats.fromJson(parsed); // validate
+      } catch (e) {
+        throw FormatException('Invalid userStats payload: $e');
+      }
+      await _prefs!.setString(_userStatsKey, userStats);
     }
 
-    if (data['recentResults'] != null) {
-      await _prefs!.setString(_recentResultsKey, data['recentResults']);
+    final recentResults = data['recentResults'];
+    if (recentResults is String) {
+      try {
+        final parsed = jsonDecode(recentResults) as List;
+        for (final item in parsed) {
+          if (item is Map<String, dynamic>) {
+            QuizResult.fromJson(item); // validate
+          }
+        }
+      } catch (e) {
+        throw FormatException('Invalid recentResults payload: $e');
+      }
+      await _prefs!.setString(_recentResultsKey, recentResults);
+    }
+
+    final locale = data['appLocale'];
+    if (locale is String) {
+      // Accept supported language codes; empty string clears the override.
+      const supported = {'en', 'tr', ''};
+      if (supported.contains(locale)) {
+        if (locale.isEmpty) {
+          await _prefs!.remove(_localeKey);
+        } else {
+          await _prefs!.setString(_localeKey, locale);
+        }
+      }
+      // Unknown locale: ignored silently (permissive).
     }
   }
 }

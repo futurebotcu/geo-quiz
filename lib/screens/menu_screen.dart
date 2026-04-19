@@ -1,4 +1,5 @@
 // lib/screens/menu_screen.dart
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
@@ -29,6 +30,9 @@ class _MenuScreenState extends State<MenuScreen> {
     'assets/capital_photos/ES_madrid.jpg',
   ];
 
+  // Probe once; rebuilds (e.g. from LocaleController) must not re-run it.
+  late final Future<DataHealth> _healthFuture = DataHealth.probe();
+
   @override
   void initState() {
     super.initState();
@@ -54,22 +58,23 @@ class _MenuScreenState extends State<MenuScreen> {
         appBar: AppBar(
           title: Text(s.menuTitle),
           actions: [
-            IconButton(
-              tooltip: s.debugCount,
-              icon: const Icon(Icons.bug_report),
-              onPressed: () async {
-                debugPrint('Karakter testi: ÇÖŞĞÜİ çöşğüı');
-                final engine = QuestionEngine();
-                await engine.initialize();
-                final counts = await engine.getAvailableItemsCount();
-                debugPrint('[COUNT] $counts');
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Counts: $counts')),
-                  );
-                }
-              },
-            ),
+            if (kDebugMode)
+              IconButton(
+                tooltip: s.debugCount,
+                icon: const Icon(Icons.bug_report),
+                onPressed: () async {
+                  debugPrint('Karakter testi: ÇÖŞĞÜİ çöşğüı');
+                  final engine = QuestionEngine();
+                  await engine.initialize();
+                  final counts = await engine.getAvailableItemsCount();
+                  debugPrint('[COUNT] $counts');
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Counts: $counts')),
+                    );
+                  }
+                },
+              ),
             IconButton(
               tooltip: s.statistics,
               icon: const Icon(Icons.insights),
@@ -90,7 +95,7 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
         body: SafeArea(
           child: FutureBuilder<DataHealth>(
-            future: DataHealth.probe(),
+            future: _healthFuture,
             builder: (context, snapshot) {
               final health = snapshot.data;
 
@@ -268,7 +273,7 @@ class _ModeCard extends StatelessWidget {
                 boxShadow: enabled
                     ? [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 12,
                           offset: const Offset(0, 6),
                         ),
@@ -276,8 +281,8 @@ class _ModeCard extends StatelessWidget {
                     : [],
                 border: Border.all(
                   color: enabled
-                      ? theme.dividerColor.withOpacity(0.3)
-                      : theme.dividerColor.withOpacity(0.5),
+                      ? theme.dividerColor.withValues(alpha: 0.3)
+                      : theme.dividerColor.withValues(alpha: 0.5),
                   width: 1,
                 ),
               ),
@@ -297,8 +302,8 @@ class _ModeCard extends StatelessWidget {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.black.withOpacity(0.7),
-                              Colors.black.withOpacity(0.2),
+                              Colors.black.withValues(alpha: 0.7),
+                              Colors.black.withValues(alpha: 0.2),
                             ],
                           ),
                         ),
@@ -334,7 +339,7 @@ class _ModeCard extends StatelessWidget {
                               style: theme.textTheme.bodySmall?.copyWith(
                                 height: 1.25,
                                 color: enabled
-                                    ? Colors.white.withOpacity(0.9)
+                                    ? Colors.white.withValues(alpha: 0.9)
                                     : Colors.grey.shade400,
                               ),
                             ),
@@ -452,7 +457,7 @@ class _ModeCard extends StatelessWidget {
     } else {
       // Fallback: düz renk
       return Container(
-        color: enabled ? color.withOpacity(0.2) : Colors.grey.shade700,
+        color: enabled ? color.withValues(alpha: 0.2) : Colors.grey.shade700,
       );
     }
   }
@@ -604,11 +609,13 @@ class _ModeCard extends StatelessWidget {
                       icon: const Icon(Icons.play_arrow_rounded),
                       label: Text(s.start),
                       onPressed: () async {
-                        // Seçilenleri kalıcı ayarlara uygula
-                        settingsProvider.updateDifficulty(tmpDifficulty);
-                        settingsProvider.updateQuestionCount(tmpCount);
-                        settingsProvider.updateTimerEnabled(tmpTimer);
-                        settingsProvider.updateContinentFilter(tmpContinent);
+                        // Atomic: 1 disk write + 1 notifyListeners.
+                        await settingsProvider.updateQuizConfig(
+                          difficulty: tmpDifficulty,
+                          questionCount: tmpCount,
+                          timerEnabled: tmpTimer,
+                          continentFilter: tmpContinent,
+                        );
 
                         final startSettings =
                             settingsProvider.settings.copyWith(mode: mode);
@@ -645,7 +652,7 @@ class _IconBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: color.withOpacity(.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(14),
       ),
       padding: const EdgeInsets.all(10),

@@ -24,7 +24,7 @@ class MenuBackground extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
           child: const SizedBox.expand(),
         ),
-        Container(color: Colors.black.withOpacity(darken)),
+        Container(color: Colors.black.withValues(alpha: darken)),
         child,
       ],
     );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../core/models.dart';
+import '../services/settings_provider.dart';
+import '../utils/mode_labels.dart';
 import 'menu_screen.dart';
 import 'quiz_screen.dart';
 import '../l10n/app_localizations.dart';
@@ -38,7 +41,7 @@ class ResultScreen extends StatelessWidget {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: gradeColor.withOpacity(0.1),
+                        color: gradeColor.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                         border: Border.all(color: gradeColor, width: 3),
                       ),
@@ -77,7 +80,8 @@ class ResultScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     Text(
-                      S.of(context).modeLabel(result.mode.displayName),
+                      S.of(context).modeLabel(
+                          localizedModeName(S.of(context), result.mode)),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
@@ -137,7 +141,7 @@ class ResultScreen extends StatelessWidget {
                           final isCorrect = answer.isCorrect;
                           final userAnswer = answer.selectedIndex >= 0
                               ? question.options[answer.selectedIndex]
-                              : 'CevaplanmadÄ±';
+                              : S.of(context).unanswered;
 
                           return ListTile(
                             leading: CircleAvatar(
@@ -210,7 +214,8 @@ class ResultScreen extends StatelessWidget {
   }
 
   void _playAgain(BuildContext context) {
-    final settings = QuizSettings(
+    final provider = Provider.of<SettingsProvider>(context, listen: false);
+    final settings = provider.settings.copyWith(
       mode: result.mode,
       questionCount: result.totalQuestions,
     );

@@ -24,7 +24,7 @@ class TopLangToggle extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: active
-                    ? Colors.black.withOpacity(0.08)
+                    ? Colors.black.withValues(alpha: 0.08)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(

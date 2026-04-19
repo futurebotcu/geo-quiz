@@ -327,8 +327,8 @@
     "iso2": "cm",
     "country": "Cameroon",
     "capital": "Yaoundé",
-    "filename": "CM_yaounde.jpg",
-    "path": "assets/capital_photos/CM_yaounde.jpg",
+    "filename": "CM_yaound.jpg",
+    "path": "assets/capital_photos/CM_yaound.jpg",
     "width": 8064,
     "height": 6048
   },
@@ -345,8 +345,8 @@
     "iso2": "co",
     "country": "Colombia",
     "capital": "Bogotá",
-    "filename": "CO_bogota.jpg",
-    "path": "assets/capital_photos/CO_bogota.jpg",
+    "filename": "CO_bogot.jpg",
+    "path": "assets/capital_photos/CO_bogot.jpg",
     "width": 4134,
     "height": 3312
   },
@@ -561,8 +561,8 @@
     "iso2": "gd",
     "country": "Grenada",
     "capital": "St. George's",
-    "filename": "GD_st-george-s.jpg",
-    "path": "assets/capital_photos/GD_st-george-s.jpg",
+    "filename": "GD_st-georges.jpg",
+    "path": "assets/capital_photos/GD_st-georges.jpg",
     "width": 1024,
     "height": 726
   },

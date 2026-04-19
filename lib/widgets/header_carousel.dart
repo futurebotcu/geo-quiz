@@ -61,7 +61,17 @@ class _HeaderCarouselState extends State<HeaderCarousel> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(img, fit: BoxFit.cover),
+                  Image.asset(
+                    img,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, _) => Container(
+                      color: Colors.grey.shade900,
+                      child: const Center(
+                        child: Icon(Icons.image_not_supported,
+                            color: Colors.white54, size: 48),
+                      ),
+                    ),
+                  ),
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(

@@ -34,15 +34,18 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.worldgeo.quiz"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
+        ndk {
+            // arm64-v8a: 64-bit ARM (modern Android phones, 98%+ of active devices)
+            // x86_64:    64-bit x86 (emulators, Chromebooks)
+            // armeabi-v7a excluded: NDK 27 + CMake 3.22.1 Windows bug; not needed for minSdk 21+
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
     }
 
     signingConfigs {

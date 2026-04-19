@@ -49,17 +49,39 @@ android/app/*.keystore
 android/app/*.jks
 **/*.keystore
 **/*.jks
+**/*.p12
 
 # Windows reserved filenames (cannot be tracked by git on Windows)
 CON
 NUL
 nul
 
+# Windows PowerShell shell-mishap files accidentally created at repo root.
+# These were observed after running ps commands with bad redirection.
+/$dir
+/Get-ChildItem
+/cd
+/dir
+/jar
+
 # Garbled path directories from Windows path separator bugs
 C:devgeo_quiz*/
 
 # Cache directories
 .cache/
+
+# Asset junk files (tool-generated cache/log files that must never enter the bundle)
+**/.....cache*
+**/*cleanup_before*.txt
+**/*cleanup_after*.txt
+**/report*.txt
+**/*.tmp
+**/*.bak
+**/*.cache
+data/*.backup
+data/backups/
+data/mode_separation_report_*.txt
+data/review_log.csv
 
 # Reports (generated)
 QA_REPORT.md
