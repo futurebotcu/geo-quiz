@@ -65,7 +65,7 @@ Bu koşullar, Türkiye'deki kullanıcılar için Türk hukuku kapsamında değer
 
 Bu koşullar hakkındaki sorularınız için lütfen iletişime geçin:
 
-**[İLETİŞİM E-POSTA ADRESİNİZİ BURAYA EKLEYİN]**
+**fatihkartal75@gmail.com**
 
 ---
 

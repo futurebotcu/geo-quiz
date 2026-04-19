@@ -65,7 +65,7 @@ These terms are governed by applicable law. For users in Turkey, Turkish law app
 
 For questions about these terms, please contact:
 
-**[ADD YOUR CONTACT EMAIL HERE]**
+**fatihkartal75@gmail.com**
 
 ---
 

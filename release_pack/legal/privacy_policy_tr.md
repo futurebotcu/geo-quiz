@@ -85,9 +85,7 @@ Bu gizlilik politikasında değişiklik yaparsak, yukarıdaki "Son güncelleme" 
 
 Bu gizlilik politikasına ilişkin sorularınız veya endişeleriniz için lütfen şu adresten iletişime geçin:
 
-**[İLETİŞİM E-POSTA ADRESİNİZİ BURAYA EKLEYİN]**
-
-*Örnek: gizlilik@alanadi.com*
+**fatihkartal75@gmail.com**
 
 ---
 
