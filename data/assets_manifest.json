@@ -30,10 +30,10 @@
     "iso2": "ag",
     "country": "Antigua and Barbuda",
     "capital": "Saint John's",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "AG_st-johns.jpg",
+    "path": "assets/capital_photos/AG_st-johns.jpg",
+    "width": 1180,
+    "height": 1096
   },
   {
     "iso2": "al",
@@ -201,10 +201,10 @@
     "iso2": "br",
     "country": "Brazil",
     "capital": "Brasília",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "BR_braslia.jpg",
+    "path": "assets/capital_photos/BR_braslia.jpg",
+    "width": 1182,
+    "height": 1088
   },
   {
     "iso2": "bs",
@@ -354,10 +354,10 @@
     "iso2": "cr",
     "country": "Costa Rica",
     "capital": "San José",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "CR_san-jos.jpg",
+    "path": "assets/capital_photos/CR_san-jos.jpg",
+    "width": 1182,
+    "height": 1090
   },
   {
     "iso2": "cu",
@@ -903,10 +903,10 @@
     "iso2": "lk",
     "country": "Sri Lanka",
     "capital": "Sri Jayawardenepura Kotte",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "LK_sri-jayawardenepura-kotte.jpg",
+    "path": "assets/capital_photos/LK_sri-jayawardenepura-kotte.jpg",
+    "width": 1182,
+    "height": 1090
   },
   {
     "iso2": "lr",
@@ -984,10 +984,10 @@
     "iso2": "md",
     "country": "Moldova",
     "capital": "Chișinău",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "MD_chiinu.jpg",
+    "path": "assets/capital_photos/MD_chiinu.jpg",
+    "width": 1178,
+    "height": 1088
   },
   {
     "iso2": "me",
@@ -1083,10 +1083,10 @@
     "iso2": "mv",
     "country": "Maldives",
     "capital": "Malé",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "MV_mal.jpg",
+    "path": "assets/capital_photos/MV_mal.jpg",
+    "width": 1190,
+    "height": 1106
   },
   {
     "iso2": "mw",
@@ -1299,10 +1299,10 @@
     "iso2": "py",
     "country": "Paraguay",
     "capital": "Asunción",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "PY_asuncion.jpg",
+    "path": "assets/capital_photos/PY_asuncion.jpg",
+    "width": 1166,
+    "height": 1090
   },
   {
     "iso2": "qa",
@@ -1479,10 +1479,10 @@
     "iso2": "st",
     "country": "São Tomé and Príncipe",
     "capital": "São Tomé",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "ST_sao-tome.jpg",
+    "path": "assets/capital_photos/ST_sao-tome.jpg",
+    "width": 1188,
+    "height": 1100
   },
   {
     "iso2": "sv",
@@ -1515,19 +1515,19 @@
     "iso2": "td",
     "country": "Chad",
     "capital": "N'Djamena",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "TD_ndjamena.jpg",
+    "path": "assets/capital_photos/TD_ndjamena.jpg",
+    "width": 1174,
+    "height": 1080
   },
   {
     "iso2": "tg",
     "country": "Togo",
     "capital": "Lomé",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "TG_lome.jpg",
+    "path": "assets/capital_photos/TG_lome.jpg",
+    "width": 1190,
+    "height": 1082
   },
   {
     "iso2": "th",
@@ -1578,10 +1578,10 @@
     "iso2": "to",
     "country": "Tonga",
     "capital": "Nuku'alofa",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "TO_nukualofa.jpg",
+    "path": "assets/capital_photos/TO_nukualofa.jpg",
+    "width": 1180,
+    "height": 1092
   },
   {
     "iso2": "tr",
@@ -1641,10 +1641,10 @@
     "iso2": "us",
     "country": "United States",
     "capital": "Washington, D.C.",
-    "filename": "",
-    "path": "",
-    "width": 0,
-    "height": 0
+    "filename": "US_washington-dc.jpg",
+    "path": "assets/capital_photos/US_washington-dc.jpg",
+    "width": 906,
+    "height": 809
   },
   {
     "iso2": "uy",

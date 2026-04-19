@@ -1,4 +1,5 @@
 // lib/screens/menu_screen.dart
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import '../core/question_engine.dart';
 import '../services/settings_provider.dart';
 import '../services/mode_artwork_provider.dart';
 import '../utils/data_health.dart';
+import '../utils/image_picker.dart';
 import 'quiz_screen.dart';
 import 'settings_screen.dart';
 import 'stats_screen.dart';
@@ -24,14 +26,69 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  final carouselImages = const <String>[
-    'assets/ui_banners/banner_cities.jpg',
-    'assets/ui_banners/banner_food.jpg',
-    'assets/capital_photos/ES_madrid.jpg',
+  // Each carousel slide is a real-content photo linked to a concrete quiz mode.
+  // Tapping a slide opens that mode's start-sheet (same behaviour as mode card).
+  // Images are picked randomly from the bundled asset pool per app launch
+  // (no new assets — zero bundle cost). Fallbacks used before async pick lands.
+  List<String> _carouselImages = const <String>[
+    'assets/food_photos/tr_baklava.jpg',
+    'assets/capital_photos/FR_paris.jpg',
+    'assets/capital_photos/JP_tokyo.jpg',
+  ];
+  static const _carouselModes = <QuizMode>[
+    QuizMode.foodCountry,
+    QuizMode.capitalPhoto,
+    QuizMode.mixed,
   ];
 
   // Probe once; rebuilds (e.g. from LocaleController) must not re-run it.
   late final Future<DataHealth> _healthFuture = DataHealth.probe();
+
+  void _openModeFromCarousel(QuizMode mode) {
+    final s = S.of(context);
+    final (String title, String subtitle, IconData icon, Color color) =
+        switch (mode) {
+      QuizMode.foodCountry => (
+          s.modeFoodCountry,
+          s.modeFoodCountryDesc,
+          Icons.restaurant,
+          Colors.orange,
+        ),
+      QuizMode.capitalPhoto || QuizMode.capitalFromImage => (
+          s.modeCapitalPhoto,
+          s.modeCapitalPhotoDesc,
+          Icons.location_city,
+          Colors.blue,
+        ),
+      QuizMode.flagCountry => (
+          s.modeFlagCountry,
+          s.modeFlagCountryDesc,
+          Icons.flag,
+          Colors.green,
+        ),
+      QuizMode.capitalCountry => (
+          s.modeCapitalCountry,
+          s.modeCapitalCountryDesc,
+          Icons.public,
+          Colors.purple,
+        ),
+      QuizMode.mixed => (
+          s.modeMixed,
+          s.modeMixedDesc,
+          Icons.shuffle,
+          Colors.teal,
+        ),
+    };
+    _openQuizStartSheet(
+      context,
+      mode,
+      title,
+      subtitle,
+      icon,
+      color,
+      'carousel-${mode.wireName}',
+    );
+  }
 
   @override
   void initState() {
@@ -45,6 +102,31 @@ class _MenuScreenState extends State<MenuScreen> {
         ModeArtworkProvider.precacheFor(context, QuizMode.mixed);
       }
     });
+    _pickCarouselSlides();
+  }
+
+  /// Randomize carousel slides from the already-bundled asset pool.
+  /// Zero bundle cost — only reshuffles what is shipped.
+  Future<void> _pickCarouselSlides() async {
+    try {
+      final foods = await loadFoodManifest();
+      final capitals =
+          (await loadCapitalManifest()).where((c) => c.hasPhoto).toList();
+      if (foods.isEmpty || capitals.length < 2) return;
+      final rng = Random();
+      final food = foods[rng.nextInt(foods.length)];
+      final c1 = capitals[rng.nextInt(capitals.length)];
+      CapitalItem c2;
+      do {
+        c2 = capitals[rng.nextInt(capitals.length)];
+      } while (c2.iso2 == c1.iso2);
+      if (!mounted) return;
+      setState(() {
+        _carouselImages = [food.path, c1.path, c2.path];
+      });
+    } catch (_) {
+      // fallback list stays in place
+    }
   }
 
   @override
@@ -104,7 +186,10 @@ class _MenuScreenState extends State<MenuScreen> {
                 children: [
                   const TopLangToggle(),
                   const SizedBox(height: 8),
-                  HeaderCarousel(images: carouselImages),
+                  HeaderCarousel(
+                    images: _carouselImages,
+                    onItemTap: (i) => _openModeFromCarousel(_carouselModes[i]),
+                  ),
                   const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -264,7 +349,7 @@ class _ModeCard extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
             onTap: enabled
-                ? () => _openStartSheet(
+                ? () => _openQuizStartSheet(
                     context, mode, title, subtitle, icon, color, heroTag)
                 : null,
             child: Container(
@@ -462,15 +547,19 @@ class _ModeCard extends StatelessWidget {
     }
   }
 
-  void _openStartSheet(
-    BuildContext context,
-    QuizMode mode,
-    String title,
-    String subtitle,
-    IconData icon,
-    Color color,
-    String heroTag,
-  ) {
+}
+
+// Top-level so the header carousel (outside _ModeCard) can also open the
+// same configuration sheet for a given mode.
+void _openQuizStartSheet(
+  BuildContext context,
+  QuizMode mode,
+  String title,
+  String subtitle,
+  IconData icon,
+  Color color,
+  String heroTag,
+) {
     final s = S.of(context);
     final settingsProvider =
         Provider.of<SettingsProvider>(context, listen: false);
@@ -641,7 +730,6 @@ class _ModeCard extends StatelessWidget {
       },
     );
   }
-}
 
 class _IconBadge extends StatelessWidget {
   final IconData icon;

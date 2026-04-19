@@ -35,6 +35,8 @@ migrate_working_dir/
 
 # Symbolication related
 app.*.symbols
+# Split debug info directory (--split-debug-info=./symbols)
+/symbols/
 
 # Obfuscation related
 app.*.map.json
@@ -79,7 +81,11 @@ C:devgeo_quiz*/
 **/*.bak
 **/*.cache
 data/*.backup
+data/*backup*
 data/backups/
+# Asset backup snapshots (pre-optimize) — never commit, always large.
+assets/*__backup/
+assets/**/*__backup/
 data/mode_separation_report_*.txt
 data/review_log.csv
 

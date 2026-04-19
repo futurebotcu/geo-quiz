@@ -350,10 +350,23 @@ class QuestionEngine {
           if (kDebugMode) debugPrint('[QG] capitalCountry: Invalid data for ${countryItem.iso2}');
           return null;
         }
+        // Başkent fotosu varsa iliştir (aynı iso2 capital manifest'inde).
+        // Foto yoksa imagePath null kalır ve UI text-only fallback'e düşer.
+        String? capitalPhotoPath;
+        if (_capitalItems != null) {
+          for (final c in _capitalItems!) {
+            if (c.iso2.toLowerCase() == countryItem.iso2.toLowerCase() &&
+                c.hasPhoto) {
+              capitalPhotoPath = getCapitalImageSource(c);
+              break;
+            }
+          }
+        }
         return _QuestionData(
           questionText:
               '${countryItem.capital} şehri hangi ülkenin başkentidir?',
           correctAnswer: countryItem.name,
+          imagePath: capitalPhotoPath,
         );
 
       case QuizMode.mixed:

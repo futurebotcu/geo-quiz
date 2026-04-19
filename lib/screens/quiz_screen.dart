@@ -352,10 +352,14 @@ class _QuizScreenState extends State<QuizScreen> {
           border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
-          child: Text(
-            question.emoji!,
-            style: const TextStyle(fontSize: 80),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              question.emoji!,
+              style: const TextStyle(fontSize: 200, height: 1.0),
+            ),
           ),
         ),
       );
@@ -390,10 +394,15 @@ class _QuizScreenState extends State<QuizScreen> {
                   if (question.emoji != null) {
                     return Container(
                       color: Colors.grey.shade50,
-                      child: Center(
-                        child: Text(
-                          question.emoji!,
-                          style: const TextStyle(fontSize: 80),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            question.emoji!,
+                            style:
+                                const TextStyle(fontSize: 200, height: 1.0),
+                          ),
                         ),
                       ),
                     );
@@ -509,14 +518,18 @@ class _EmojiFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        emoji,
-        style: const TextStyle(
-          fontSize: 96,
-          height: 1.0,
+    // FittedBox.contain: emoji'yi container'a orantılı sığdırır, her zaman
+    // tam ortalı ve symmetric padding ile. Sabit fontSize'ın yol açtığı
+    // baseline/ascent dengesizliğini çözer.
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Text(
+          emoji,
+          style: const TextStyle(fontSize: 200, height: 1.0),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,
       ),
     );
   }

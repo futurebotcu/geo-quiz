@@ -172,8 +172,11 @@ void main() {
         expect(q.mode, equals(QuizMode.capitalCountry));
         expect(q.options.length, equals(4));
         expect(q.options.contains(q.correctAnswer), isTrue);
-        // Text-only mode — no image.
-        expect(q.imagePath, isNull);
+        // imagePath is optional: capital photo is attached when available
+        // for that iso2 (text-only fallback when missing).
+        if (q.imagePath != null) {
+          expect(q.imagePath!.startsWith('assets/'), isTrue);
+        }
         // Capital carried via metadata.
         expect(q.metadata['capital'], isNotNull);
         expect((q.metadata['capital'] as String).isNotEmpty, isTrue);
