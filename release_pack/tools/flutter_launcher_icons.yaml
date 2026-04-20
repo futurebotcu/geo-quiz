@@ -1,0 +1,32 @@
+# Flutter Launcher Icons Configuration
+# Already integrated in pubspec.yaml — this file is for reference / standalone use.
+# Source: https://pub.dev/packages/flutter_launcher_icons
+
+flutter_launcher_icons:
+  # Android
+  android: true
+  image_path_android: assets/brand/app_icon_foreground.png
+
+  # Adaptive icon (Android 8.0+)
+  adaptive_icon_foreground: assets/brand/app_icon_foreground.png
+  adaptive_icon_background: "#FFFFFF"
+
+  # Monochrome icon (Android 13+ themed icons)
+  adaptive_icon_monochrome: assets/brand/app_icon_mono.png
+
+  # Minimum Android SDK for adaptive icon
+  min_sdk_android: 21
+
+  # iOS
+  ios: true
+  image_path_ios: assets/brand/app_icon_foreground.png
+  # Note: iOS icons must NOT have transparency. Ensure app_icon_foreground.png
+  # has a solid background when used for iOS, OR use a separate iOS-specific file:
+  # image_path_ios: assets/brand/app_icon_ios.png  ← recommended if using transparency
+
+# IMPORTANT NOTES:
+# 1. The source image (app_icon_foreground.png) should be 1024×1024 px minimum
+# 2. For iOS: the image must have NO transparent areas
+# 3. For Android adaptive foreground: transparency IS supported (shows over background)
+# 4. If your foreground has transparency (designed for adaptive), use a separate
+#    non-transparent 1024×1024 file for iOS.

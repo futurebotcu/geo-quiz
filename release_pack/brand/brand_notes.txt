@@ -1,0 +1,43 @@
+GEO QUIZ — BRAND NOTES
+======================
+
+APP IDENTITY
+  Full name:    Geo Quiz: Flags, Capitals & Foods
+  Short name:   Geo Quiz
+  Package:      com.worldgeo.quiz
+  Category:     Education / Trivia
+  Tone:         Friendly, curious, educational. Not gamified-aggressive.
+                Approachable for all ages (8+), smart without being academic.
+
+VISUAL IDENTITY
+  Primary color:    Indigo / #4F46E5
+  Background:       World map imagery, city skylines, food photography
+  Typography:       Nunito (Google Fonts) — rounded, readable, modern
+  Icon style:       Minimalist globe or map pin with flag/food accent.
+                    Adaptive icon: foreground = icon mark, background = white.
+                    Monochrome variant required for Android 13+ themed icons.
+
+KEY MESSAGES (for store copy and ASO)
+  1. "195 countries, 5 quiz modes" — breadth
+  2. "Offline — no internet required" — reliability, privacy
+  3. "Flags + Capital Cities + Local Foods" — unique triple-content angle
+  4. "Turkish + English" — bilingual, regional appeal
+  5. "No ads, no tracking, no account" — trust, GDPR-friendly
+
+AUDIENCE
+  Primary:   Students (12-25), travelers, geography enthusiasts
+  Secondary: Trivia game fans, language learners
+  Geography: Turkey + English-speaking markets initially
+
+DIFFERENTIATION vs COMPETITORS
+  - Includes food-to-country mode (rare in geography quiz apps)
+  - Dual-language (TR/EN) from day 1
+  - High-quality capital city photos (183 countries)
+  - Zero data collection (privacy-first)
+  - Works offline (no server dependency)
+
+DO NOT
+  - Use clip art or generic emoji-only visuals in store graphics
+  - Claim "100% coverage" for flags (13 PNG only; rest emoji — truthful)
+  - Promise features not yet implemented (leaderboards, multiplayer, etc.)
+  - Use animated GIFs for store screenshots (static preferred for review)

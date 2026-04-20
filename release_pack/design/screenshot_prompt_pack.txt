@@ -1,0 +1,142 @@
+SCREENSHOT PRODUCTION GUIDE — 8 SCREENSHOTS (EN + TR)
+=======================================================
+Tool: Real device / emulator capture + Canva/Figma overlay frame
+Canvas: 1080×1920 px (Google Play) / 1290×2796 px (App Store 6.7")
+
+FRAMING APPROACH:
+- Option A: Raw app screenshot + text overlay at top
+- Option B: Device frame (use mockuphone.com or Rotato) + colored background + text
+
+Color scheme for all screenshots:
+  Background: #4F46E5 (indigo) or white
+  Text overlay: white on indigo, or indigo on white
+  Font: Nunito Bold for headline, Nunito Regular for subtext
+
+=======================================================
+SCREENSHOT 1 — MENU SCREEN
+=======================================================
+UI: Main menu showing 5 mode cards (foodCountry, capitalPhoto, flagCountry,
+    capitalCountry, mixed) with carousel at top
+
+EN text overlay:
+  Headline: "5 Ways to Learn"
+  Subline:  "Choose your challenge"
+
+TR text overlay:
+  Headline: "5 Farklı Mod"
+  Subline:  "Meydan okumanı seç"
+
+AI caption prompt (if needed):
+"App screenshot frame: colorful grid of 5 quiz mode cards on a world map
+background. Cards show icons for food, city, flag, map, shuffle. Modern
+Material 3 UI. Indigo accent color."
+
+=======================================================
+SCREENSHOT 2 — FLAG QUIZ QUESTION
+=======================================================
+UI: Quiz screen showing a large flag emoji (e.g. 🇯🇵) with 4 country options
+    as chips/buttons. Progress bar at top showing Q3/10.
+
+EN text overlay:
+  Headline: "195 Country Flags"
+  Subline:  "Can you name them all?"
+
+TR text overlay:
+  Headline: "195 Ülke Bayrağı"
+  Subline:  "Hepsini tanıyabiliyor musun?"
+
+=======================================================
+SCREENSHOT 3 — CAPITAL PHOTO QUESTION
+=======================================================
+UI: Quiz screen with a high-quality photo of a capital city (e.g. Paris/Eiffel
+    Tower or Tokyo skyline) with 4 capital name options below.
+
+EN text overlay:
+  Headline: "183 Capital Photos"
+  Subline:  "Real city photography"
+
+TR text overlay:
+  Headline: "183 Başkent Fotoğrafı"
+  Subline:  "Gerçek şehir fotoğrafları"
+
+=======================================================
+SCREENSHOT 4 — FOOD QUIZ QUESTION
+=======================================================
+UI: Quiz screen with a food photo (e.g. sushi, pasta, tacos) and 4 country options.
+
+EN text overlay:
+  Headline: "Unique Food Mode"
+  Subline:  "Match dishes to countries"
+
+TR text overlay:
+  Headline: "Eşsiz Yemek Modu"
+  Subline:  "Yemekleri ülkeleriyle eşleştir"
+
+=======================================================
+SCREENSHOT 5 — CORRECT ANSWER FEEDBACK
+=======================================================
+UI: Quiz screen after answering correctly: correct option highlighted green,
+    brief celebration or checkmark animation state.
+
+EN text overlay:
+  Headline: "Instant Feedback"
+  Subline:  "Learn as you play"
+
+TR text overlay:
+  Headline: "Anında Geri Bildirim"
+  Subline:  "Oynayarak öğren"
+
+=======================================================
+SCREENSHOT 6 — RESULT SCREEN
+=======================================================
+UI: Result screen showing score (e.g. "8/10 correct"), grade label "Great!",
+    duration, mode name, and "Review Answers" / "Try Again" buttons.
+
+EN text overlay:
+  Headline: "See How You Did"
+  Subline:  "Detailed score breakdown"
+
+TR text overlay:
+  Headline: "Sonucunu Gör"
+  Subline:  "Ayrıntılı skor özeti"
+
+=======================================================
+SCREENSHOT 7 — STATISTICS SCREEN
+=======================================================
+UI: Stats screen showing total games, best score, average score, recent results list.
+
+EN text overlay:
+  Headline: "Track Your Progress"
+  Subline:  "Full history & statistics"
+
+TR text overlay:
+  Headline: "İlerlemenı Takip Et"
+  Subline:  "Tam geçmiş ve istatistikler"
+
+=======================================================
+SCREENSHOT 8 — SETTINGS / DIFFICULTY SHEET
+=======================================================
+UI: Bottom sheet showing quiz settings: difficulty chips (Easy/Medium/Hard),
+    question count chips (5/10/15/20), timer toggle, continent filter chips.
+
+EN text overlay:
+  Headline: "Customize Your Quiz"
+  Subline:  "Difficulty · Questions · Continents"
+
+TR text overlay:
+  Headline: "Quizi Özelleştir"
+  Subline:  "Zorluk · Soru Sayısı · Kıtalar"
+
+=======================================================
+PRODUCTION CHECKLIST
+=======================================================
+[ ] Capture screenshots on real device or high-res emulator
+[ ] Use English locale for EN screenshots, Turkish for TR screenshots
+[ ] Ensure status bar is clean (WiFi/time visible but minimal)
+    - Or hide status bar in screenshots
+[ ] Export at exact required dimensions for each store
+[ ] Add device frame optional but professional (mockuphone.com)
+[ ] Review each screenshot for Turkish special chars (ÇÖŞĞÜİ çöşğüı)
+    - Ensure font renders correctly in overlays (use Nunito from Google Fonts)
+[ ] Do not include any user personal data in screenshots
+[ ] First screenshot is most critical for ASO — make it count

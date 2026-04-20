@@ -1,0 +1,33 @@
+# Flutter Native Splash Configuration
+# Already integrated in pubspec.yaml — this file is for reference / standalone use.
+# Source: https://pub.dev/packages/flutter_native_splash
+
+flutter_native_splash:
+  # Light mode background
+  color: "#FFFFFF"
+  # Dark mode background
+  color_dark: "#000000"
+
+  # Splash logo image (centered on screen)
+  image: assets/brand/splash_logo.png
+  image_dark: assets/brand/splash_logo.png
+
+  # Android 12+ splash (uses icon-based system)
+  android_12:
+    image: assets/brand/splash_logo.png
+    icon_background_color: "#FFFFFF"
+    icon_background_color_dark: "#000000"
+    # image_dark: assets/brand/splash_logo_dark.png  # optional dark variant
+
+  # Platforms
+  android: true
+  ios: true
+  web: false
+
+# IMAGE SPECS FOR SPLASH LOGO:
+# - Recommended size: 288×288 px (1x), 432×432 (1.5x), 576×576 (2x)
+# - Or provide a single 1152×1152 px file (flutter_native_splash auto-scales)
+# - Format: PNG with transparency
+# - Keep the logo simple — it appears briefly on a colored background
+# - On Android 12+, the icon is displayed in a circle mask — keep important
+#   content within the center 80% of the image

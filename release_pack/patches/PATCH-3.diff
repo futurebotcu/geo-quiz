@@ -1,0 +1,54 @@
+--- PATCH-3: pubspec.yaml assets cleanup
+--- File: pubspec.yaml
+--- Problem 1: Duplicate "- assets/placeholders/" entry (lines 45 and 52)
+---   → Causes unnecessary double-processing during flutter pub get; cosmetic bloat.
+--- Problem 2: data/ directory contains non-app files (review_log.csv, *.backup,
+---   mode_separation_report_*.txt) but GOOD NEWS: pubspec only lists specific
+---   files from data/, not the whole directory. These files are NOT bundled.
+---   No action needed for data/ directory contents.
+
+diff --git a/pubspec.yaml b/pubspec.yaml
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ assets section:
+   assets:
+     # Localization
+     - assets/l10n/
+     # Başkentler
+     - data/assets_manifest.json
+     - data/flags_manifest.json
+     - assets/capital_photos/
+     - assets/flags/
+     - assets/placeholders/
+     - assets/capitals.json
+     - data/countries.json
+
+     # Yemekler
+     - data/foods_manifest.json
+-    - assets/food_photos/
+-    - assets/placeholders/         ← REMOVED (duplicate)
++    - assets/food_photos/
+
+     # UI Assets
+     - assets/ui_backgrounds/
+     - assets/ui_banners/
+     # Brand assets for icons and splash
+     - assets/brand/
+
+--- ADDITIONAL RECOMMENDATIONS (not patched automatically):
+--- Consider cleaning up from data/ directory (not app-impacting, but repo hygiene):
+---   data/assets_manifest.json.backup
+---   data/backups/
+---   data/mode_separation_report_20250922_*.txt
+---   data/review_log.csv
+--- Add to .gitignore OR delete if no longer needed.
+--- These do NOT affect the app bundle (they are not listed in pubspec assets).
+
+--- GOOGLE FONTS NOTE:
+--- main.dart uses GoogleFonts.nunitoTextTheme() which downloads Nunito at runtime
+--- if not cached. For a fully offline app, consider bundling the font:
+---   1. Download Nunito from fonts.google.com
+---   2. Place in assets/fonts/
+---   3. Add font: declaration to pubspec.yaml
+---   4. Replace GoogleFonts.nunito() with fontFamily: 'Nunito'
+--- Low priority for v1.0 but recommended for v1.1.

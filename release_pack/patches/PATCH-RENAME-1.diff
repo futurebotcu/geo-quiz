@@ -1,0 +1,49 @@
+--- PATCH-RENAME-1: Display Name Rename
+--- Scope: in-app l10n + Android launcher label + iOS display name
+--- applicationId / Bundle ID: UNCHANGED (com.worldgeo.quiz)
+--- Rationale: Launcher label is kept short ("Geo Quiz") because icon labels
+---   are constrained to ~12-14 chars on most devices. The full brand name
+---   "Geo Quiz: Flags, Capitals & Foods" is used as the OS window/task title
+---   via MaterialApp.onGenerateTitle (appName ARB key) and in store listings.
+
+diff --git a/assets/l10n/app_en.arb b/assets/l10n/app_en.arb
+--- a/assets/l10n/app_en.arb
++++ b/assets/l10n/app_en.arb
+@@ -2,7 +2,7 @@
+   "@@locale": "en",
+-  "appName": "World Geo Quiz",
++  "appName": "Geo Quiz: Flags, Capitals & Foods",
+   "@appName": {
+     "description": "Brand app name for the app bar and tab title"
+   },
+
+diff --git a/assets/l10n/app_tr.arb b/assets/l10n/app_tr.arb
+--- a/assets/l10n/app_tr.arb
++++ b/assets/l10n/app_tr.arb
+@@ -2,5 +2,5 @@
+   "@@locale": "tr",
+-  "appName": "Dünya Geo Quiz",
++  "appName": "Geo Quiz: Bayraklar, Başkentler & Yemekler",
+
+diff --git a/android/app/src/main/res/values/strings.xml b/android/app/src/main/res/values/strings.xml
+--- a/android/app/src/main/res/values/strings.xml
++++ b/android/app/src/main/res/values/strings.xml
+@@ -2,5 +2,5 @@
+ <resources>
+-    <string name="app_name">World Geo Quiz</string>
++    <string name="app_name">Geo Quiz</string>
+ </resources>
+ NOTE: "Geo Quiz" is the launcher / home-screen label.
+ Full brand name is in store listing title (see release_pack/store/).
+
+diff --git a/ios/Runner/Info.plist b/ios/Runner/Info.plist
+--- a/ios/Runner/Info.plist
++++ b/ios/Runner/Info.plist
+@@ CFBundleDisplayName
+-    <string>World Geo Quiz</string>
++    <string>Geo Quiz</string>
+@@ CFBundleName
+-    <string>World Geo Quiz</string>
++    <string>Geo Quiz</string>
+ NOTE: Under-icon name kept short for readability on all device sizes.
+ Full name appears in App Store Connect listing.

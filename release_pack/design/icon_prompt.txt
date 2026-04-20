@@ -1,0 +1,46 @@
+AI IMAGE GENERATION PROMPT — APP ICON
+======================================
+Tool: Midjourney v6 / DALL-E 3 / Stable Diffusion XL
+Canvas: 1024×1024 px, PNG with transparency (for foreground layer)
+
+--- PRIMARY PROMPT ---
+
+A minimalist app icon for a world geography quiz app. Centered design:
+a stylized globe outline with subtle latitude/longitude grid lines,
+rendered in flat vector style. Inside the globe, incorporate three small
+accent elements: a colorful flag pennant, a map pin marker, and a fork
+(representing food). Primary color indigo (#4F46E5) on white background.
+Clean, modern, geometric. No text. No shadows. Suitable for both light
+and dark backgrounds. --ar 1:1 --style raw --stylize 50
+
+--- ALTERNATIVE PROMPTS ---
+
+Option A (Globe + Flag):
+"Flat vector app icon: indigo (#4F46E5) globe outline on white, one
+colorful flag icon integrated into the globe surface. Minimalist,
+geometric, no text. 1024x1024, clean edges, transparent background."
+
+Option B (Map Pin):
+"Minimalist geography quiz app icon. A bold map location pin shape
+(indigo #4F46E5) containing a tiny world map silhouette. Flat design,
+no gradients, white background for adaptive icon. No text."
+
+Option C (World + Quiz):
+"App icon: stylized world map silhouette in indigo (#4F46E5), with a
+small speech bubble / question mark overlay. Flat vector, no text,
+1024x1024, suitable for educational app."
+
+--- SPECS REMINDER ---
+- Deliver at 1024×1024 px minimum
+- Transparent background (PNG) for foreground layer
+- Keep design within center 840px diameter (safe zone)
+- Also generate a single-color (white silhouette on transparent) version
+  for Android 13 monochrome themed icon
+
+--- MANUAL TOOL ALTERNATIVE ---
+Use Figma, Adobe Illustrator, or Canva Pro:
+1. Create 1024×1024 artboard
+2. Draw globe/map shape in #4F46E5
+3. Add accent icons (flag: 🚩, pin: 📍, fork: 🍴) in contrasting colors
+4. Export as PNG with transparency
+5. Export white-only version for monochrome

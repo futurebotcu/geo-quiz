@@ -1,0 +1,54 @@
+--- PATCH-1: Debug UI hidden in release builds
+--- File: lib/screens/menu_screen.dart
+--- Problem: Icons.bug_report button and debugPrint calls visible in release.
+--- Fix: Wrap with kDebugMode guard (tree-shaken out of release builds by compiler).
+
+diff --git a/lib/screens/menu_screen.dart b/lib/screens/menu_screen.dart
+--- a/lib/screens/menu_screen.dart
++++ b/lib/screens/menu_screen.dart
+@@ -1,4 +1,5 @@
++import 'package:flutter/foundation.dart';
+ import 'package:flutter/material.dart';
+ import 'package:provider/provider.dart';
+ import '../l10n/app_localizations.dart';
+
+@@ actions: [
+-           IconButton(
+-             tooltip: s.debugCount,
+-             icon: const Icon(Icons.bug_report),
+-             onPressed: () async {
+-               debugPrint('Karakter testi: ÇÖŞĞÜİ çöşğüı');
+-               final engine = QuestionEngine();
+-               await engine.initialize();
+-               final counts = await engine.getAvailableItemsCount();
+-               debugPrint('[COUNT] $counts');
+-               if (context.mounted) {
+-                 ScaffoldMessenger.of(context).showSnackBar(
+-                   SnackBar(content: Text('Counts: $counts')),
+-                 );
+-               }
+-             },
+-           ),
++           if (kDebugMode)
++             IconButton(
++               tooltip: s.debugCount,
++               icon: const Icon(Icons.bug_report),
++               onPressed: () async {
++                 debugPrint('Karakter testi: ÇÖŞĞÜİ çöşğüı');
++                 final engine = QuestionEngine();
++                 await engine.initialize();
++                 final counts = await engine.getAvailableItemsCount();
++                 debugPrint('[COUNT] $counts');
++                 if (context.mounted) {
++                   ScaffoldMessenger.of(context).showSnackBar(
++                     SnackBar(content: Text('Counts: $counts')),
++                   );
++                 }
++               },
++             ),
+            IconButton(
+
+--- VERIFICATION:
+--- kDebugMode is a compile-time constant in Flutter. In release/profile builds,
+--- the entire block is tree-shaken (dead code eliminated). Zero runtime cost.
+--- Run: flutter build apk --release  → button will NOT appear.

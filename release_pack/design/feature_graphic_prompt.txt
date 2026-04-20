@@ -1,0 +1,44 @@
+AI IMAGE GENERATION PROMPT — GOOGLE PLAY FEATURE GRAPHIC
+==========================================================
+Tool: Midjourney v6 / DALL-E 3 / Stable Diffusion XL
+Canvas: 1024×500 px, JPG, no alpha channel
+
+--- PRIMARY PROMPT ---
+
+A wide-format promotional banner for a world geography quiz mobile app.
+Horizontal composition (2:1 ratio). Background: deep indigo-to-navy
+gradient (#4F46E5 to #1A1A2E) with a subtle world map outline watermark.
+Center: the app name "Geo Quiz" in large white bold Nunito/rounded sans
+font, subtitle "Flags · Capitals · Foods" below in smaller text.
+Right side: floating phone mockup showing a colorful quiz interface with
+a flag emoji and multiple choice options. Left side: three small icon
+badges (🚩 flag, 🏙️ city, 🍜 food) with labels. Overall feel: clean,
+modern, educational, friendly. No photography. --ar 2:1 --style raw
+
+--- ALTERNATIVE (no phone mockup — simpler) ---
+
+"Wide promotional banner 1024x500px for geography quiz app. Indigo
+(#4F46E5) to dark blue gradient background. World map outline as subtle
+watermark. Center text: 'Geo Quiz' in bold white, subtitle 'Flags,
+Capitals & Foods' in lighter text. Three flag/globe/food emoji icons
+with circles. Clean modern educational design. No phone mockup."
+
+--- MANUAL CREATION GUIDE (Canva / Figma) ---
+
+1. Canvas: 1024 × 500 px
+2. Background: gradient #4F46E5 → #1A1A2E (left to right)
+3. Watermark: world map SVG outline, 10% white opacity
+4. App icon: top-left corner, 80×80 px
+5. App name: "Geo Quiz" — Nunito Bold, 72px, white, centered
+6. Subtitle: "Flags · Capitals · Foods" — Nunito Regular, 28px, white 80% opacity
+7. Three mode badges (right side):
+   - 🚩 Flag → Country
+   - 🏙️ Photo → Capital
+   - 🍜 Food → Country
+   Each badge: rounded rectangle, white 20% opacity, 14px Nunito
+8. Keep all content within center 80% of canvas (leave 10% padding each edge)
+9. Export: JPG, quality 90%+, ≤1MB
+
+--- SAFE ZONE ---
+Do not place critical content in the outer 10% margins.
+Google Play may crop or overlay content in those areas.

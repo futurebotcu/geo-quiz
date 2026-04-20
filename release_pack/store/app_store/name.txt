@@ -1,0 +1,13 @@
+PRIMARY (26 chars — within 30-char App Store limit):
+Geo Quiz: Flags & Capitals
+
+NOTE: App Store Connect "Name" field limit = 30 characters.
+Full brand name "Geo Quiz: Flags, Capitals & Foods" = 34 chars → OVER LIMIT.
+Subtitle (30 chars) will cover "Foods" → combined effect = full brand message.
+
+ALTERNATIVES IF PRIMARY IS TAKEN:
+1. "Geo Quiz – World Geography"    [26 chars]
+2. "Geo Quiz: Geography Trivia"    [26 chars]
+3. "World Geo Quiz"                [14 chars] ← original, fallback
+
+CHECK: Search App Store Connect for existing apps with similar names before submission.

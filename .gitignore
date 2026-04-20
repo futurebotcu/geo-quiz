@@ -86,6 +86,9 @@ data/backups/
 # Asset backup snapshots (pre-optimize) — never commit, always large.
 assets/*__backup/
 assets/**/*__backup/
+assets/brand/__backup_pre_premium/
+# Premium icon master source (1MB) — kept locally, not committed.
+assets/premium_*.png
 data/mode_separation_report_*.txt
 data/review_log.csv
 

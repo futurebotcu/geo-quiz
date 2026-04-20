@@ -1,0 +1,10 @@
+🌍 Welcome to Geo Quiz!
+
+Test your geography knowledge across 195 countries with 5 unique quiz modes:
+• Flags → Country
+• Capital Photos → City name
+• Foods → Country of origin
+• Capital City → Country
+• Mixed (all modes combined)
+
+Completely offline. No ads. No tracking. Available in English and Turkish.

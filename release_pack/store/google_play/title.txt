@@ -1,0 +1,15 @@
+PRIMARY (27 chars — within 30-char limit):
+Geo Quiz: Flags & Capitals
+
+NOTE: Google Play title limit = 30 characters.
+Full brand name "Geo Quiz: Flags, Capitals & Foods" = 34 chars → OVER LIMIT.
+
+ALTERNATIVES RANKED:
+1. "Geo Quiz: Flags & Capitals"     [27 chars] ← RECOMMENDED
+2. "Geo Quiz – World Geography"     [26 chars] ← generic fallback
+3. "Geo Quiz: Flags, Capitals"      [25 chars] ← missing Foods
+4. "GeoQuiz – Flags & Geography"    [27 chars] ← brand variant
+
+RATIONALE: Foods mode is highlighted in the short description and
+full description. The title focuses on the most searched keywords
+(flags + capitals) for ASO performance.

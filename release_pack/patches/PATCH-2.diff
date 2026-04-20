@@ -1,0 +1,46 @@
+--- PATCH-2: iOS Privacy Manifest (PrivacyInfo.xcprivacy)
+--- File: ios/Runner/PrivacyInfo.xcprivacy  [NEW FILE]
+--- Required by: Apple App Store review for iOS 17+ (ITMS-91053)
+--- Reason: shared_preferences plugin uses NSUserDefaults (Required Reason API)
+--- Without this file: App Store Connect upload will be REJECTED with ITMS-91053.
+
+diff --git a/ios/Runner/PrivacyInfo.xcprivacy b/ios/Runner/PrivacyInfo.xcprivacy
+--- /dev/null
++++ b/ios/Runner/PrivacyInfo.xcprivacy
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
++  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++  <key>NSPrivacyAccessedAPITypes</key>
++  <array>
++    <dict>
++      <key>NSPrivacyAccessedAPIType</key>
++      <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
++      <key>NSPrivacyAccessedAPITypeReasons</key>
++      <array>
++        <string>CA92.1</string>
++      </array>
++    </dict>
++  </array>
++  <key>NSPrivacyCollectedDataTypes</key>
++  <array/>
++  <key>NSPrivacyTracking</key>
++  <false/>
++  <key>NSPrivacyTrackingDomains</key>
++  <array/>
++</dict>
++</plist>
+
+--- XCODE STEP (manual — required after creating the file):
+--- 1. Open ios/Runner.xcworkspace in Xcode
+--- 2. In Project Navigator, right-click Runner group → Add Files to "Runner"
+--- 3. Select PrivacyInfo.xcprivacy
+--- 4. Ensure "Add to target: Runner" is checked
+--- 5. Build and verify no ITMS-91053 warning in Xcode organizer
+
+--- API REASON EXPLANATION:
+--- CA92.1 = "Access info from the same app, per documentation"
+--- shared_preferences stores user settings (quiz mode, difficulty, stats) locally.
+--- No data is transmitted to any server. Full alignment with Apple's requirements.
