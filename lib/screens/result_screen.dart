@@ -30,10 +30,12 @@ class ResultScreen extends StatelessWidget {
         title: Text(S.of(context).resultTitle),
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
+      body: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -246,6 +248,7 @@ class ResultScreen extends StatelessWidget {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

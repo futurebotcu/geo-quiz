@@ -273,31 +273,45 @@ class _QuizScreenState extends State<QuizScreen> {
         top: false,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            // Tighter top padding so the info card doesn't crowd the
+            // progress bar on small screens. Bottom keeps 16 + SafeArea.
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    // Slimmer info-card padding: the single row of text
+                    // doesn't need the same breathing room as the question
+                    // card below.
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          S.of(context).questionLabel(
-                              _currentQuestionIndex + 1, _questions.length),
-                          style: Theme.of(context).textTheme.titleMedium,
+                        Flexible(
+                          child: Text(
+                            S.of(context).questionLabel(
+                                _currentQuestionIndex + 1, _questions.length),
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
-                        Text(
-                          S.of(context).scoreCounter(
-                              _answers.where((a) => a.isCorrect).length),
-                          style: Theme.of(context).textTheme.titleMedium,
+                        const SizedBox(width: 12),
+                        Flexible(
+                          child: Text(
+                            S.of(context).scoreCounter(
+                                _answers.where((a) => a.isCorrect).length),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 // Soru değiştiğinde fade-through geçişi. Ani içerik değişimini
                 // yumuşatır; quiz akışını daha akıcı hissettirir.
                 AnimatedSwitcher(

@@ -594,6 +594,11 @@ void _openQuizStartSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
+      constraints: BoxConstraints(
+        // Leave a ~8% strip of the screen visible above the sheet so the
+        // content never crowds the status bar on short devices.
+        maxHeight: MediaQuery.of(context).size.height * 0.92,
+      ),
       builder: (ctx) {
         DifficultyLevel tmpDifficulty = settings.difficulty;
         bool tmpTimer = settings.timerEnabled;
@@ -641,142 +646,186 @@ void _openQuizStartSheet(
           data: modAccentTheme,
           child: StatefulBuilder(
             builder: (ctx, setState) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 16 + 12),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                  // Hero başlık
-                  Row(
-                    children: [
-                      Hero(
-                          tag: heroTag,
-                          child: _IconBadge(icon: icon, color: color)),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w700),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              subtitle,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
+              // Split layout: scrollable config up top, fixed CTA at the
+              // bottom. Guarantees the "Başlat" button is always visible
+              // regardless of screen height, text scale, or language.
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Drag handle for sheet affordance.
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 4),
+                    child: Container(
+                      width: 36,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: baseScheme.onSurfaceVariant
+                            .withValues(alpha: 0.35),
+                        borderRadius: BorderRadius.circular(2),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Zorluk seçimi
-                  _Section(
-                    title: s.difficulty,
-                    child: Wrap(
-                      spacing: 8,
-                      children: DifficultyLevel.values.map((d) {
-                        final selected = d == tmpDifficulty;
-                        return ChoiceChip(
-                          selected: selected,
-                          label: Text(_difficultyText(d, s)),
-                          onSelected: (_) => setState(() => tmpDifficulty = d),
-                        );
-                      }).toList(),
                     ),
                   ),
+                  Flexible(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Hero başlık
+                          Row(
+                            children: [
+                              Hero(
+                                  tag: heroTag,
+                                  child: _IconBadge(icon: icon, color: color)),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      title,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w700),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      subtitle,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
 
-                  // Soru sayısı
-                  _Section(
-                    title: s.questionCount,
-                    child: Wrap(
-                      spacing: 8,
-                      children: [5, 10, 15, 20].map((n) {
-                        final selected = n == tmpCount;
-                        return ChoiceChip(
-                          selected: selected,
-                          label: Text('$n'),
-                          onSelected: (_) => setState(() => tmpCount = n),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-
-                  // Süre (timer) anahtarı
-                  _Section(
-                    title: s.timer,
-                    child: SwitchListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(s.timerEnabled),
-                      subtitle: Text(s.countdownPerQuestion),
-                      value: tmpTimer,
-                      onChanged: (v) => setState(() => tmpTimer = v),
-                    ),
-                  ),
-
-                  // Kıta filtresi
-                  _Section(
-                    title: s.continentFilter,
-                    child: Wrap(
-                      spacing: 8,
-                      children: continents.map((continent) {
-                        final selected = tmpContinent == continent.$2;
-                        return ChoiceChip(
-                          label: Text(continent.$1),
-                          selected: selected,
-                          onSelected: (_) =>
-                              setState(() => tmpContinent = continent.$2),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Başlat butonu
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.icon(
-                      icon: const Icon(Icons.play_arrow_rounded),
-                      label: Text(s.start),
-                      onPressed: () async {
-                        // Atomic: 1 disk write + 1 notifyListeners.
-                        await settingsProvider.updateQuizConfig(
-                          difficulty: tmpDifficulty,
-                          questionCount: tmpCount,
-                          timerEnabled: tmpTimer,
-                          continentFilter: tmpContinent,
-                        );
-
-                        final startSettings =
-                            settingsProvider.settings.copyWith(mode: mode);
-
-                        if (context.mounted) {
-                          Navigator.pop(ctx); // sheet kapat
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  QuizScreen(settings: startSettings),
+                          // Zorluk seçimi
+                          _Section(
+                            title: s.difficulty,
+                            child: Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: DifficultyLevel.values.map((d) {
+                                final selected = d == tmpDifficulty;
+                                return ChoiceChip(
+                                  selected: selected,
+                                  label: Text(_difficultyText(d, s)),
+                                  onSelected: (_) =>
+                                      setState(() => tmpDifficulty = d),
+                                );
+                              }).toList(),
                             ),
+                          ),
+
+                          // Soru sayısı
+                          _Section(
+                            title: s.questionCount,
+                            child: Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [5, 10, 15, 20].map((n) {
+                                final selected = n == tmpCount;
+                                return ChoiceChip(
+                                  selected: selected,
+                                  label: Text('$n'),
+                                  onSelected: (_) =>
+                                      setState(() => tmpCount = n),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+
+                          // Süre (timer) anahtarı
+                          _Section(
+                            title: s.timer,
+                            child: SwitchListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(s.timerEnabled),
+                              subtitle: Text(s.countdownPerQuestion),
+                              value: tmpTimer,
+                              onChanged: (v) => setState(() => tmpTimer = v),
+                            ),
+                          ),
+
+                          // Kıta filtresi
+                          _Section(
+                            title: s.continentFilter,
+                            child: Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: continents.map((continent) {
+                                final selected = tmpContinent == continent.$2;
+                                return ChoiceChip(
+                                  label: Text(
+                                    continent.$1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  selected: selected,
+                                  onSelected: (_) => setState(
+                                      () => tmpContinent = continent.$2),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Pinned CTA bar — sits above the system nav thanks to
+                  // showModalBottomSheet's useSafeArea. Divider separates
+                  // it from the scrollable config above.
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: baseScheme.outlineVariant.withValues(alpha: 0.5),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        label: Text(s.start),
+                        onPressed: () async {
+                          // Atomic: 1 disk write + 1 notifyListeners.
+                          await settingsProvider.updateQuizConfig(
+                            difficulty: tmpDifficulty,
+                            questionCount: tmpCount,
+                            timerEnabled: tmpTimer,
+                            continentFilter: tmpContinent,
                           );
-                        }
-                      },
+
+                          final startSettings =
+                              settingsProvider.settings.copyWith(mode: mode);
+
+                          if (context.mounted) {
+                            Navigator.pop(ctx); // sheet kapat
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    QuizScreen(settings: startSettings),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ],
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
         );
       },
     );
