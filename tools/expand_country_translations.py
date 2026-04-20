@@ -26,7 +26,7 @@ EN_TR = {"en", "tr"}
 LANGS_NEW = ["de", "fr", "es", "it", "pt", "ru", "ja", "zh", "ar", "ko"]
 
 ENDPOINT = "https://query.wikidata.org/sparql"
-USER_AGENT = "geoquiz-expand/2.0 (contact: eagleeyetrader1@gmail.com)"
+USER_AGENT = "geoquiz-expand/2.0 (contact: trultruva@gmail.com)"
 
 
 def build_lang_query(iso2_codes: list[str], lang: str) -> str:

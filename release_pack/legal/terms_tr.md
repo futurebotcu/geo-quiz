@@ -65,7 +65,7 @@ Bu koşullar, Türkiye'deki kullanıcılar için Türk hukuku kapsamında değer
 
 Bu koşullar hakkındaki sorularınız için lütfen iletişime geçin:
 
-**fatihkartal75@gmail.com**
+**trultruva@gmail.com**
 
 ---
 

@@ -85,7 +85,7 @@ Bu gizlilik politikasında değişiklik yaparsak, yukarıdaki "Son güncelleme" 
 
 Bu gizlilik politikasına ilişkin sorularınız veya endişeleriniz için lütfen şu adresten iletişime geçin:
 
-**fatihkartal75@gmail.com**
+**trultruva@gmail.com**
 
 ---
 

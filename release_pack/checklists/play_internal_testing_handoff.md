@@ -63,7 +63,7 @@ Reason: educational geography quiz. No violence, no user-generated content, no c
 
 - Local markdown drafts exist at `release_pack/legal/privacy_policy_en.md` and `release_pack/legal/privacy_policy_tr.md`.
 - **Play Console requires a public HTTPS URL.**
-- Contact email placeholder still present — must be replaced with `eagleeyetrader1@gmail.com` (or dedicated support alias) before publishing.
+- Contact email unified to `trultruva@gmail.com` across privacy policy, terms, and in-app Settings → Support (AppInfo.supportEmail).
 - Host on GitHub Pages / Netlify / personal site before submitting. Internal Testing technically allows a draft URL, but any promotion to Closed/Production track will reject without a live policy.
 
 ---

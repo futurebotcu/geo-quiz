@@ -85,7 +85,7 @@ If we make changes to this privacy policy, we will update the "Last updated" dat
 
 If you have questions or concerns about this privacy policy, please contact us at:
 
-**fatihkartal75@gmail.com**
+**trultruva@gmail.com**
 
 ---
 
