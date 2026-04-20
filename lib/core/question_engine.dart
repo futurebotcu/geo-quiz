@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'models.dart';
 import '../utils/image_picker.dart';
+import '../utils/country_localizer.dart';
 import '../utils/emoji.dart' as emoji_utils;
 
 // Kıta filtresi yardımcısı
@@ -102,6 +103,7 @@ class QuestionEngine {
   List<FlagItem>? _flagItems;
   List<FoodItem>? _foodItems;
   List<CountryItem>? _countryItems;
+  Map<String, CountryItem> _countryByIso = const {};
   Map<String, List<String>> _continentMapping = {};
 
   Future<void> initialize() async {
@@ -109,6 +111,13 @@ class QuestionEngine {
     _flagItems = await loadFlagManifest();
     _foodItems = await loadFoodManifest();
     _countryItems = await loadCountries();
+    _countryByIso = {
+      for (final c in _countryItems!) c.iso2.toLowerCase(): c,
+    };
+    // Publish the country index so UI-layer lookups (mid-quiz locale
+    // switches, capitalCountry placeholder, etc.) can resolve labels
+    // without depending on this engine instance.
+    CountryLocalizer.setCountries(_countryItems!);
     _initializeContinentMapping();
   }
 
@@ -133,10 +142,17 @@ class QuestionEngine {
     return 'Unknown';
   }
 
+  CountryItem? _countryByIso2(String iso2) =>
+      _countryByIso[iso2.toLowerCase()];
+
   Future<List<QuizQuestion>> generateQuestions(
-    QuizSettings settings,
-  ) async {
-    if (kDebugMode) debugPrint('[QG] mode=${settings.mode.wireName} count=${settings.questionCount} diff=${settings.difficulty}');
+    QuizSettings settings, {
+    String languageCode = 'en',
+  }) async {
+    if (kDebugMode) {
+      debugPrint(
+          '[QG] mode=${settings.mode.wireName} count=${settings.questionCount} diff=${settings.difficulty} lang=$languageCode');
+    }
 
     if (_capitalItems == null ||
         _flagItems == null ||
@@ -146,8 +162,12 @@ class QuestionEngine {
     }
 
     if (settings.mode == QuizMode.mixed) {
-      return _generateMixedQuestions(settings.questionCount,
-          settings.difficulty, settings.continentFilter);
+      return _generateMixedQuestions(
+        settings.questionCount,
+        settings.difficulty,
+        settings.continentFilter,
+        languageCode,
+      );
     }
 
     final questions = <QuizQuestion>[];
@@ -180,7 +200,7 @@ class QuestionEngine {
       usedCountries.add(iso2);
 
       final question = await _generateSingleQuestion(
-          item, settings.mode, settings.difficulty);
+          item, settings.mode, settings.difficulty, languageCode);
       if (question != null) {
         questions.add(question);
         if (kDebugMode) debugPrint('[QG] Q${questions.length}: correct="${question.correctAnswer}" options=${question.options} image=${question.imagePath} iso=${question.iso2}');
@@ -215,7 +235,11 @@ class QuestionEngine {
   }
 
   Future<List<QuizQuestion>> _generateMixedQuestions(
-      int count, DifficultyLevel difficulty, String? continentFilter) async {
+    int count,
+    DifficultyLevel difficulty,
+    String? continentFilter,
+    String languageCode,
+  ) async {
     final questions = <QuizQuestion>[];
     final usedCountries = <String>{};
     final modes = [
@@ -246,8 +270,8 @@ class QuestionEngine {
         final iso2 = _getIso2FromItem(item);
         if (!usedCountries.contains(iso2)) {
           usedCountries.add(iso2);
-          final question =
-              await _generateSingleQuestion(item, mode, difficulty);
+          final question = await _generateSingleQuestion(
+              item, mode, difficulty, languageCode);
           if (question != null) {
             questions.add(question);
             break;
@@ -265,24 +289,34 @@ class QuestionEngine {
     dynamic item,
     QuizMode mode,
     DifficultyLevel difficulty,
+    String languageCode,
   ) async {
     final iso2 = _getIso2FromItem(item);
     final continent = _getContinent(iso2);
 
-    final questionData = _getQuestionDataForMode(item, mode);
+    final questionData = _getQuestionDataForMode(item, mode, languageCode);
     if (questionData == null) return null;
 
-    final distractors = await _generateDistractors(
+    final distractorPairs = await _generateDistractorsWithIso(
       questionData.correctAnswer,
       continent,
       mode,
       difficulty,
+      languageCode,
+      iso2,
     );
 
-    if (distractors.length < 3) return null;
+    if (distractorPairs.length < 3) return null;
 
-    final options = [questionData.correctAnswer, ...distractors.take(3)];
-    options.shuffle(_random);
+    // Combine correct + distractors, keeping option text and iso2 in sync.
+    final pairs = <({String text, String iso2})>[
+      (text: questionData.correctAnswer, iso2: iso2),
+      ...distractorPairs.take(3),
+    ];
+    final indices = List<int>.generate(pairs.length, (i) => i)
+      ..shuffle(_random);
+    final shuffledOptions = [for (final i in indices) pairs[i].text];
+    final shuffledIso2s = [for (final i in indices) pairs[i].iso2];
 
     // Add metadata for specific question types
     final Map<String, dynamic> metadata = {};
@@ -290,14 +324,24 @@ class QuestionEngine {
       metadata['dishName'] = item.dish;
     }
     if (mode == QuizMode.capitalCountry && item is CountryItem) {
-      metadata['capital'] = item.capital;
+      // Frozen quiz-start capital — the UI prefers a live lookup via
+      // CountryLocalizer for mid-quiz locale switches, but keeps this as
+      // a fallback.
+      metadata['capital'] = item.capitalFor(languageCode);
     }
+
+    final optionKind = (mode == QuizMode.capitalPhoto ||
+            mode == QuizMode.capitalFromImage)
+        ? OptionKind.capital
+        : OptionKind.country;
 
     return QuizQuestion(
       mode: mode,
       questionText: questionData.questionText,
       correctAnswer: questionData.correctAnswer,
-      options: options,
+      options: shuffledOptions,
+      optionIso2s: shuffledIso2s,
+      optionKind: optionKind,
       iso2: iso2,
       continent: continent,
       imagePath: questionData.imagePath,
@@ -306,29 +350,47 @@ class QuestionEngine {
     );
   }
 
-  _QuestionData? _getQuestionDataForMode(dynamic item, QuizMode mode) {
+  _QuestionData? _getQuestionDataForMode(
+    dynamic item,
+    QuizMode mode,
+    String languageCode,
+  ) {
     switch (mode) {
       case QuizMode.foodCountry:
         final foodItem = item as FoodItem;
+        // Food manifest's `country` field is raw Turkish. Resolve the country
+        // name via iso2 → CountryItem so the answer matches the active
+        // locale; fall back to the raw string if lookup fails.
+        final country = _countryByIso2(foodItem.iso2);
+        final correct = country != null
+            ? country.nameFor(languageCode)
+            : foodItem.country;
         return _QuestionData(
           questionText: 'Bu yemek hangi ülkeye ait?',
-          correctAnswer: foodItem.country,
+          correctAnswer: correct,
           imagePath: getFoodImageSource(foodItem),
         );
 
       case QuizMode.capitalPhoto:
       case QuizMode.capitalFromImage:
         final capitalItem = item as CapitalItem;
+        // Capital manifest's `capital` is raw English. Resolve via iso2 so
+        // the answer text matches the active locale.
+        final country = _countryByIso2(capitalItem.iso2);
+        final correct = country != null
+            ? country.capitalFor(languageCode)
+            : capitalItem.capital;
         return _QuestionData(
           questionText: 'Fotoğrafta hangi başkent var?',
-          correctAnswer: capitalItem.capital,
+          correctAnswer: correct,
           imagePath: getCapitalImageSource(capitalItem),
         );
 
       case QuizMode.flagCountry:
         final flagItem = item as FlagItem;
-        final countryName = _getCountryName(flagItem.iso2);
-        if (countryName == 'Unknown' || countryName.isEmpty) {
+        final country = _countryByIso2(flagItem.iso2);
+        final countryName = country?.nameFor(languageCode) ?? '';
+        if (countryName.isEmpty) {
           if (kDebugMode) debugPrint('[QG] flagCountry: No country name found for ${flagItem.iso2}');
           return null;
         }
@@ -346,7 +408,9 @@ class QuestionEngine {
 
       case QuizMode.capitalCountry:
         final countryItem = item as CountryItem;
-        if (countryItem.capital.isEmpty || countryItem.name.isEmpty) {
+        final localizedName = countryItem.nameFor(languageCode);
+        final localizedCapital = countryItem.capitalFor(languageCode);
+        if (localizedName.isEmpty || localizedCapital.isEmpty) {
           if (kDebugMode) debugPrint('[QG] capitalCountry: Invalid data for ${countryItem.iso2}');
           return null;
         }
@@ -363,9 +427,8 @@ class QuestionEngine {
           }
         }
         return _QuestionData(
-          questionText:
-              '${countryItem.capital} şehri hangi ülkenin başkentidir?',
-          correctAnswer: countryItem.name,
+          questionText: '$localizedCapital şehri hangi ülkenin başkentidir?',
+          correctAnswer: localizedName,
           imagePath: capitalPhotoPath,
         );
 
@@ -374,38 +437,35 @@ class QuestionEngine {
     }
   }
 
-  String _getCountryName(String iso2) {
-    final countryItem = _countryItems!.firstWhere(
-      (country) => country.iso2.toLowerCase() == iso2.toLowerCase(),
-      orElse: () =>
-          CountryItem(iso2: iso2, name: 'Unknown', capital: '', continent: ''),
-    );
-    return countryItem.name;
-  }
-
-  Future<List<String>> _generateDistractors(
+  Future<List<({String text, String iso2})>> _generateDistractorsWithIso(
     String correctAnswer,
     String continent,
     QuizMode mode,
     DifficultyLevel difficulty,
+    String languageCode,
+    String correctIso2,
   ) async {
-    // Doğru cevabın ülke bilgisini bul
-    final correctIso2 = _findIso2ForAnswer(correctAnswer, mode);
-    if (correctIso2.isEmpty || _countryItems == null) {
-      // Fallback: eski basit mantık
-      return _generateSimpleDistractors(correctAnswer, mode);
+    if (_countryItems == null) {
+      return _generateSimpleDistractorsWithIso(
+          correctAnswer, correctIso2, mode, languageCode);
     }
 
-    final correctCountry = _countryItems!.firstWhere(
-      (c) => c.iso2.toLowerCase() == correctIso2.toLowerCase(),
-      orElse: () => CountryItem(
-          iso2: correctIso2,
-          name: correctAnswer,
-          capital: '',
-          continent: continent),
-    );
+    final answerIso2 = correctIso2.isNotEmpty
+        ? correctIso2
+        : _findIso2ForAnswer(correctAnswer, mode, languageCode);
+    if (answerIso2.isEmpty) {
+      return _generateSimpleDistractorsWithIso(
+          correctAnswer, correctIso2, mode, languageCode);
+    }
 
-    // Yeni akıllı distractor seçimi
+    final correctCountry = _countryByIso2(answerIso2) ??
+        CountryItem(
+          iso2: answerIso2,
+          names: {'en': correctAnswer},
+          capitals: const {},
+          continent: continent,
+        );
+
     final chosenCountries = _pickDistractors(
       pool: _countryItems!,
       answer: correctCountry,
@@ -414,103 +474,101 @@ class QuestionEngine {
       need: 3,
     );
 
-    // Ülkeleri cevap formatına çevir
-    final distractors = <String>[];
+    final pairs = <({String text, String iso2})>[];
     for (final country in chosenCountries) {
-      final answer = _convertCountryToAnswer(country, mode);
-      if (answer.isNotEmpty && answer != correctAnswer) {
-        distractors.add(answer);
+      final answer = _convertCountryToAnswer(country, mode, languageCode);
+      if (answer.isNotEmpty &&
+          answer != correctAnswer &&
+          country.iso2.toLowerCase() != answerIso2.toLowerCase()) {
+        pairs.add((text: answer, iso2: country.iso2));
       }
     }
 
-    // Yeterli distractor yoksa fallback
-    if (distractors.length < 3) {
-      final fallback = await _generateSimpleDistractors(correctAnswer, mode);
-      distractors.addAll(fallback.take(3 - distractors.length));
+    if (pairs.length < 3) {
+      final fallback = await _generateSimpleDistractorsWithIso(
+          correctAnswer, correctIso2, mode, languageCode);
+      for (final f in fallback) {
+        if (pairs.length >= 3) break;
+        if (pairs.any((p) =>
+            p.iso2.toLowerCase() == f.iso2.toLowerCase())) {
+          continue;
+        }
+        pairs.add(f);
+      }
     }
 
-    return distractors.take(3).toList();
+    return pairs.take(3).toList();
   }
 
-  // Ülkeyi mod formatına çevir (eski mantığın tersini yap)
-  String _convertCountryToAnswer(CountryItem country, QuizMode mode) {
+  // Ülkeyi mod formatına çevir (locale-aware)
+  String _convertCountryToAnswer(
+      CountryItem country, QuizMode mode, String languageCode) {
     switch (mode) {
       case QuizMode.foodCountry:
       case QuizMode.flagCountry:
       case QuizMode.capitalCountry:
-        return country.name;
+        return country.nameFor(languageCode);
       case QuizMode.capitalPhoto:
       case QuizMode.capitalFromImage:
-        return country.capital;
+        return country.capitalFor(languageCode);
       case QuizMode.mixed:
-        return country.name; // Mixed'de genelde ülke adı
+        return country.nameFor(languageCode);
     }
   }
 
-  // Basit fallback distractor üretimi
-  Future<List<String>> _generateSimpleDistractors(
-      String correctAnswer, QuizMode mode) async {
-    List<String> possibleAnswers = [];
-
-    switch (mode) {
-      case QuizMode.foodCountry:
-        possibleAnswers =
-            _foodItems!.map((item) => item.country).toSet().toList();
-        break;
-      case QuizMode.capitalPhoto:
-      case QuizMode.capitalFromImage:
-        possibleAnswers = _capitalItems!
-            .where((item) => item.capital.isNotEmpty)
-            .map((item) => item.capital)
-            .toList();
-        break;
-      case QuizMode.flagCountry:
-      case QuizMode.capitalCountry:
-        possibleAnswers = _countryItems!.map((item) => item.name).toList();
-        break;
-      case QuizMode.mixed:
-        possibleAnswers = _countryItems!.map((item) => item.name).toList();
-        break;
+  // Basit fallback distractor üretimi (locale-aware, iso2-paired).
+  Future<List<({String text, String iso2})>> _generateSimpleDistractorsWithIso(
+      String correctAnswer,
+      String correctIso2,
+      QuizMode mode,
+      String languageCode) async {
+    final out = <({String text, String iso2})>[];
+    final items = List<CountryItem>.from(_countryItems ?? const [])
+      ..shuffle(_random);
+    for (final c in items) {
+      if (out.length >= 3) break;
+      if (c.iso2.toLowerCase() == correctIso2.toLowerCase()) continue;
+      final text = _convertCountryToAnswer(c, mode, languageCode);
+      if (text.isEmpty || text == correctAnswer) continue;
+      if (out.any((p) => p.iso2.toLowerCase() == c.iso2.toLowerCase())) {
+        continue;
+      }
+      out.add((text: text, iso2: c.iso2));
     }
-
-    possibleAnswers
-        .removeWhere((answer) => answer == correctAnswer || answer.isEmpty);
-    possibleAnswers.shuffle(_random);
-
-    return possibleAnswers.take(3).toList();
+    return out;
   }
 
-  String _findIso2ForAnswer(String answer, QuizMode mode) {
+  // Localized answer string → iso2. Only used as a safety net when the
+  // caller didn't pass an iso2 (shouldn't happen under the new flow, but
+  // kept for robustness).
+  String _findIso2ForAnswer(
+      String answer, QuizMode mode, String languageCode) {
+    bool matchesCountry(CountryItem c) {
+      return c.nameFor(languageCode) == answer ||
+          c.nameEN == answer ||
+          c.nameTR == answer;
+    }
+
+    bool matchesCapital(CountryItem c) {
+      return c.capitalFor(languageCode) == answer ||
+          c.capitalEN == answer ||
+          c.capitalTR == answer;
+    }
+
     switch (mode) {
       case QuizMode.foodCountry:
-        final foodItem = _foodItems!.firstWhere(
-          (item) => item.country == answer,
-          orElse: () => FoodItem(iso2: '', country: '', dish: '', path: ''),
-        );
-        return foodItem.iso2;
-      case QuizMode.capitalPhoto:
-      case QuizMode.capitalFromImage:
-        final capitalItem = _capitalItems!.firstWhere(
-          (item) => item.capital == answer,
-          orElse: () => CapitalItem(
-              iso2: '',
-              country: '',
-              capital: '',
-              path: '',
-              filename: '',
-              width: 0,
-              height: 0),
-        );
-        return capitalItem.iso2;
       case QuizMode.flagCountry:
       case QuizMode.capitalCountry:
-        final countryItem = _countryItems!.firstWhere(
-          (item) => item.name == answer,
-          orElse: () =>
-              CountryItem(iso2: '', name: '', capital: '', continent: ''),
-        );
-        return countryItem.iso2;
       case QuizMode.mixed:
+        for (final c in _countryItems ?? const <CountryItem>[]) {
+          if (matchesCountry(c)) return c.iso2;
+        }
+        return '';
+      case QuizMode.capitalPhoto:
+      case QuizMode.capitalFromImage:
+        for (final c in _countryItems ?? const <CountryItem>[]) {
+          if (matchesCapital(c)) return c.iso2;
+        }
         return '';
     }
   }

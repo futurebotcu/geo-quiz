@@ -18,12 +18,6 @@ class STr extends S {
   String get language => 'Dil';
 
   @override
-  String get languageEnglish => 'İngilizce';
-
-  @override
-  String get languageTurkish => 'Türkçe';
-
-  @override
   String get languageSystemDefault => 'Sistem Varsayılanı';
 
   @override
@@ -85,7 +79,7 @@ class STr extends S {
 
   @override
   String get hintText =>
-      'İpucu: Zorluğu başlatmadan önce seçebilirsin. Kıta filtresi ayarlarda!';
+      'Modu seç, başlamadan önce zorluk, sayaç ve kıta filtresini ayarla.';
 
   @override
   String get difficulty => 'Zorluk';
@@ -139,7 +133,8 @@ class STr extends S {
   String get quizSettings => 'Quiz Ayarları';
 
   @override
-  String get timerPerQuestionDesc => 'Her soru için 30 saniye süre';
+  String get timerPerQuestionDesc =>
+      'Soru başına geri sayım (zorluk ile değişir)';
 
   @override
   String questionsLabel(int count) {
@@ -159,25 +154,13 @@ class STr extends S {
   String get capitalMode => 'Başkent Modu';
 
   @override
-  String get capitalModeDesc => '183 başkent fotoğrafı mevcut';
+  String get capitalModeDesc => 'Fotoğraflardan başkentleri tanı';
 
   @override
   String get flagMode => 'Bayrak Modu';
 
   @override
-  String get flagModeDesc => '195 ülke bayrağı (PNG + Emoji)';
-
-  @override
-  String get difficultyLevels => 'Zorluk Seviyeleri';
-
-  @override
-  String get difficultyEasyDesc => 'Aynı kıtadan 1 seçenek, diğerlerinden 2';
-
-  @override
-  String get difficultyMediumDesc => 'Aynı kıtadan 1 seçenek, diğerlerinden 2';
-
-  @override
-  String get difficultyHardDesc => 'Aynı kıtadan 2 seçenek, diğerlerinden 1';
+  String get flagModeDesc => 'Bayraklarından ülkeleri tanı';
 
   @override
   String get questionFoodCountry => 'Bu yemek hangi ülkeye ait?';
@@ -219,9 +202,6 @@ class STr extends S {
 
   @override
   String get gradeGood => 'İyi';
-
-  @override
-  String get gradeFair => 'Orta';
 
   @override
   String get gradeNeedsWork => 'Gelişmeli';
@@ -295,4 +275,16 @@ class STr extends S {
 
   @override
   String get average => 'Ortalama';
+
+  @override
+  String get support => 'Destek';
+
+  @override
+  String get supportIntro => 'Soru, hata veya geri bildirim mi var? Bize yaz.';
+
+  @override
+  String get contactEmail => 'E-posta gönder';
+
+  @override
+  String get version => 'Sürüm';
 }

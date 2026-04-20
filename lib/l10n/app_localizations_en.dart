@@ -18,12 +18,6 @@ class SEn extends S {
   String get language => 'Language';
 
   @override
-  String get languageEnglish => 'English';
-
-  @override
-  String get languageTurkish => 'Turkish';
-
-  @override
   String get languageSystemDefault => 'System Default';
 
   @override
@@ -86,7 +80,7 @@ class SEn extends S {
 
   @override
   String get hintText =>
-      'Hint: You can select difficulty before starting. Continent filter in settings!';
+      'Tap a mode to pick difficulty, timer, and continent before you start.';
 
   @override
   String get difficulty => 'Difficulty';
@@ -140,7 +134,8 @@ class SEn extends S {
   String get quizSettings => 'Quiz Settings';
 
   @override
-  String get timerPerQuestionDesc => '30 seconds per question';
+  String get timerPerQuestionDesc =>
+      'Countdown per question (varies by difficulty)';
 
   @override
   String questionsLabel(int count) {
@@ -160,28 +155,13 @@ class SEn extends S {
   String get capitalMode => 'Capital Mode';
 
   @override
-  String get capitalModeDesc => '183 capital photos available';
+  String get capitalModeDesc => 'Recognise capital cities from photos';
 
   @override
   String get flagMode => 'Flag Mode';
 
   @override
-  String get flagModeDesc => '195 country flags (PNG + Emoji)';
-
-  @override
-  String get difficultyLevels => 'Difficulty Levels';
-
-  @override
-  String get difficultyEasyDesc =>
-      '1 option from same continent, 2 from others';
-
-  @override
-  String get difficultyMediumDesc =>
-      '1 option from same continent, 2 from others';
-
-  @override
-  String get difficultyHardDesc =>
-      '2 options from same continent, 1 from others';
+  String get flagModeDesc => 'Identify countries by their flags';
 
   @override
   String get questionFoodCountry => 'Which country does this food belong to?';
@@ -223,9 +203,6 @@ class SEn extends S {
 
   @override
   String get gradeGood => 'Good';
-
-  @override
-  String get gradeFair => 'Fair';
 
   @override
   String get gradeNeedsWork => 'Needs Work';
@@ -299,4 +276,17 @@ class SEn extends S {
 
   @override
   String get average => 'Average';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get supportIntro =>
+      'Questions, bugs, or feedback? We\'d love to hear from you.';
+
+  @override
+  String get contactEmail => 'Email us';
+
+  @override
+  String get version => 'Version';
 }

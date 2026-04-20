@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'screens/menu_screen.dart';
 import 'services/settings_provider.dart';
 import 'services/locale_controller.dart';
+import 'services/app_locales.dart';
+import 'theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -34,65 +35,19 @@ class GeoQuizApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('tr'),
-          ],
+          supportedLocales: AppLocales.supportedLocales,
           locale: localeController.override,
           localeResolutionCallback: (locale, supported) {
-            // If locale override is set, use it
+            // Manual override always wins.
             if (localeController.override != null) {
               return localeController.override;
             }
-            // Otherwise, try to match system locale
-            if (locale == null) return const Locale('en');
-            for (final l in supported) {
-              if (l.languageCode == locale.languageCode) return l;
-            }
-            return const Locale('en');
+            // System default: resolve against our registry (exact match,
+            // then languageCode-only, then English fallback).
+            return AppLocales.resolveForSystem(locale).locale;
           },
-          theme: ThemeData(
-            colorScheme:
-                ColorScheme.fromSeed(seedColor: const Color(0xFF4F46E5)),
-            useMaterial3: true,
-            // Tüm uygulama varsayılan fontu:
-            textTheme: GoogleFonts.nunitoTextTheme(),
-            // Başlıkları biraz daha koyu yapalım:
-            appBarTheme: AppBarTheme(
-              titleTextStyle: GoogleFonts.nunito(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF4F46E5),
-              brightness: Brightness.dark,
-            ),
-            useMaterial3: true,
-            textTheme: GoogleFonts.nunitoTextTheme(
-                ThemeData(brightness: Brightness.dark).textTheme),
-            appBarTheme: AppBarTheme(
-              titleTextStyle: GoogleFonts.nunito(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          builder: (context, child) {
-            final locale = Localizations.localeOf(context);
-            // RTL languages: ar (Arabic), he (Hebrew), fa (Persian), ur (Urdu)
-            const rtlLangs = {'ar', 'he', 'fa', 'ur'};
-            final forceLtr =
-                !rtlLangs.contains(locale.languageCode.toLowerCase());
-            return Directionality(
-              textDirection: forceLtr ? TextDirection.ltr : TextDirection.rtl,
-              child: child!,
-            );
-          },
+          theme: AppTheme.light(),
+          darkTheme: AppTheme.dark(),
           home: const MenuScreen(),
           debugShowCheckedModeBanner: false,
         );

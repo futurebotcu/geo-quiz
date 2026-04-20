@@ -9,6 +9,7 @@ import 'package:geo_quiz/services/settings_provider.dart';
 import 'package:geo_quiz/services/locale_controller.dart';
 import 'package:geo_quiz/services/storage_service.dart';
 import 'package:geo_quiz/screens/quiz_screen.dart';
+import 'package:geo_quiz/widgets/answer_option.dart';
 import 'package:geo_quiz/l10n/app_localizations.dart';
 
 Widget _wrap(Widget home) {
@@ -55,8 +56,8 @@ void main() {
 
     // Loading indicator gone.
     expect(find.byType(CircularProgressIndicator), findsNothing);
-    // 4 option buttons rendered (ElevatedButton per option).
-    expect(find.byType(ElevatedButton), findsNWidgets(4));
+    // 4 answer option rows rendered (custom AnswerOption widget).
+    expect(find.byType(AnswerOption), findsNWidgets(4));
   });
 
   testWidgets(
@@ -109,7 +110,7 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 3));
 
     // Tap first option to trigger _submitAnswer (which schedules 2s timer).
-    final options = find.byType(ElevatedButton);
+    final options = find.byType(AnswerOption);
     expect(options, findsAtLeastNWidgets(4));
     await tester.tap(options.first);
     await tester.pump(const Duration(milliseconds: 100));

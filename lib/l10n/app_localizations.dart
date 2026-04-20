@@ -5,8 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_ko.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_ru.dart';
 import 'app_localizations_tr.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -93,8 +103,18 @@ abstract class S {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('de'),
     Locale('en'),
-    Locale('tr')
+    Locale('es'),
+    Locale('fr'),
+    Locale('it'),
+    Locale('ja'),
+    Locale('ko'),
+    Locale('pt'),
+    Locale('ru'),
+    Locale('tr'),
+    Locale('zh')
   ];
 
   /// Brand app name for the app bar and tab title
@@ -114,18 +134,6 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
-
-  /// English language option
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get languageEnglish;
-
-  /// Turkish language option
-  ///
-  /// In en, this message translates to:
-  /// **'Turkish'**
-  String get languageTurkish;
 
   /// System default language option
   ///
@@ -244,7 +252,7 @@ abstract class S {
   /// Hint text on main menu
   ///
   /// In en, this message translates to:
-  /// **'Hint: You can select difficulty before starting. Continent filter in settings!'**
+  /// **'Tap a mode to pick difficulty, timer, and continent before you start.'**
   String get hintText;
 
   /// Difficulty label
@@ -352,7 +360,7 @@ abstract class S {
   /// Timer per question description
   ///
   /// In en, this message translates to:
-  /// **'30 seconds per question'**
+  /// **'Countdown per question (varies by difficulty)'**
   String get timerPerQuestionDesc;
 
   /// Questions count label
@@ -388,7 +396,7 @@ abstract class S {
   /// Capital mode description
   ///
   /// In en, this message translates to:
-  /// **'183 capital photos available'**
+  /// **'Recognise capital cities from photos'**
   String get capitalModeDesc;
 
   /// Flag mode label
@@ -400,32 +408,8 @@ abstract class S {
   /// Flag mode description
   ///
   /// In en, this message translates to:
-  /// **'195 country flags (PNG + Emoji)'**
+  /// **'Identify countries by their flags'**
   String get flagModeDesc;
-
-  /// Difficulty levels section title
-  ///
-  /// In en, this message translates to:
-  /// **'Difficulty Levels'**
-  String get difficultyLevels;
-
-  /// Easy difficulty description
-  ///
-  /// In en, this message translates to:
-  /// **'1 option from same continent, 2 from others'**
-  String get difficultyEasyDesc;
-
-  /// Medium difficulty description
-  ///
-  /// In en, this message translates to:
-  /// **'1 option from same continent, 2 from others'**
-  String get difficultyMediumDesc;
-
-  /// Hard difficulty description
-  ///
-  /// In en, this message translates to:
-  /// **'2 options from same continent, 1 from others'**
-  String get difficultyHardDesc;
 
   /// Food to country question text
   ///
@@ -487,17 +471,11 @@ abstract class S {
   /// **'Great!'**
   String get gradeGreat;
 
-  /// Grade: Good (60-74%)
+  /// Grade: Good (50-69%)
   ///
   /// In en, this message translates to:
   /// **'Good'**
   String get gradeGood;
-
-  /// Grade: Fair (50-59%)
-  ///
-  /// In en, this message translates to:
-  /// **'Fair'**
-  String get gradeFair;
 
   /// Grade: Needs Work (<50%)
   ///
@@ -630,6 +608,30 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Average'**
   String get average;
+
+  /// Settings support section title
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get support;
+
+  /// Short blurb above the contact email
+  ///
+  /// In en, this message translates to:
+  /// **'Questions, bugs, or feedback? We\'d love to hear from you.'**
+  String get supportIntro;
+
+  /// Tap label that opens the mail app
+  ///
+  /// In en, this message translates to:
+  /// **'Email us'**
+  String get contactEmail;
+
+  /// Version label in About
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
@@ -641,8 +643,20 @@ class _SDelegate extends LocalizationsDelegate<S> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+        'ar',
+        'de',
+        'en',
+        'es',
+        'fr',
+        'it',
+        'ja',
+        'ko',
+        'pt',
+        'ru',
+        'tr',
+        'zh'
+      ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_SDelegate old) => false;
@@ -651,10 +665,30 @@ class _SDelegate extends LocalizationsDelegate<S> {
 S lookupS(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return SAr();
+    case 'de':
+      return SDe();
     case 'en':
       return SEn();
+    case 'es':
+      return SEs();
+    case 'fr':
+      return SFr();
+    case 'it':
+      return SIt();
+    case 'ja':
+      return SJa();
+    case 'ko':
+      return SKo();
+    case 'pt':
+      return SPt();
+    case 'ru':
+      return SRu();
     case 'tr':
       return STr();
+    case 'zh':
+      return SZh();
   }
 
   throw FlutterError(

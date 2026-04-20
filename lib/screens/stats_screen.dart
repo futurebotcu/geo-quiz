@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../core/models.dart';
 import '../services/settings_provider.dart';
+import '../theme/app_tokens.dart';
 import '../utils/mode_labels.dart';
 import '../l10n/app_localizations.dart';
 
@@ -77,31 +79,25 @@ class StatsScreen extends StatelessWidget {
     final s = S.of(context);
     final bestScore = stats.getBestScore(mode);
     final averageScore = stats.getAverageScore(mode);
+    final color = AppModeColors.forMode(mode);
 
     IconData icon;
-    Color color;
-
     switch (mode) {
       case QuizMode.foodCountry:
         icon = Icons.restaurant;
-        color = Colors.orange;
         break;
       case QuizMode.capitalPhoto:
       case QuizMode.capitalFromImage:
         icon = Icons.location_city;
-        color = Colors.blue;
         break;
       case QuizMode.flagCountry:
         icon = Icons.flag;
-        color = Colors.green;
         break;
       case QuizMode.capitalCountry:
         icon = Icons.quiz;
-        color = Colors.purple;
         break;
       case QuizMode.mixed:
         icon = Icons.shuffle;
-        color = Colors.red;
         break;
     }
 
@@ -182,26 +178,7 @@ class StatsScreen extends StatelessWidget {
 
                 return Column(
                   children: results.take(5).map((result) {
-                    Color modeColor;
-                    switch (result.mode) {
-                      case QuizMode.foodCountry:
-                        modeColor = Colors.orange;
-                        break;
-                      case QuizMode.capitalPhoto:
-                      case QuizMode.capitalFromImage:
-                        modeColor = Colors.blue;
-                        break;
-                      case QuizMode.flagCountry:
-                        modeColor = Colors.green;
-                        break;
-                      case QuizMode.capitalCountry:
-                        modeColor = Colors.purple;
-                        break;
-                      case QuizMode.mixed:
-                        modeColor = Colors.red;
-                        break;
-                    }
-
+                    final modeColor = AppModeColors.forMode(result.mode);
                     final modeName = localizedModeName(s, result.mode);
                     return ListTile(
                       leading: CircleAvatar(
@@ -215,9 +192,7 @@ class StatsScreen extends StatelessWidget {
                         ),
                       ),
                       title: Text(modeName),
-                      subtitle: Text(
-                        '$modeName • ${_formatDate(result.completedAt)}',
-                      ),
+                      subtitle: Text(_formatDate(context, result.completedAt)),
                       trailing: Text(
                         '${result.percentage.toStringAsFixed(1)}%',
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -239,7 +214,7 @@ class StatsScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.brSm,
       ),
       child: Column(
         children: [
@@ -264,7 +239,9 @@ class StatsScreen extends StatelessWidget {
     );
   }
 
-  String _formatDate(DateTime date) {
-    return '${date.day}/${date.month}/${date.year}';
+  String _formatDate(BuildContext context, DateTime date) {
+    // Locale-aware short date: EN → 4/19/2026, TR → 19.04.2026.
+    final locale = Localizations.localeOf(context).toString();
+    return DateFormat.yMd(locale).format(date);
   }
 }

@@ -31,23 +31,6 @@ extension QuizModeWire on QuizMode {
     }
   }
 
-  /// Menüde/metinde kısa açıklama
-  String get subtitle {
-    switch (this) {
-      case QuizMode.foodCountry:
-        return 'Fotoğraftaki yemeğin hangi ülkeye ait olduğunu bul';
-      case QuizMode.capitalPhoto:
-      case QuizMode.capitalFromImage:
-        return 'Başkent şehir fotoğraflarından tahmin et';
-      case QuizMode.flagCountry:
-        return 'Bayraklardan ülkeleri tanı';
-      case QuizMode.capitalCountry:
-        return '"Bu şehir hangi ülkenin başkentidir?"';
-      case QuizMode.mixed:
-        return 'Tüm modlar karışık';
-    }
-  }
-
   /// capitalPhoto ile capitalFromImage aynı kategori
   bool get isCapitalPhoto =>
       this == QuizMode.capitalPhoto || this == QuizMode.capitalFromImage;
@@ -149,12 +132,21 @@ class QuizSettings {
   }
 }
 
+/// What the answer options represent. Drives how the quiz screen maps an
+/// option's `iso2` to a localized label at render time.
+enum OptionKind { country, capital }
+
 // =============== SORU / CEVAP / SONUÇ ===============
 class QuizQuestion {
   final QuizMode mode; // Mode for determining localized question text
   final String questionText; // Fallback text (not used if mode is set)
   final String correctAnswer;
   final List<String> options;
+  // Parallel ISO-2 codes for each entry in [options]. Used for mid-quiz
+  // locale changes: the UI re-renders option text via a locale-aware
+  // lookup, and answer correctness is checked against [iso2] directly.
+  final List<String> optionIso2s;
+  final OptionKind optionKind;
   final String? imagePath;
   final String? emoji;
   final String iso2;
@@ -166,6 +158,8 @@ class QuizQuestion {
     required this.questionText,
     required this.correctAnswer,
     required this.options,
+    required this.optionIso2s,
+    required this.optionKind,
     required this.iso2,
     this.continent,
     this.imagePath,
@@ -173,7 +167,17 @@ class QuizQuestion {
     this.metadata = const {}, // Varsayılan boş map
   });
 
+  /// Prefer [correctOptionIndex] — it's iso2-based and survives runtime
+  /// re-localization of option text. Kept for backward compatibility.
   int get correctIndex => options.indexOf(correctAnswer);
+
+  /// Index of the correct option computed via iso2 equality. Safe to use
+  /// after option labels have been re-resolved to a new locale.
+  int get correctOptionIndex {
+    final idx = optionIso2s.indexWhere(
+        (i) => i.toLowerCase() == iso2.toLowerCase());
+    return idx >= 0 ? idx : correctIndex;
+  }
 }
 
 class QuizAnswer {
@@ -350,21 +354,3 @@ class UserStats {
   }
 }
 
-// UI'da görünen kısa adlar (Türkçe)
-extension QuizModeUi on QuizMode {
-  String get displayName {
-    switch (this) {
-      case QuizMode.foodCountry:
-        return 'Yemek → Ülke';
-      case QuizMode.capitalPhoto:
-      case QuizMode.capitalFromImage:
-        return 'Foto → Başkent';
-      case QuizMode.flagCountry:
-        return 'Bayrak → Ülke';
-      case QuizMode.capitalCountry:
-        return 'Şehir → Ülke';
-      case QuizMode.mixed:
-        return 'Karma';
-    }
-  }
-}

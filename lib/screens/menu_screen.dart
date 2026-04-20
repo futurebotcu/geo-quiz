@@ -9,14 +9,14 @@ import '../core/models.dart';
 import '../core/question_engine.dart';
 import '../services/settings_provider.dart';
 import '../services/mode_artwork_provider.dart';
+import '../theme/app_tokens.dart';
 import '../utils/data_health.dart';
 import '../utils/image_picker.dart';
 import 'quiz_screen.dart';
 import 'settings_screen.dart';
 import 'stats_screen.dart';
-import '../widgets/menu_background.dart';
 import '../widgets/header_carousel.dart';
-import '../widgets/top_lang_toggle.dart';
+import '../widgets/language_flag_button.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -133,13 +133,11 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final s = S.of(context);
-    return MenuBackground(
-      imagePath: 'assets/ui_backgrounds/bg_worldmap.jpg',
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text(s.menuTitle),
-          actions: [
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(s.menuTitle),
+        actions: [
+            const LanguageFlagButton(),
             if (kDebugMode)
               IconButton(
                 tooltip: s.debugCount,
@@ -184,8 +182,6 @@ class _MenuScreenState extends State<MenuScreen> {
               return ListView(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
-                  const TopLangToggle(),
-                  const SizedBox(height: 8),
                   HeaderCarousel(
                     images: _carouselImages,
                     onItemTap: (i) => _openModeFromCarousel(_carouselModes[i]),
@@ -231,7 +227,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   title: s.modeFoodCountry,
                                   subtitle: s.modeFoodCountryDesc,
                                   icon: Icons.restaurant,
-                                  color: Colors.orange,
+                                  color: AppModeColors.foodCountry,
                                   enabled:
                                       health?.isEnabled('foodCountry') ?? true,
                                   tooltipMessage:
@@ -242,7 +238,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   title: s.modeCapitalPhoto,
                                   subtitle: s.modeCapitalPhotoDesc,
                                   icon: Icons.location_city,
-                                  color: Colors.blue,
+                                  color: AppModeColors.capitalPhoto,
                                   enabled:
                                       health?.isEnabled('capitalPhoto') ?? true,
                                   tooltipMessage:
@@ -253,7 +249,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   title: s.modeFlagCountry,
                                   subtitle: s.modeFlagCountryDesc,
                                   icon: Icons.flag,
-                                  color: Colors.green,
+                                  color: AppModeColors.flagCountry,
                                   enabled:
                                       health?.isEnabled('flagCountry') ?? true,
                                   tooltipMessage:
@@ -264,7 +260,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   title: s.modeCapitalCountry,
                                   subtitle: s.modeCapitalCountryDesc,
                                   icon: Icons.public,
-                                  color: Colors.purple,
+                                  color: AppModeColors.capitalCountry,
                                   enabled:
                                       health?.isEnabled('capitalCountry') ??
                                           true,
@@ -276,7 +272,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   title: s.modeMixed,
                                   subtitle: s.modeMixedDesc,
                                   icon: Icons.shuffle,
-                                  color: Colors.teal,
+                                  color: AppModeColors.mixed,
                                   enabled: health?.isEnabled('mixed') ?? true,
                                   tooltipMessage:
                                       health?.getTooltipMessage('mixed'),
@@ -309,12 +305,11 @@ class _MenuScreenState extends State<MenuScreen> {
             },
           ),
         ),
-      ),
     );
   }
 }
 
-class _ModeCard extends StatelessWidget {
+class _ModeCard extends StatefulWidget {
   final QuizMode mode;
   final String title;
   final String subtitle;
@@ -334,9 +329,23 @@ class _ModeCard extends StatelessWidget {
   });
 
   @override
+  State<_ModeCard> createState() => _ModeCardState();
+}
+
+class _ModeCardState extends State<_ModeCard> {
+  bool _pressed = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final s = S.of(context);
+    final mode = widget.mode;
+    final title = widget.title;
+    final subtitle = widget.subtitle;
+    final icon = widget.icon;
+    final color = widget.color;
+    final enabled = widget.enabled;
+    final tooltipMessage = widget.tooltipMessage;
     final heroTag = 'mode-hero-${mode.wireName}';
 
     return FutureBuilder<ModeArtwork>(
@@ -344,17 +353,29 @@ class _ModeCard extends StatelessWidget {
       builder: (context, snapshot) {
         final art = snapshot.data;
 
-        Widget card = Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: enabled
-                ? () => _openQuizStartSheet(
-                    context, mode, title, subtitle, icon, color, heroTag)
-                : null,
-            child: Container(
+        // Micro scale-down on press gives the large card a tactile response
+        // beyond the ripple. 0.98 is enough to feel, not enough to jiggle.
+        Widget card = AnimatedScale(
+          scale: _pressed && enabled ? 0.98 : 1.0,
+          duration: const Duration(milliseconds: 85),
+          curve: Curves.easeOut,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.all(AppRadius.rXl),
+              onTap: enabled
+                  ? () => _openQuizStartSheet(
+                      context, mode, title, subtitle, icon, color, heroTag)
+                  : null,
+              onHighlightChanged:
+                  enabled ? (h) => setState(() => _pressed = h) : null,
+              // Mode-colored ripple — refined alphas so press reads but the
+              // card doesn't get "paint-dipped".
+              splashColor: color.withValues(alpha: 0.10),
+              highlightColor: color.withValues(alpha: 0.05),
+              child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.all(AppRadius.rXl),
                 boxShadow: enabled
                     ? [
                         BoxShadow(
@@ -372,7 +393,7 @@ class _ModeCard extends StatelessWidget {
                 ),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.all(AppRadius.rXl),
                 child: Stack(
                   children: [
                     // Arka plan görseli veya emoji
@@ -436,7 +457,7 @@ class _ModeCard extends StatelessWidget {
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: Colors.orange.shade100,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: AppRadius.brSm,
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -481,12 +502,13 @@ class _ModeCard extends StatelessWidget {
               ),
             ),
           ),
+          ),
         );
 
         // Tooltip sadece disabled kartlara
         if (!enabled && tooltipMessage != null) {
           card = Tooltip(
-            message: tooltipMessage!,
+            message: tooltipMessage,
             child: card,
           );
         }
@@ -542,11 +564,10 @@ class _ModeCard extends StatelessWidget {
     } else {
       // Fallback: düz renk
       return Container(
-        color: enabled ? color.withValues(alpha: 0.2) : Colors.grey.shade700,
+        color: enabled ? widget.color.withValues(alpha: 0.2) : Colors.grey.shade700,
       );
     }
   }
-
 }
 
 // Top-level so the header carousel (outside _ModeCard) can also open the
@@ -589,13 +610,42 @@ void _openQuizStartSheet(
           (s.continentOceania, 'Oceania'),
         ];
 
-        return StatefulBuilder(
-          builder: (ctx, setState) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16 + 12),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
+        // Accent override: sheet içindeki tüm Material bileşenleri
+        // (ChoiceChip selected, Switch, FilledButton "Başlat") mod rengine
+        // boyanır. Üstteki _IconBadge rengiyle senkron bir "bu modun sayfası"
+        // hissi veriyor.
+        final baseTheme = Theme.of(ctx);
+        final baseScheme = baseTheme.colorScheme;
+        final modAccentTheme = baseTheme.copyWith(
+          colorScheme: baseScheme.copyWith(
+            primary: color,
+            onPrimary: Colors.white,
+            primaryContainer: color.withValues(alpha: 0.15),
+            onPrimaryContainer: color,
+          ),
+          chipTheme: baseTheme.chipTheme.copyWith(
+            selectedColor: color.withValues(alpha: 0.15),
+          ),
+          filledButtonTheme: FilledButtonThemeData(
+            style: FilledButton.styleFrom(
+              backgroundColor: color,
+              foregroundColor: Colors.white,
+              minimumSize: const Size.fromHeight(52),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: AppRadius.brMd),
+            ),
+          ),
+        );
+
+        return Theme(
+          data: modAccentTheme,
+          child: StatefulBuilder(
+            builder: (ctx, setState) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 16, 20, 16 + 12),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                   // Hero başlık
                   Row(
                     children: [
@@ -726,6 +776,7 @@ void _openQuizStartSheet(
               ),
             );
           },
+        ),
         );
       },
     );
@@ -741,7 +792,7 @@ class _IconBadge extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: AppRadius.brMd,
       ),
       padding: const EdgeInsets.all(10),
       child: Icon(icon, color: color, size: 26),

@@ -5,8 +5,11 @@ import 'dart:async';
 import '../core/models.dart';
 import '../core/question_engine.dart';
 import '../services/settings_provider.dart';
+import '../theme/app_tokens.dart';
 import 'result_screen.dart';
-import '../widgets/top_lang_toggle.dart';
+import '../widgets/answer_option.dart';
+import '../widgets/language_flag_button.dart';
+import '../utils/country_localizer.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/mode_labels.dart';
 import '../generated/asset_version.dart';
@@ -32,10 +35,17 @@ class _QuizScreenState extends State<QuizScreen> {
   Timer? _postAnswerTimer;
   DateTime? _quizStartTime;
 
+  bool _didInit = false;
+
   @override
-  void initState() {
-    super.initState();
-    _initializeQuiz();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // `Localizations.localeOf` needs InheritedWidgets resolved, so it must
+    // run after initState. Guarded so we only kick off the quiz once.
+    if (!_didInit) {
+      _didInit = true;
+      _initializeQuiz();
+    }
   }
 
   @override
@@ -48,9 +58,16 @@ class _QuizScreenState extends State<QuizScreen> {
   Future<void> _initializeQuiz() async {
     setState(() => _isLoading = true);
 
+    // Capture the active locale before the first await so answer options
+    // are generated in the language the user is seeing.
+    final languageCode = Localizations.localeOf(context).languageCode;
+
     try {
       await _engine.initialize();
-      final questions = await _engine.generateQuestions(widget.settings);
+      final questions = await _engine.generateQuestions(
+        widget.settings,
+        languageCode: languageCode,
+      );
 
       if (questions.isEmpty) {
         if (kDebugMode) debugPrint('[QUIZ] No questions generated for ${widget.settings.mode.wireName}');
@@ -133,7 +150,9 @@ class _QuizScreenState extends State<QuizScreen> {
     });
 
     final question = _questions[_currentQuestionIndex];
-    final isCorrect = selectedIndex == question.correctIndex;
+    // iso2-based correctness — survives mid-quiz locale switches that may
+    // have re-rendered option text in a different language.
+    final isCorrect = selectedIndex == question.correctOptionIndex;
 
     final answer = QuizAnswer(
       questionIndex: _currentQuestionIndex,
@@ -145,7 +164,10 @@ class _QuizScreenState extends State<QuizScreen> {
     _answers.add(answer);
 
     _postAnswerTimer?.cancel();
-    _postAnswerTimer = Timer(const Duration(seconds: 2), () {
+    // Post-answer pause: long enough to register the green/red feedback,
+    // short enough to keep the quiz feeling snappy. Previously 2000ms —
+    // tightened to 1200ms on user feedback ("too slow").
+    _postAnswerTimer = Timer(const Duration(milliseconds: 1200), () {
       if (!mounted) return;
       if (_currentQuestionIndex < _questions.length - 1) {
         _nextQuestion();
@@ -241,6 +263,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ],
         ),
         centerTitle: true,
+        actions: const [LanguageFlagButton()],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4),
           child: LinearProgressIndicator(value: progress),
@@ -254,8 +277,6 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const TopLangToggle(),
-                const SizedBox(height: 16),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -277,31 +298,68 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Text(
-                          _getLocalizedQuestionText(question),
-                          style: Theme.of(context).textTheme.headlineSmall,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        _buildQuestionImage(question),
-                      ],
+                // Soru değiştiğinde fade-through geçişi. Ani içerik değişimini
+                // yumuşatır; quiz akışını daha akıcı hissettirir.
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 150),
+                  switchInCurve: Curves.easeOutCubic,
+                  switchOutCurve: Curves.easeIn,
+                  transitionBuilder: (child, anim) => FadeTransition(
+                    opacity: anim,
+                    child: SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0, 0.025),
+                        end: Offset.zero,
+                      ).animate(anim),
+                      child: child,
                     ),
                   ),
+                  child: Column(
+                    key: ValueKey(_currentQuestionIndex),
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              Text(
+                                _getLocalizedQuestionText(question),
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16),
+                              _buildQuestionImage(question),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ...List.generate(question.options.length, (index) {
+                        // Resolve option text against the live locale so a
+                        // mid-quiz language switch re-renders all options.
+                        final iso2 = index < question.optionIso2s.length
+                            ? question.optionIso2s[index]
+                            : '';
+                        final fallback = question.options[index];
+                        final label = iso2.isNotEmpty
+                            ? CountryLocalizer.labelFor(
+                                iso2: iso2,
+                                kind: question.optionKind,
+                                languageCode:
+                                    Localizations.localeOf(context).languageCode,
+                                fallback: fallback,
+                              )
+                            : fallback;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: _buildOptionButton(index, label, question),
+                        );
+                      }),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 16),
-                ...question.options.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final option = entry.value;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: _buildOptionButton(index, option, question),
-                  );
-                }),
               ],
             ),
           ),
@@ -321,8 +379,13 @@ class _QuizScreenState extends State<QuizScreen> {
       case QuizMode.flagCountry:
         return s.questionFlagCountry;
       case QuizMode.capitalCountry:
-        // For capitalCountry mode, we need the capital name from metadata
-        final capital = question.metadata['capital'] as String? ?? '';
+        // Resolve the capital name against the live locale so the question
+        // text also updates on mid-quiz language switches. Fall back to
+        // the quiz-start metadata if the localizer hasn't loaded yet.
+        final lang = Localizations.localeOf(context).languageCode;
+        final live = CountryLocalizer.capitalOf(question.iso2, lang);
+        final frozen = question.metadata['capital'] as String? ?? '';
+        final capital = (live != null && live.isNotEmpty) ? live : frozen;
         return s.questionCapitalCountry(capital);
       case QuizMode.mixed:
         // In practice, each generated question carries a concrete mode
@@ -350,7 +413,7 @@ class _QuizScreenState extends State<QuizScreen> {
         height: 180,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade300),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.all(AppRadius.rMd),
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -376,10 +439,10 @@ class _QuizScreenState extends State<QuizScreen> {
             constraints: const BoxConstraints(maxWidth: 400),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.all(AppRadius.rMd),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.all(AppRadius.rMd),
               child: Image.asset(
                 question.imagePath!,
                 key: ValueKey('${question.imagePath}-${AssetVersion.value}'),
@@ -438,7 +501,7 @@ class _QuizScreenState extends State<QuizScreen> {
         height: 150,
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.all(AppRadius.rMd),
         ),
         child: const Center(
           child: Icon(Icons.help, color: Colors.grey),
@@ -448,37 +511,13 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Widget _buildOptionButton(int index, String option, QuizQuestion question) {
-    Color? backgroundColor;
-    Color? foregroundColor;
-
-    if (_hasAnswered) {
-      if (index == question.correctIndex) {
-        backgroundColor = Colors.green;
-        foregroundColor = Colors.white;
-      } else if (index == _selectedOption && index != question.correctIndex) {
-        backgroundColor = Colors.red;
-        foregroundColor = Colors.white;
-      }
-    }
-
-    return SizedBox(
-      width: double.infinity,
-      height: 56,
-      child: ElevatedButton(
-        onPressed: _hasAnswered ? null : () => _submitAnswer(index),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: Text(
-          option,
-          style: const TextStyle(fontSize: 16),
-          textAlign: TextAlign.center,
-        ),
-      ),
+    return AnswerOption(
+      index: index,
+      label: option,
+      hasAnswered: _hasAnswered,
+      isCorrect: index == question.correctIndex,
+      isUserSelection: index == _selectedOption,
+      onTap: _hasAnswered ? null : () => _submitAnswer(index),
     );
   }
 }
@@ -493,7 +532,7 @@ class _FlagBox extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 4 / 3,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.all(AppRadius.rMd),
         child: Container(
           color: Theme.of(context)
               .colorScheme

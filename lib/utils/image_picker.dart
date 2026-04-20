@@ -97,38 +97,79 @@ class FoodItem {
       };
 }
 
-// Country — general quiz data
+// Country — general quiz data.
+//
+// The raw dataset (`data/countries.json`) ships `countryXX` / `capitalXX`
+// pairs for every supported language (en, tr + 10 more). We keep a map of
+// all labels in-memory and expose `nameFor(lang)` / `capitalFor(lang)` so
+// the quiz engine can render answer options in the user's selected
+// language. English is the universal fallback when a label is missing.
 class CountryItem {
+  static const List<String> supportedLangs = <String>[
+    'en', 'tr', 'de', 'fr', 'es', 'it', 'pt', 'ru', 'ja', 'zh', 'ar', 'ko',
+  ];
+
   final String iso2;
-  final String name;
-  final String capital;
+  final Map<String, String> names;
+  final Map<String, String> capitals;
   final String continent;
 
   CountryItem({
     required this.iso2,
-    required this.name,
-    required this.capital,
+    required this.names,
+    required this.capitals,
     required this.continent,
   });
 
+  /// Backwards-compatible default: Turkish with English fallback.
+  /// Prefer [nameFor] in new code — this getter is kept for tests and
+  /// stats screens that don't know the active locale.
+  String get name => names['tr'] ?? names['en'] ?? '';
+  String get capital => capitals['tr'] ?? capitals['en'] ?? '';
+
+  /// For convenience — used by distractor generation when it needs a stable
+  /// English reference.
+  String get nameEN => names['en'] ?? '';
+  String get nameTR => names['tr'] ?? '';
+  String get capitalEN => capitals['en'] ?? '';
+  String get capitalTR => capitals['tr'] ?? '';
+
+  String nameFor(String languageCode) {
+    final v = names[languageCode];
+    if (v != null && v.isNotEmpty) return v;
+    return names['en'] ?? '';
+  }
+
+  String capitalFor(String languageCode) {
+    final v = capitals[languageCode];
+    if (v != null && v.isNotEmpty) return v;
+    return capitals['en'] ?? '';
+  }
+
   factory CountryItem.fromJson(Map<String, dynamic> j) {
     final iso2 = j['iso2']?.toString() ?? '';
-    final name = j['countryTR']?.toString() ?? j['countryEN']?.toString() ?? '';
-    final capital =
-        j['capitalTR']?.toString() ?? j['capitalEN']?.toString() ?? '';
+    final names = <String, String>{};
+    final capitals = <String, String>{};
+    for (final lang in supportedLangs) {
+      final up = lang.toUpperCase();
+      final cn = j['country$up']?.toString();
+      final cap = j['capital$up']?.toString();
+      if (cn != null && cn.isNotEmpty) names[lang] = cn;
+      if (cap != null && cap.isNotEmpty) capitals[lang] = cap;
+    }
     final region = j['region']?.toString() ?? '';
     final subregion = j['subregion']?.toString() ?? '';
     final continent = deriveContinent(region, subregion);
 
-    if (iso2.isEmpty || name.isEmpty || capital.isEmpty) {
+    if (iso2.isEmpty || names.isEmpty || capitals.isEmpty) {
       debugPrint(
-          '[CountryItem] Skipping invalid entry: iso2=$iso2 name=$name capital=$capital');
+          '[CountryItem] Skipping invalid entry: iso2=$iso2 names=${names.keys} capitals=${capitals.keys}');
     }
 
     return CountryItem(
       iso2: iso2,
-      name: name,
-      capital: capital,
+      names: names,
+      capitals: capitals,
       continent: continent,
     );
   }

@@ -12,14 +12,6 @@
   "@language": {
     "description": "Language setting label"
   },
-  "languageEnglish": "English",
-  "@languageEnglish": {
-    "description": "English language option"
-  },
-  "languageTurkish": "Turkish",
-  "@languageTurkish": {
-    "description": "Turkish language option"
-  },
   "languageSystemDefault": "System Default",
   "@languageSystemDefault": {
     "description": "System default language option"
@@ -96,7 +88,7 @@
   "@missingData": {
     "description": "Missing data warning"
   },
-  "hintText": "Hint: You can select difficulty before starting. Continent filter in settings!",
+  "hintText": "Tap a mode to pick difficulty, timer, and continent before you start.",
   "@hintText": {
     "description": "Hint text on main menu"
   },
@@ -168,7 +160,7 @@
   "@quizSettings": {
     "description": "Quiz settings section title"
   },
-  "timerPerQuestionDesc": "30 seconds per question",
+  "timerPerQuestionDesc": "Countdown per question (varies by difficulty)",
   "@timerPerQuestionDesc": {
     "description": "Timer per question description"
   },
@@ -198,7 +190,7 @@
   "@capitalMode": {
     "description": "Capital mode label"
   },
-  "capitalModeDesc": "183 capital photos available",
+  "capitalModeDesc": "Recognise capital cities from photos",
   "@capitalModeDesc": {
     "description": "Capital mode description"
   },
@@ -206,25 +198,9 @@
   "@flagMode": {
     "description": "Flag mode label"
   },
-  "flagModeDesc": "195 country flags (PNG + Emoji)",
+  "flagModeDesc": "Identify countries by their flags",
   "@flagModeDesc": {
     "description": "Flag mode description"
-  },
-  "difficultyLevels": "Difficulty Levels",
-  "@difficultyLevels": {
-    "description": "Difficulty levels section title"
-  },
-  "difficultyEasyDesc": "1 option from same continent, 2 from others",
-  "@difficultyEasyDesc": {
-    "description": "Easy difficulty description"
-  },
-  "difficultyMediumDesc": "1 option from same continent, 2 from others",
-  "@difficultyMediumDesc": {
-    "description": "Medium difficulty description"
-  },
-  "difficultyHardDesc": "2 options from same continent, 1 from others",
-  "@difficultyHardDesc": {
-    "description": "Hard difficulty description"
   },
   "questionFoodCountry": "Which country does this food belong to?",
   "@questionFoodCountry": {
@@ -292,11 +268,7 @@
   },
   "gradeGood": "Good",
   "@gradeGood": {
-    "description": "Grade: Good (60-74%)"
-  },
-  "gradeFair": "Fair",
-  "@gradeFair": {
-    "description": "Grade: Fair (50-59%)"
+    "description": "Grade: Good (50-69%)"
   },
   "gradeNeedsWork": "Needs Work",
   "@gradeNeedsWork": {
@@ -403,5 +375,21 @@
   "average": "Average",
   "@average": {
     "description": "Average score label in stats mode card"
+  },
+  "support": "Support",
+  "@support": {
+    "description": "Settings support section title"
+  },
+  "supportIntro": "Questions, bugs, or feedback? We'd love to hear from you.",
+  "@supportIntro": {
+    "description": "Short blurb above the contact email"
+  },
+  "contactEmail": "Email us",
+  "@contactEmail": {
+    "description": "Tap label that opens the mail app"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label in About"
   }
 }

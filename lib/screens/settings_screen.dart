@@ -1,250 +1,154 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../core/app_info.dart';
 import '../l10n/app_localizations.dart';
-import '../core/models.dart';
-import '../services/settings_provider.dart';
-import '../services/locale_controller.dart';
-import '../widgets/top_lang_toggle.dart';
+import '../theme/app_tokens.dart';
+import '../widgets/language_flag_button.dart';
+import '../widgets/language_picker.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  Locale? _selectedLocale;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedLocale = context.read<LocaleController>().override;
-  }
 
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
 
-    return Consumer<SettingsProvider>(
-      builder: (context, settingsProvider, child) {
-        final settings = settingsProvider.settings;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(s.settings),
+        actions: const [LanguageFlagButton()],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          _SectionCard(
+            title: s.language,
+            child: const LanguagePickerList(),
+          ),
+          AppSpacing.vLg,
+          _SupportCard(),
+          AppSpacing.vLg,
+          _AboutCard(),
+        ],
+      ),
+    );
+  }
+}
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(s.settings),
+/// Shared card shell used by the three Settings sections. Keeps spacing,
+/// clipping and the title treatment consistent so the screen reads as a
+/// single polished surface rather than a list of mismatched widgets.
+class _SectionCard extends StatelessWidget {
+  final String title;
+  final Widget child;
+  const _SectionCard({required this.title, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              const TopLangToggle(),
-              const SizedBox(height: 16),
-              // Language Settings Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        s.language,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      RadioGroup<Locale?>(
-                        groupValue: _selectedLocale,
-                        onChanged: (v) => setState(() => _selectedLocale = v),
-                        child: Column(
-                          children: [
-                            RadioListTile<Locale?>(
-                              title: Text(s.languageEnglish),
-                              value: const Locale('en'),
-                            ),
-                            RadioListTile<Locale?>(
-                              title: Text(s.languageTurkish),
-                              value: const Locale('tr'),
-                            ),
-                            RadioListTile<Locale?>(
-                              title: Text(s.languageSystemDefault),
-                              subtitle: Text(_getSystemLocaleDesc()),
-                              value: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await context
-                                .read<LocaleController>()
-                                .setLocale(_selectedLocale);
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(s.save)),
-                              );
-                            }
-                          },
-                          child: Text(s.save),
-                        ),
-                      ),
-                    ],
+          child,
+          AppSpacing.vSm,
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final s = S.of(context);
+    return _SectionCard(
+      title: s.support,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              s.supportIntro,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.color
+                        ?.withValues(alpha: 0.85),
                   ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Quiz Settings Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        s.quizSettings,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      SwitchListTile(
-                        title: Text(s.timer),
-                        subtitle: Text(s.timerPerQuestionDesc),
-                        value: settings.timerEnabled,
-                        onChanged: (value) {
-                          settingsProvider.updateTimerEnabled(value);
-                        },
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: Text(s.questionCount),
-                        subtitle:
-                            Text(s.questionsLabel(settings.questionCount)),
-                        trailing: DropdownButton<int>(
-                          value: settings.questionCount,
-                          items: [5, 10, 15, 20, 25].map((count) {
-                            return DropdownMenuItem(
-                              value: count,
-                              child: Text('$count'),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            if (value != null) {
-                              settingsProvider.updateQuestionCount(value);
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        title: Text(s.difficultyLevel),
-                        subtitle: Text(_getDifficultyText(settings.difficulty)),
-                        trailing: DropdownButton<DifficultyLevel>(
-                          value: settings.difficulty,
-                          items: DifficultyLevel.values.map((level) {
-                            return DropdownMenuItem(
-                              value: level,
-                              child: Text(_getDifficultyText(level)),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            if (value != null) {
-                              settingsProvider.updateDifficulty(value);
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // About Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        s.about,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      ListTile(
-                        leading: const Icon(Icons.info),
-                        title: Text(s.menuTitle),
-                        subtitle: Text(s.appDescription),
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.photo),
-                        title: Text(s.capitalMode),
-                        subtitle: Text(s.capitalModeDesc),
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.flag),
-                        title: Text(s.flagMode),
-                        subtitle: Text(s.flagModeDesc),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Difficulty Levels Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        s.difficultyLevels,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      ListTile(
-                        leading: const Icon(Icons.sentiment_satisfied,
-                            color: Colors.green),
-                        title: Text(s.difficultyEasy),
-                        subtitle: Text(s.difficultyEasyDesc),
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.sentiment_neutral,
-                            color: Colors.orange),
-                        title: Text(s.difficultyMedium),
-                        subtitle: Text(s.difficultyMediumDesc),
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.sentiment_dissatisfied,
-                            color: Colors.red),
-                        title: Text(s.difficultyHard),
-                        subtitle: Text(s.difficultyHardDesc),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        );
-      },
+          ListTile(
+            leading: const Icon(Icons.mail_outline_rounded),
+            title: Text(s.contactEmail),
+            subtitle: const Text(AppInfo.supportEmail),
+            trailing: const Icon(Icons.arrow_outward_rounded, size: 18),
+            onTap: () => _openMail(context),
+          ),
+        ],
+      ),
     );
   }
 
-  String _getDifficultyText(DifficultyLevel level) {
-    final s = S.of(context);
-    switch (level) {
-      case DifficultyLevel.easy:
-        return s.difficultyEasy;
-      case DifficultyLevel.medium:
-        return s.difficultyMedium;
-      case DifficultyLevel.hard:
-        return s.difficultyHard;
+  Future<void> _openMail(BuildContext context) async {
+    final subject = Uri.encodeComponent(
+      'Geo Quiz Support (v${AppInfo.displayVersion})',
+    );
+    final uri = Uri.parse('mailto:${AppInfo.supportEmail}?subject=$subject');
+    try {
+      final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!ok && context.mounted) {
+        _showEmailFallback(context);
+      }
+    } catch (e) {
+      if (kDebugMode) debugPrint('Support mailto failed: $e');
+      if (context.mounted) _showEmailFallback(context);
     }
   }
 
-  String _getSystemLocaleDesc() {
-    final systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
-    return '(${systemLocale.languageCode})';
+  void _showEmailFallback(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(AppInfo.supportEmail),
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+}
+
+class _AboutCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final s = S.of(context);
+    return _SectionCard(
+      title: s.about,
+      child: Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.public_rounded),
+            title: Text(s.appName),
+            subtitle: Text(s.appDescription),
+          ),
+          ListTile(
+            leading: const Icon(Icons.tag_rounded),
+            title: Text(s.version),
+            subtitle: Text(AppInfo.displayVersion),
+          ),
+        ],
+      ),
+    );
   }
 }
