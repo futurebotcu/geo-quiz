@@ -590,14 +590,10 @@ void _openQuizStartSheet(
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
+      showDragHandle: true,
       backgroundColor: Theme.of(context).colorScheme.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      constraints: BoxConstraints(
-        // Leave a ~8% strip of the screen visible above the sheet so the
-        // content never crowds the status bar on short devices.
-        maxHeight: MediaQuery.of(context).size.height * 0.92,
       ),
       builder: (ctx) {
         DifficultyLevel tmpDifficulty = settings.difficulty;
@@ -647,27 +643,14 @@ void _openQuizStartSheet(
           child: StatefulBuilder(
             builder: (ctx, setState) {
               // Split layout: scrollable config up top, fixed CTA at the
-              // bottom. Guarantees the "Başlat" button is always visible
-              // regardless of screen height, text scale, or language.
+              // bottom. Drag handle is provided by `showDragHandle: true`
+              // so we don't draw one manually.
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Drag handle for sheet affordance.
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 4),
-                    child: Container(
-                      width: 36,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: baseScheme.onSurfaceVariant
-                            .withValues(alpha: 0.35),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
                   Flexible(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -781,15 +764,19 @@ void _openQuizStartSheet(
                       ),
                     ),
                   ),
-                  // Pinned CTA bar — sits above the system nav thanks to
-                  // showModalBottomSheet's useSafeArea. Divider separates
-                  // it from the scrollable config above.
+                  // Pinned CTA bar. showModalBottomSheet(useSafeArea: true)
+                  // wraps the sheet in SafeArea(bottom: false) — so the
+                  // bottom system inset (gesture/home indicator) is NOT
+                  // consumed by the framework. We explicitly consume it
+                  // here so the button never sits under the gesture bar.
                   Divider(
                     height: 1,
                     thickness: 1,
                     color: baseScheme.outlineVariant.withValues(alpha: 0.5),
                   ),
-                  Padding(
+                  SafeArea(
+                    top: false,
+                    child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
                     child: SizedBox(
                       width: double.infinity,
@@ -820,6 +807,7 @@ void _openQuizStartSheet(
                           }
                         },
                       ),
+                    ),
                     ),
                   ),
                 ],
