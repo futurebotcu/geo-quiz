@@ -91,6 +91,16 @@ android {
             enableSplit = true
         }
     }
+
+    // A plugin (shared_preferences_android) ships a stub armeabi-v7a lib
+    // while the Flutter engine is compiled only for arm64-v8a + x86_64.
+    // That stub makes the bundle advertise a 32-bit ABI we don't actually
+    // serve — causing install/launch failures on legacy devices. Drop it.
+    packaging {
+        jniLibs {
+            excludes += "**/armeabi-v7a/**"
+        }
+    }
 }
 
 flutter {
