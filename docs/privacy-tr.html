@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gizlilik Politikası — Geo Quiz</title>
+<meta name="description" content="Geo Quiz: Bayraklar, Başkentler & Yemekler için Gizlilik Politikası. Hiçbir kişisel veri toplamıyoruz.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5a6470;
+    --accent: #2f6fed;
+    --border: #e5e8ec;
+    --code-bg: #f5f7fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #e8eaed;
+      --muted: #9aa3af;
+      --accent: #6ea0ff;
+      --border: #232730;
+      --code-bg: #1a1d24;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+  }
+  h1 { margin: 0 0 8px; font-size: 28px; }
+  h2 { margin: 32px 0 12px; font-size: 20px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .lang { font-size: 14px; }
+  .lang a { color: var(--accent); text-decoration: none; margin-left: 8px; }
+  .lang a:hover { text-decoration: underline; }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+  strong { color: var(--fg); }
+  a { color: var(--accent); }
+  footer { margin-top: 40px; color: var(--muted); font-size: 13px; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="lang"><strong>Dil:</strong> Türkçe · <a href="privacy.html">English</a></div>
+    <h1>Gizlilik Politikası</h1>
+    <div class="meta">
+      <strong>Uygulama:</strong> Geo Quiz: Bayraklar, Başkentler &amp; Yemekler<br>
+      <strong>Paket:</strong> com.worldgeo.quiz<br>
+      <strong>Son güncelleme:</strong> Şubat 2026
+    </div>
+  </header>
+
+  <h2>Özet</h2>
+  <p>Geo Quiz, tamamen çevrimdışı çalışan bir coğrafya quiz uygulamasıdır. <strong>Hiçbir kişisel veri toplamıyor, iletmiyor veya paylaşmıyoruz.</strong> Bu politika, uygulamanın verilerinizle ne yaptığını ve yapmadığını açıklamaktadır.</p>
+
+  <hr>
+
+  <h2>1. Toplamadığımız Bilgiler</h2>
+  <p>Aşağıdaki bilgilerin hiçbirini toplamıyoruz:</p>
+  <ul>
+    <li>Kişisel tanımlayıcılar (ad, e-posta adresi, telefon numarası)</li>
+    <li>Cihaz tanımlayıcıları (IMEI, reklam kimliği, IDFA)</li>
+    <li>Konum verileri (GPS veya yaklaşık konum)</li>
+    <li>Kullanım analitiği veya davranışsal veriler</li>
+    <li>Kilitlenme raporları (kilitlenme raporlama SDK'sı entegre edilmemiştir)</li>
+    <li>Anket veya geri bildirim verileri</li>
+    <li>Finansal veya ödeme bilgileri (uygulama içi satın alma yoktur)</li>
+    <li>Kişiler, fotoğraflar, kamera veya mikrofon verileri</li>
+  </ul>
+
+  <hr>
+
+  <h2>2. Cihazınızda Yerel Olarak Saklanan Bilgiler</h2>
+  <p>Uygulama aşağıdaki verileri <strong>yalnızca cihazınızda</strong>, işletim sisteminin standart yerel depolama alanını (Android'de SharedPreferences / iOS'ta NSUserDefaults) kullanarak saklar:</p>
+  <table>
+    <thead>
+      <tr><th>Veri Türü</th><th>Amaç</th><th>Konum</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Quiz ayarları (mod, zorluk, soru sayısı, zamanlayıcı, kıta filtresi)</td><td>Oturumlar arasında tercihlerinizi hatırlamak</td><td>Cihaz yerel depolaması</td></tr>
+      <tr><td>Quiz sonuç geçmişi (son 20 sonuç: skor, tarih, mod, süre)</td><td>İstatistik ekranında göstermek</td><td>Cihaz yerel depolaması</td></tr>
+      <tr><td>Dil tercihi (İngilizce/Türkçe/sistem varsayılanı)</td><td>Seçtiğiniz dili hatırlamak</td><td>Cihaz yerel depolaması</td></tr>
+    </tbody>
+  </table>
+  <p>Bu veriler <strong>cihazınızdan hiçbir zaman çıkmaz</strong>. Herhangi bir sunucuya, bulut hizmetine veya üçüncü tarafa yüklenmez.</p>
+
+  <hr>
+
+  <h2>3. İnternet ve Ağ Erişimi</h2>
+  <p>Uygulama, Android'de <code>INTERNET</code> iznini beyan etmektedir. Bu, uygulamaya dahil edilen Google Fonts kütüphanesi tarafından, yazı tipi dosyaları cihazda önbelleğe alınmamışsa yükleme girişiminde bulunabilmesi için gereklidir. <strong>Bu bağlantı üzerinden kullanıcı verisi iletilmez.</strong> Temel quiz işlevselliği (tüm sorular, görseller, bayraklar ve ülke verileri) uygulamanın içinde tamamen paketlenmiştir ve internet bağlantısı olmadan çalışır.</p>
+
+  <hr>
+
+  <h2>4. Üçüncü Taraf Hizmetler</h2>
+  <p>Bu uygulama aşağıdakiler dahil <strong>hiçbir üçüncü taraf hizmetiyle</strong> entegre değildir:</p>
+  <ul>
+    <li>Analitik platformlar (Google Analytics, Firebase Analytics, Mixpanel vb. yok)</li>
+    <li>Reklam ağları (AdMob, Facebook Audience Network vb. yok)</li>
+    <li>Kilitlenme raporlama araçları (Firebase Crashlytics, Sentry vb. yok)</li>
+    <li>Sosyal giriş sağlayıcılar (Google Sign-In, Apple Sign-In, Facebook vb. yok)</li>
+    <li>Ödeme işlemcileri (Stripe, RevenueCat vb. yok)</li>
+    <li>Bulut depolama veya veritabanları (Firebase, Supabase, AWS vb. yok)</li>
+  </ul>
+
+  <hr>
+
+  <h2>5. Çocukların Gizliliği</h2>
+  <p>Bu uygulama, 13 yaşın altındaki çocuklar dahil her yaştan kullanıcıya uygundur. Herhangi bir kişisel veri toplamadığımız için bu uygulama, COPPA (Çocukların Çevrimiçi Gizliliğini Koruma Yasası) ve eşdeğer düzenlemelerle uyumludur.</p>
+
+  <hr>
+
+  <h2>6. Veri Saklama ve Silme</h2>
+  <p>Yerel olarak saklanan tüm veriler (quiz sonuçları ve ayarlar) istediğiniz zaman silinebilir:</p>
+  <ul>
+    <li>Uygulamanın Ayarlar ekranındaki "Tüm Verileri Temizle" seçeneğini kullanarak, <strong>veya</strong></li>
+    <li>Uygulamayı cihazınızdan kaldırarak.</li>
+  </ul>
+
+  <hr>
+
+  <h2>7. Bu Politikadaki Değişiklikler</h2>
+  <p>Bu gizlilik politikasında değişiklik yaparsak, yukarıdaki "Son güncelleme" tarihini güncelleriz. Önemli değişiklikler için kullanıcıları bir uygulama güncellemesi aracılığıyla bilgilendiririz.</p>
+
+  <hr>
+
+  <h2>8. İletişim</h2>
+  <p>Bu gizlilik politikasına ilişkin sorularınız veya endişeleriniz için lütfen şu adresten iletişime geçin:</p>
+  <p><strong><a href="mailto:trultruva@gmail.com">trultruva@gmail.com</a></strong></p>
+
+  <footer>Bu uygulama kişisel veri toplamamaktadır. Bu gizlilik politikası, uygulama mağazası gereksinimleri ve geçerli gizlilik mevzuatına uyum sağlamak amacıyla sunulmaktadır.</footer>
+</div>
+</body>
+</html>
