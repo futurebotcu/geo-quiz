@@ -87,8 +87,10 @@ data/backups/
 assets/*__backup/
 assets/**/*__backup/
 assets/brand/__backup_pre_premium/
-# Premium icon master source (1MB) — kept locally, not committed.
+assets/brand/__backup_pre_2026-04-23/
+# Icon master sources (1MB+) — kept locally, not committed.
 assets/premium_*.png
+assets/app_icon_source_*.png
 data/mode_separation_report_*.txt
 data/review_log.csv
 
